@@ -6,7 +6,13 @@
 import {Restful, Router, Reply} from "@jingli/restful";
 
 @Restful()
-export class TestController {
+export class TestController{
+    constructor() {
+    }
+
+    $isValidId(id: string) {
+        return true;
+    }
 
     async get(req, res, next) {
         console.log("ok");
@@ -15,6 +21,6 @@ export class TestController {
 
     async find(req, res, next) {
         console.log("find ok.");
-        res.json(Reply(0, {msg:"find ok."}));
+        res.json(Reply(0, {msg:"ok"}));
     }
 }

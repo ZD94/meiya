@@ -59,9 +59,12 @@ registerControllerToRouter(router);
 // }
 
 export async function initHttp(app) {
-    app.use("/", (req, res, next)=>{
+    /* app.use("/", (req, res, next)=>{
         console.log(req.url);
         next();
-    });
+    }); */
     app.use(router);
+    app.get("/one/:id", (req, res, next)=>{
+        res.send("one say: "+ req.params.id);
+    });
 }
