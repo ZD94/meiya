@@ -3,25 +3,18 @@
  */
 
 'use strict';
-import {AbstractController, Restful, Router} from "@jingli/restful";
+import {Restful, Router, Reply} from "@jingli/restful";
 
 @Restful()
-export class TestController extends AbstractController {
-    constructor() {
-        super();
-    }
-
-    $isValidId(id: string) {
-        return true;
-    }
+export class TestController {
 
     async get(req, res, next) {
         console.log("ok");
-        res.json(this.reply(0, null));
+        res.json(Reply(0, null));
     }
 
     async find(req, res, next) {
         console.log("find ok.");
-        res.json(this.reply(0, {msg:"find ok."}));
+        res.json(Reply(0, {msg:"find ok."}));
     }
 }
