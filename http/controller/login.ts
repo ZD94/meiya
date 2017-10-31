@@ -4,7 +4,7 @@
 
 'use strict';
 import {AbstractController, Restful, Router} from "@jingli/restful";
-
+import {Login} from "http/interface";
 @Restful()
 export class AuthController extends AbstractController {
     constructor() {
@@ -15,18 +15,10 @@ export class AuthController extends AbstractController {
         return true;
     }
 
-    async get(req, res, next) {
-        console.log("ok");
-        res.json(this.reply(0, null));
-    }
-
-    async find(req, res, next) {
-        console.log("find ok.");
-        res.json(this.reply(0, {msg:"find ok."}));
-    }
-
-    @Router("/good")
+    @Router("/login")
     async other(req, res, next){
+        let {username, password, timestamp} = req.body;
+        
         res.send("good")
     }
 }
