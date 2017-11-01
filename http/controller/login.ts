@@ -3,8 +3,12 @@
  */
 
 'use strict';
-import {AbstractController, Restful, Router} from "@jingli/restful";
-import {Login} from "http/interface";
+import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
+import {proxyHttp} from '../util'
+
+let reqs = require('request');
+// import {Login} from "http/interface";
+
 @Restful()
 export class AuthController extends AbstractController {
     constructor() {
@@ -16,9 +20,25 @@ export class AuthController extends AbstractController {
     }
 
     @Router("/login")
-    async other(req, res, next){
-        let {username, password, timestamp} = req.body;
-        
-        res.send("good")
+    async other(req, res2, next) {
+        let params = {
+            url: 'http://121.41.36.97:6005/API.svc/Login',
+            body: {
+                "userName": "JingLiZhiXiang",
+                "password": '123456',
+                "passwordType": "3"
+            },
+            header: {
+                'content-type': 'application/json'
+            },
+            method:"POST"
+        };
+        let data = await proxyHttp(params);
+        console.log('data.sessionId======>',data,'<====data.sessionId');
+        if(data) {
+            data = JSON.stringify(data)
+        }
+        res2.json(Reply(0, {msg: `${data}`}));
     }
 }
+

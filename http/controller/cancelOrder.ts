@@ -1,10 +1,11 @@
 
+
 'use strict';
-import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
+import {AbstractController, Restful, Router, Reply} from '@jingli/restful'
 import {proxyHttp} from '../util'
 
-let reqs = require ('request');
 
+let reqs = require('request');
 @Restful()
 export class AuthController extends AbstractController{
     constructor(){
@@ -14,22 +15,23 @@ export class AuthController extends AbstractController{
     $isValidId(id:string){
         return true;
     }
-    @Router("/searchFlight")
+
+    @Router("/cancel")
     async other(req,res2,next){
         let params = {
-            url:'http://121.41.36.97:6005/API.svc/QueryFlights',
+            url:"",
             body:{
 
             },
             header:{
-                'content-type': 'application/json'
+
             },
             method:"POST"
         };
         let data = await proxyHttp(params);
-        if (data) data = JSON.stringify(data);
-
+        if(data) {
+            data = JSON.stringify(data)
+        }
         res2.json(Reply(0,{msg:`${data}`}))
     }
 }
-

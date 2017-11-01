@@ -1,9 +1,10 @@
 let request = require("request");
 
+
 export async function proxyHttp(params:{
     url: string;
     method?:string;
-    body?:object;
+    body:object;
     qs?:object;
     header?:object;
 }){
@@ -18,12 +19,12 @@ export async function proxyHttp(params:{
             headers: header
         }, (err, resp, result) => {
             if (err) {
-                return reject(err);
+                return reject(err)
             }
-
             if (typeof result == 'string') {
                 try{
                     result = JSON.parse(result);
+                    console.log(result,'<=====result')
                 }catch(e){
                     return reject(e);
                 }
@@ -32,3 +33,30 @@ export async function proxyHttp(params:{
         });
     })
 }
+
+//
+// export async function proxyHttp(){
+//     request({
+//         url: 'http://121.41.36.97:6005/API.svc/Login',
+//         method: 'POST',
+//         json: true,
+//         headers: {
+//             'content-type': 'application/json'
+//         },
+//         body:  {
+//             "userName": "JingLiZhiXiang",
+//             "password": '123456',
+//             "passwordType": "3",
+//         }
+//     }, function (err, res, body) {
+//         if (!err && res.statusCode == 200) {
+//             let id = res.body.sessionId;
+//             let result = JSON.stringify(res.body);
+//             console.log(result, "<======login");
+//             return result
+//         } else {
+//             console.log(err);
+//         }
+//     });
+// }
+//
