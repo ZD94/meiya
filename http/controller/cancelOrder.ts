@@ -24,14 +24,13 @@ export class AuthController extends AbstractController{
 
             },
             header:{
-
+                'content-type': 'application/json'
             },
             method:"POST"
         };
         let data = await proxyHttp(params);
-        if(data) {
-            data = JSON.stringify(data)
-        }
+        if(data) data = JSON.stringify(data);
         res2.json(Reply(0,{msg:`${data}`}))
     }
 }
+

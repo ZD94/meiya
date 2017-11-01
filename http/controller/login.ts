@@ -35,9 +35,7 @@ export class AuthController extends AbstractController {
         };
         let data = await proxyHttp(params);
         console.log('data.sessionId======>',data,'<====data.sessionId');
-        if(data) {
-            data = JSON.stringify(data)
-        }
+        if(data)  data = JSON.stringify(data);
         res2.json(Reply(0, {msg: `${data}`}));
     }
 }
