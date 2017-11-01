@@ -19,7 +19,7 @@ export class ReturnController extends AbstractController{
     @Router("/returuOrder")
     async other(req,res2,next){
         let params = {
-            url:"",
+            url:"http://121.41.36.97:6005/API.svc/CreateReturnOrder",
             method:"POST",
             header:{
                 'content-type': 'application/json'

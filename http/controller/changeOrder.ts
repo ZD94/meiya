@@ -17,7 +17,7 @@ export class ChangeController extends AbstractController {
     @Router('/changeOrder')
     async other(req, res2, next) {
         let params = {
-            url: "",
+            url: "http://121.41.36.97:6005/API.svc/CreateChangeOrder",
             body: {},
             header: {
                 'content-type': 'application/json'

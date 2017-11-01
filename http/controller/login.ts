@@ -38,5 +38,6 @@ export class AuthController extends AbstractController {
         if(data)  data = JSON.stringify(data);
         res2.json(Reply(0, {msg: `${data}`}));
     }
+
 }
 
