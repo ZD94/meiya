@@ -5,7 +5,7 @@ import {proxyHttp} from '../util'
 let reqs = require("request");
 
 @Restful()
-export class AuthController extends AbstractController {
+export class ChangeController extends AbstractController {
     constructor() {
         super();
     }

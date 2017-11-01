@@ -7,7 +7,7 @@ import {proxyHttp} from '../util'
 
 let reqs = require('request');
 @Restful()
-export class AuthController extends AbstractController{
+export class CancelController extends AbstractController{
     constructor(){
         super();
     }
@@ -16,7 +16,7 @@ export class AuthController extends AbstractController{
         return true;
     }
 
-    @Router("/cancel")
+    @Router("/cancelOrder")
     async other(req,res2,next){
         let params = {
             url:"",
