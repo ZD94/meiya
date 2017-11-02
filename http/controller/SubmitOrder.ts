@@ -23,12 +23,15 @@ export class SubmitController extends AbstractController{
                 'content-type': 'application/json'
             },
             body:{
-                orderNo,
-                sessionId
+                "orderNo":"TB1700203436",
+                "sessionId":"636452335003320079"
             }
         };
-        let data = await proxyHttp(params);
-        if(data) data = JSON.stringify(data);
-        res2.json(Reply(0,{msg:`${data}`}))
+        let data : any = await proxyHttp(params);
+        if(data.code == '10000'){
+            res2.json(Reply(0, data));
+        } else {
+            res2.json(Reply(502, data.description));
+        }
     }
 }

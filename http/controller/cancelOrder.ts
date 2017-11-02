@@ -18,7 +18,7 @@ export class CancelController extends AbstractController {
 
     @Router("/cancelOrder")
     async other(req, res2, next) {
-        let {orderNo, sessionId} = req.body
+        let {orderNo, sessionId} = req.body;
         let params = {
             url: `${config.meiyaUrl}` + "/CancelOrder",
             body: {
@@ -30,9 +30,13 @@ export class CancelController extends AbstractController {
             },
             method: "POST"
         };
-        let data = await proxyHttp(params);
-        if (data) data = JSON.stringify(data);
-        res2.json(Reply(0, {msg: `${data}`}))
+        let data: any = await proxyHttp(params);
+
+        if (data.code == '10000') {
+            res2.json(Reply(0, data));
+        } else {
+            res2.json(Reply(502, data.description));
+        }
     }
 }
 

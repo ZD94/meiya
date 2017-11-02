@@ -22,15 +22,21 @@ export class CheckController extends AbstractController {
             url: `${config.meiyaUrl}` + "/CheckPrice",
             body: {
                 orderNo,
-                sessionId
+                sessionId,
+                // 'orderNo':"TB1700203240",
+                // 'sessionId':"636452335003320079"
             },
             header: {
                 'content-type': 'application/json'
             },
             method: "POST"
         };
-        let data = await proxyHttp(params);
+        let data: any = await proxyHttp(params);
 
-        res2.json(Reply(0, data))
+        if (data.code == '10000') {
+            res2.json(Reply(0, data));
+        } else {
+            res2.json(Reply(502, data.description));
+        }
     }
 }

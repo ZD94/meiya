@@ -21,17 +21,21 @@ export class GetInfoController extends AbstractController{
     async other(req,res2,next){
         let {orderNo,sessionId} = req.body;
         let params = {
-            url:`${config.meitaUrl}` + "/GetOrderInfo",
+            url:`${config.meiyaUrl}` + "/GetOrderInfo",
             method:"POST",
             header:{
                 'content-type': 'application/json'
             },
             body:{
-                orderNo,
-                sessionId
+                'orderNo':"TB1700203240",
+                'sessionId':"636452335003320079"
             }
         };
-        let data = await proxyHttp(params);
-        res2.json(Reply(0,data))
+        let data :any= await proxyHttp(params);
+        if(data.code == '10000'){
+            res2.json(Reply(0, data));
+        } else {
+            res2.json(Reply(502, data.description));
+        }
     }
 }

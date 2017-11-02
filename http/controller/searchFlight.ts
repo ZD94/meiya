@@ -21,21 +21,24 @@ export class SearchController extends AbstractController{
         let params = {
             url:`${config.meiyaUrl}`+'/QueryFlights',
             body:{
-                departureCity,
-                arrivalCity,
-                departureDate,
-                type,
-                sessionId
+                "departureCity": "PEK",
+                "arrivalCity": "SHA",
+                "departureDate": "2018-06-10",
+                "tripType":1,
+                "sessionId":"636452335003320079"
             },
             header:{
                 'content-type': 'application/json'
             },
             method:"POST"
         };
-        let data = await proxyHttp(params);
-        if (data) data = JSON.stringify(data);
+        let data : any= await proxyHttp(params);
+        if(data.code == '10000'){
+            res2.json(Reply(0, data));
+        } else {
+            res2.json(Reply(502, data.description));
+        }
 
-        res2.json(Reply(0,data))
     }
 }
 

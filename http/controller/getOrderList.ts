@@ -25,10 +25,14 @@ export class GetListController extends AbstractController{
                 'content-type': 'application/json'
             },
             body:{
-                sessionId
+                "sessionId":"636452335003320079"
             }
         };
-        let data = await proxyHttp(params);
-        res2.json(Reply(0,data))
+        let data : any = await proxyHttp(params);
+        if(data.code == '10000'){
+            res2.json(Reply(0, data));
+        } else {
+            res2.json(Reply(502, data.description));
+        }
     }
 }

@@ -1,6 +1,7 @@
 'use strict';
 import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
 import {proxyHttp} from '../util'
+
 let config = require("@jingli/config")
 let reqs = require("request");
 
@@ -16,21 +17,21 @@ export class ChangeController extends AbstractController {
 
     @Router('/changeOrder')
     async other(req, res2, next) {
-        let {sessionId,flightList} = req.body;
+        let {sessionId} = req.body;
         let params = {
-            url: `${config.meiyaUrl}`+"/CreateChangeOrder",
+            url: `${config.meiyaUrl}` + "/CreateChangeOrder",
             header: {
                 'content-type': 'application/json'
             },
-            method:"POST",
-            body: {
-
-            }
+            method: "POST",
+            body: {}
         };
-        let data = await proxyHttp(params);
-        if(data) {
-            data = JSON.stringify(data)
+        let data: any = await proxyHttp(params);
+
+        if (data.code == '10000') {
+            res2.json(Reply(0, data));
+        } else {
+            res2.json(Reply(502, data.description));
         }
-        res2.json(Reply(0,{msg:`${data}`}))
     }
 }
