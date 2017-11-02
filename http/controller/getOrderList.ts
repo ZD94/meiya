@@ -7,7 +7,7 @@ let reqs = require("request");
 
 @Restful()
 
-export class GetList extends AbstractController{
+export class GetListController extends AbstractController{
     constructor (){
         super()
     }

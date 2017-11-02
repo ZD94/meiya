@@ -17,7 +17,7 @@ export class CreatController extends AbstractController {
 
     @Router('/creatOrder')
     async other(req, res2, next) {
-        let {} = req.body;
+        let {sessionId,type} = req.body;
         let params = {
             url: config.meiyaUrl + "/CreateOrder",
             body: {},
@@ -32,5 +32,3 @@ export class CreatController extends AbstractController {
         res2.json(Reply(0, {msg: `${data}`}))
     }
 }
-
-

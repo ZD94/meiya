@@ -26,8 +26,8 @@ export class AuthController extends AbstractController {
         let params = {
             url: `${config.meiyaUrl}` + '/Login',
             body: {
-                userName,
-                password,
+                "userName": "JingLiZhiXiang",
+                'password' : "123456",
                 "passwordType": "3"
             },
             header: {
