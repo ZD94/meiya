@@ -2,6 +2,7 @@
 import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
 import {proxyHttp} from '../util'
 
+let config = require("@jingli/config");
 let reqs = require('request');
 
 @Restful()
@@ -16,17 +17,20 @@ export class CheckController extends AbstractController {
 
     @Router('/checkPrice')
     async other(req, res2, next) {
+        let {sessionId, orderNo} = req.body;
         let params = {
-            url:'',
-            body:{},
-            header:{
+            url: `${config.meiyaUrl}` + "/CheckPrice",
+            body: {
+                orderNo,
+                sessionId
+            },
+            header: {
                 'content-type': 'application/json'
             },
-            method:"POST"
+            method: "POST"
         };
         let data = await proxyHttp(params);
-        if(data) data = JSON.stringify(data);
 
-        res2.json(Reply(0,{msg:`${data}`}))
+        res2.json(Reply(0, data))
     }
 }

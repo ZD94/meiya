@@ -3,7 +3,7 @@
 'use strict';
 import {AbstractController, Restful, Router, Reply} from '@jingli/restful'
 import {proxyHttp} from '../util'
-
+let config = require("@jingli/config");
 let reqs = require("request");
 
 @Restful()
@@ -18,14 +18,21 @@ export class ReturnController extends AbstractController{
 
     @Router("/returuOrder")
     async other(req,res2,next){
+        let {sessionId, orderNo} = req.body;
         let params = {
-            url:"http://121.41.36.97:6005/API.svc/CreateReturnOrder",
+            url:`${config.meiyaUrl}` + "/CreateReturnOrder",
             method:"POST",
             header:{
                 'content-type': 'application/json'
             },
             body:{
-
+                orderNo,
+                segmentList:[],
+                passengerList:[""],
+                contactList:{
+                    contactName:"",
+                    mobile:""
+                }
             },
         };
         let data = await proxyHttp(params);

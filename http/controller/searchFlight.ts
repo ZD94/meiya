@@ -2,6 +2,7 @@
 'use strict';
 import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
 import {proxyHttp} from '../util'
+let config = require("@jingli/config");
 
 let reqs = require ('request');
 
@@ -16,10 +17,15 @@ export class SearchController extends AbstractController{
     }
     @Router("/searchFlight")
     async other(req,res2,next){
+        let {departureCity,arrivalCity,departureDate,airCompanies,channels,cabins,type,sessionId} = req.body;
         let params = {
-            url:'http://121.41.36.97:6005/API.svc/QueryFlights',
+            url:`${config.meiyaUrl}`+'/QueryFlights',
             body:{
-
+                departureCity,
+                arrivalCity,
+                departureDate,
+                type,
+                sessionId
             },
             header:{
                 'content-type': 'application/json'
@@ -29,7 +35,7 @@ export class SearchController extends AbstractController{
         let data = await proxyHttp(params);
         if (data) data = JSON.stringify(data);
 
-        res2.json(Reply(0,{msg:`${data}`}))
+        res2.json(Reply(0,data))
     }
 }
 

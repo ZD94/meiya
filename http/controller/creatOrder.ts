@@ -2,6 +2,7 @@
 import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
 import {proxyHttp} from '../util'
 
+let config = require("@jingli/config");
 let reqs = require('request');
 
 @Restful()
@@ -16,8 +17,9 @@ export class CreatController extends AbstractController {
 
     @Router('/creatOrder')
     async other(req, res2, next) {
+        let {} = req.body;
         let params = {
-            url: "http://121.41.36.97:6005/API.svc/CreateOrder",
+            url: config.meiyaUrl + "/CreateOrder",
             body: {},
             header: {
                 'content-type': 'application/json'

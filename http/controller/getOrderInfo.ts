@@ -1,23 +1,27 @@
+
+
 'use strict';
 import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
 import {proxyHttp} from '../util'
 let config = require("@jingli/config");
 let reqs = require('request');
 
+
 @Restful()
-export class SubmitController extends AbstractController{
+export class GetInfoController extends AbstractController{
     constructor(){
         super();
     }
-    $isValidId(){
+
+    $isValidId(id:string){
         return true
     }
 
-    @Router('/submitOrder')
+    @Router('/getOrderInfo')
     async other(req,res2,next){
         let {orderNo,sessionId} = req.body;
         let params = {
-            url : `${config.meiyaUrl}` + "/SubmitOrder",
+            url:`${config.meitaUrl}` + "/GetOrderInfo",
             method:"POST",
             header:{
                 'content-type': 'application/json'
@@ -28,7 +32,6 @@ export class SubmitController extends AbstractController{
             }
         };
         let data = await proxyHttp(params);
-        if(data) data = JSON.stringify(data);
-        res2.json(Reply(0,{msg:`${data}`}))
+        res2.json(Reply(0,data))
     }
 }

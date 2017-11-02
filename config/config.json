@@ -9,14 +9,7 @@
     "apiPort": 4104,
     "socket_file": "${{rootDir}}/web.sock",
     "pid_file": "${{rootDir}}/tmp/server.pid",
-    "postgres":{
-        "url": "${JL_APP_POSTGRES}",
-        "debug": true
-    },
-    "api": {
-        "postgres": "${{postgres.url}}",
-        "remotes": []
-      },
+    "meiyaUrl":"http://121.41.36.97:6005/API.svc",
     "logger": {
         "path": "${{rootDir}}/log",
         "prefix": "${{appName}}_",

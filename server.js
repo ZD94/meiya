@@ -30,7 +30,7 @@ var logger = new Logger('main');
 var cache = require("common/cache");
 cache.init({redis_conf: config.redis.url, prefix: 'jlbudget:cache'});
 
-require("./db");
+// require("./db");
 
 var Server = require('common/server');
 var server = new Server(config.appName, config.pid_file);

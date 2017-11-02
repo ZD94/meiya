@@ -3,7 +3,7 @@
 'use strict';
 import {AbstractController, Restful, Router, Reply} from '@jingli/restful'
 import {proxyHttp} from '../util'
-
+let config = require("@jingli/config");
 
 let reqs = require('request');
 @Restful()
@@ -19,7 +19,7 @@ export class CancelController extends AbstractController{
     @Router("/cancelOrder")
     async other(req,res2,next){
         let params = {
-            url:"",
+            url:`${config.meiyaUrl}`+"/CancelOrder",
             body:{
 
             },
