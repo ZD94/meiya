@@ -3,10 +3,10 @@ import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
 import {proxyHttp} from '../util'
 
 let config = require("@jingli/config");
-let reqs = require("request");
+let reqs = require('request');
 
 @Restful()
-export class ChangeController extends AbstractController {
+export class OrderController extends AbstractController {
     constructor() {
         super();
     }
@@ -15,21 +15,30 @@ export class ChangeController extends AbstractController {
         return true;
     }
 
-    //创建改签单
+    //创建订单
     async add(req, res, next) {
-        // let query = req.body;
-
-
-
+        let query = req.body;
 
         let params = {
-            url: `${config.meiyaUrl}` + "/CreateChangeOrder",
-            body: {},
+            url: `${config.meiyaUrl}` + "/CreateOrder",
+            body: {
+                "flightList":
+                    [{
+                        "flightID": "",
+                        "departureCity": "",
+                        "arrivalCity": "",
+                        "departureDate": "",
+                        "airline": "",
+                        "cabinType": "",
+                        "flightNo": "",
+                        "price":0
+                    }],
+
+            },
             header: {
                 'content-type': 'application/json'
             }
         };
-
         let data: any = await proxyHttp(params);
         if (data.code == '10000') {
             res.json(Reply(0, data));
@@ -38,7 +47,7 @@ export class ChangeController extends AbstractController {
         }
     }
 
-    //取消改签单
+    //取消订单
     async delete(req, res, next) {
         let query = req.body;
         let {auth} = req.headers;
@@ -46,7 +55,7 @@ export class ChangeController extends AbstractController {
         query.sessionId = auth.sessionId;
 
         let params = {
-            url: `${config.meiyaUrl}` + "/CancelChangeOrder",
+            url: `${config.meiyaUrl}` + "/CancelOrder",
             body: {
                 "orderNo": `${query.orderNo}`,
                 "sessionId":`${query.sessionId}`
@@ -56,31 +65,35 @@ export class ChangeController extends AbstractController {
             }
         };
         let data: any = await proxyHttp(params);
-        if (data.code == "10000") {
-            res.json(Reply(0, data))
+        if (data.code == '10000') {
+            res.json(Reply(0, data));
         } else {
-            res.json(Reply(0, data.description))
+            res.json(Reply(502, data.description));
         }
     }
 
-    //改签单列表
+    //订单列表
     async find(req, res, next) {
+        let {auth} = req.headers;
         let params = {
-            url: `${config.meiyaUrl}` + "/GetChangeOrderList",
-            body: {},
+            url: `${config.meiyaUrl}` + "/GetOrderList",
+            body: {
+                "sessionId":auth.sessionId
+            },
             header: {
                 'content-type': 'application/json'
             }
         };
         let data: any = await proxyHttp(params);
-        if (data.code == "10000") {
-            res.json(Reply(0, data))
+
+        if (data.code == '10000') {
+            res.json(Reply(0, data));
         } else {
-            res.json(Reply(0, data.description))
+            res.json(Reply(502, data.description));
         }
     }
 
-    //改签单详情
+    //订单详情
     async get (req, res, next) {
         let query = req.query;
         let {auth} = req.headers;
@@ -88,7 +101,7 @@ export class ChangeController extends AbstractController {
         query.sessionId = auth.sessionId;
 
         let params = {
-            url: `${config.meiyaUrl}` + "/GetChangeOrderInfo",
+            url: `${config.meiyaUrl}` + "/GetOrderInfo",
             body: {
                 "orderNo": `${query.orderNo}`,
                 "sessionId":`${query.sessionId}`
@@ -98,46 +111,42 @@ export class ChangeController extends AbstractController {
             }
         };
         let data: any = await proxyHttp(params);
-        if (data.code == "10000") {
-            res.json(Reply(0, data))
+
+        if (data.code == '10000') {
+            res.json(Reply(0, data));
         } else {
-            res.json(Reply(0, data.description))
+            res.json(Reply(502, data.description));
         }
     }
 
-    //提交改签单审批
+    //提交订单审批
     async update(req, res, next) {
+        let query = req.body;
+        let {auth} = req.headers;
+        auth = JSON.parse(decodeURIComponent(auth));
+        query.sessionId = auth.sessionId;
+
         let params = {
-            url: `${config.meiyaUrl}` + "/SubmitChangeOrder",
-            body: {},
+            url: `${config.meiyaUrl}` + "/SubmitOrder",
+            body: {
+                "orderNo": `${query.orderNo}`,
+                "sessionId":`${query.sessionId}`
+            },
             header: {
                 'content-type': 'application/json'
             }
         };
-
         let data: any = await proxyHttp(params);
-        if (data.code == "10000") {
-            res.json(Reply(0, data))
+
+        if (data.code == '10000') {
+            res.json(Reply(0, data));
         } else {
-            res.json(Reply(0, data.description))
+            res.json(Reply(502, data.description));
         }
     }
 
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

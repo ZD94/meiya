@@ -20,6 +20,14 @@ registerControllerToRouter(router);
 // let uuid = require("uuid");
 
 export async function initHttp(app) {
+    app.use("/", (req, res, next)=>{
+        console.log("url==>", req.url);
+        next();
+    });
+
+    router.get("/good", (req, res, next)=>{
+        res.send("good man");
+    })
     app.use(router);
     // app.get("/go", async (req, res, next)=>{
     //     let data = await Model.tmc.build({

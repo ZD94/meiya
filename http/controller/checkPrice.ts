@@ -16,27 +16,23 @@ export class CheckController extends AbstractController {
     }
 
     @Router('/checkPrice')
-    async other(req, res2, next) {
+    async other(req, res, next) {
         let {sessionId, orderNo} = req.body;
         let params = {
             url: `${config.meiyaUrl}` + "/CheckPrice",
-            body: {
-                orderNo,
-                sessionId,
-                // 'orderNo':"TB1700203240",
-                // 'sessionId':"636452335003320079"
-            },
+            body: {},
             header: {
                 'content-type': 'application/json'
             },
-            method: "POST"
         };
         let data: any = await proxyHttp(params);
 
         if (data.code == '10000') {
-            res2.json(Reply(0, data));
+            res.json(Reply(0, data));
         } else {
-            res2.json(Reply(502, data.description));
+            res.json(Reply(502, data.description));
         }
     }
+
+
 }
