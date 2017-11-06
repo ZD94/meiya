@@ -30,9 +30,7 @@ export class CheckController extends AbstractController {
         if (data.code == '10000') {
             res.json(Reply(0, data));
         } else {
-            res.json(Reply(502, data.description));
+            res.json(Reply(502, null));
         }
     }
-
-
 }

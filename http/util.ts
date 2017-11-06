@@ -8,7 +8,7 @@ export async function proxyHttp(params: {
     qs?: object;
     header?: object;
 }) {
-    let {url, body = {}, method = "get", qs = {}, header = {}} = params;
+    let {url, body = {}, method = "post", qs = {}, header = {}} = params;
     return new Promise((resolve, reject) => {
         request({
             url,
@@ -22,7 +22,6 @@ export async function proxyHttp(params: {
                 if (typeof result == 'string') {
                     try {
                         result = JSON.parse(result);
-                        console.log(result, '<=====result')
                     } catch (e) {
                         return reject(e);
                     }

@@ -18,7 +18,6 @@ export class OrderController extends AbstractController {
     //创建订单
     async add(req, res, next) {
         let query = req.body;
-
         let params = {
             url: `${config.meiyaUrl}` + "/CreateOrder",
             body: {
@@ -33,7 +32,23 @@ export class OrderController extends AbstractController {
                         "flightNo": "",
                         "price":0
                     }],
-
+                "passengerList":
+                    [{
+                        "outsidePassengerId": "",
+                        "passengerType": "",
+                        "companyId": "",
+                        "certificatesList":
+                            [{
+                                "certType": "",
+                                "certNumber": "",
+                            }]
+                    }],
+                "contactList":
+                    {
+                        "contactName": "",
+                        "mobile": "",
+                    },
+                "sessionId": ""
             },
             header: {
                 'content-type': 'application/json'
@@ -41,9 +56,12 @@ export class OrderController extends AbstractController {
         };
         let data: any = await proxyHttp(params);
         if (data.code == '10000') {
-            res.json(Reply(0, data));
+            let orderNos = {
+                orderNos:data.orderNos
+            }
+            res.json(Reply(0, orderNos));
         } else {
-            res.json(Reply(502, data.description));
+            res.json(Reply(502, null));
         }
     }
 
@@ -66,9 +84,12 @@ export class OrderController extends AbstractController {
         };
         let data: any = await proxyHttp(params);
         if (data.code == '10000') {
-            res.json(Reply(0, data));
+            let orderNo = {
+                orderNo:data.orderNo
+            };
+            res.json(Reply(0, orderNo));
         } else {
-            res.json(Reply(502, data.description));
+            res.json(Reply(502, null));
         }
     }
 
@@ -89,7 +110,7 @@ export class OrderController extends AbstractController {
         if (data.code == '10000') {
             res.json(Reply(0, data));
         } else {
-            res.json(Reply(502, data.description));
+            res.json(Reply(502, null));
         }
     }
 
@@ -115,7 +136,7 @@ export class OrderController extends AbstractController {
         if (data.code == '10000') {
             res.json(Reply(0, data));
         } else {
-            res.json(Reply(502, data.description));
+            res.json(Reply(502, null));
         }
     }
 
@@ -141,7 +162,7 @@ export class OrderController extends AbstractController {
         if (data.code == '10000') {
             res.json(Reply(0, data));
         } else {
-            res.json(Reply(502, data.description));
+            res.json(Reply(502, null));
         }
     }
 

@@ -15,12 +15,16 @@ export class SearchFlightController extends AbstractController {
     $isValidId(id: string) {
         return true;
     }
-
     async find(req, res, next) {
         let query = req.query;
         let {auth} = req.headers;
         auth = JSON.parse(decodeURIComponent(auth));
         query.sessionId = auth.sessionId;
+        if(query.supplier){
+            delete query.supplier;
+        }
+        console.log(query,"<======query");
+        // console.log(auth,"<=====auth");
         let params = {
             url: `${config.meiyaUrl}` + '/QueryFlights',
             body: query,
@@ -28,12 +32,18 @@ export class SearchFlightController extends AbstractController {
                 'content-type': 'application/json'
             },
         };
-        let data: any = await proxyHttp(params);
-        if (data.code == '10000') {
-            res.json(Reply(0, data));
-        } else {
-            res.json(Reply(502, data.description));
+        let data: any;
+        try {
+            data = await proxyHttp(params);
+            if (data.code == '10000') {
+                return res.json(Reply(0, data.flightInfoList) || [] );
+            } else {
+                return res.json(Reply(502, null));
+            }
+            // res.json(Reply(0,data))
+        } catch (err) {
+            console.log(err, '<======err');
+            return res.json(Reply(502, null))
         }
     }
-
 }

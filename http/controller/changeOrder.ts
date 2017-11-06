@@ -18,10 +18,6 @@ export class ChangeController extends AbstractController {
     //创建改签单
     async add(req, res, next) {
         // let query = req.body;
-
-
-
-
         let params = {
             url: `${config.meiyaUrl}` + "/CreateChangeOrder",
             body: {},
@@ -34,7 +30,7 @@ export class ChangeController extends AbstractController {
         if (data.code == '10000') {
             res.json(Reply(0, data));
         } else {
-            res.json(Reply(502, data.description));
+            res.json(Reply(502, null));
         }
     }
 
@@ -59,7 +55,7 @@ export class ChangeController extends AbstractController {
         if (data.code == "10000") {
             res.json(Reply(0, data))
         } else {
-            res.json(Reply(0, data.description))
+            res.json(Reply(502, null))
         }
     }
 
@@ -76,7 +72,7 @@ export class ChangeController extends AbstractController {
         if (data.code == "10000") {
             res.json(Reply(0, data))
         } else {
-            res.json(Reply(0, data.description))
+            res.json(Reply(502, null))
         }
     }
 
@@ -101,7 +97,7 @@ export class ChangeController extends AbstractController {
         if (data.code == "10000") {
             res.json(Reply(0, data))
         } else {
-            res.json(Reply(0, data.description))
+            res.json(Reply(502, null))
         }
     }
 
@@ -119,7 +115,7 @@ export class ChangeController extends AbstractController {
         if (data.code == "10000") {
             res.json(Reply(0, data))
         } else {
-            res.json(Reply(0, data.description))
+            res.json(Reply(502, null))
         }
     }
 

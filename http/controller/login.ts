@@ -37,9 +37,12 @@ export class AuthController extends AbstractController {
 
         let data: any = await proxyHttp(params);
         if (data.code == '10000') {
-            res.json(Reply(0, data));
+            let sessionId = {
+                sessionId:data.sessionId
+            }
+            res.json(Reply(0, sessionId));
         } else {
-            res.json(Reply(502, data.description));
+            res.json(Reply(502, null));
         }
     }
 }
