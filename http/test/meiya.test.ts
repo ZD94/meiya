@@ -49,7 +49,7 @@ describe('/美亚订票流程', function () {
                 "flightID": "",
                 "departureCity": "PEK",
                 "arrivalCity": "SHA",
-                "departureDate": "2018-05-15",
+                "departureDate": "2018-03-01",
                 "departureTime":
                     [0],
                 "airline": "",
@@ -147,10 +147,11 @@ describe('/美亚订票流程', function () {
                 } catch (err) {
                     result.body
                 }
+                console.log(result,"<=====creatOrderResult");
                 order = result.orderNos;
                 expect(result.code).to.be.equal("10000");
                 done()
-            }, 2000)
+            }, 1000)
         })
     });
 
@@ -212,7 +213,6 @@ describe('/美亚订票流程', function () {
 */
 
     it("提交审批", (done) => {
-        console.log(order[0], sessionId, "<========00000");
         request({
             url: url + "/SubmitOrder",
             method: "POST",
@@ -239,6 +239,114 @@ describe('/美亚订票流程', function () {
             expect(result.code).to.be.equal("10000");
             done()
         })
+    });
+
+
+    /*it("创建改签单",(done)=>{
+        request({
+            url:url+"/CreateChangeOrder",
+            method:"POST",
+            json:true,
+            headers:{
+                'content-type': 'application/json'
+            },
+            body:{}
+        },(err,res,body)=>{
+            if(err){
+                console.log(err);
+                return
+            }
+            let result;
+            try {
+                result = res.body
+            }catch (err){
+                result = body
+            }
+            console.log(result,"<=======changeOrderResult");
+            expect(result.code).to.be.equal("10000");
+            done()
+        })
+    })*/
+
+    /*it("取消改签单", (done) => {
+        request({
+            url: url + "/CancelChangeOrder",
+            method:"POST",
+            json:"true",
+            headers:{
+                'content-type': 'application/json'
+            },
+            body:{}
+        },(err,res,body)=>{
+            if(err){
+                console.log(err);
+                return;
+            }
+            let result;
+            try{
+                result = res.body
+            }catch (err){
+                result = body
+            }
+            console.log(result,"<======result")
+            expect(result.code).to.be.equal("10000");
+            done()
+        })
     })
+*/
+
+    /* it("订购单创建退票单", (done) => {
+         request({
+             url: url + "/CreateReturnOrder",
+             method: "POST",
+             json: true,
+             headers: {
+                 'content-type': 'application/json'
+             },
+             body: {}
+         }, (err, res, body) => {
+             if (err) {
+                 console.log(err);
+                 return
+             }
+             let result;
+             try {
+                 result = res.body
+             } catch (err) {
+                 result = body
+             }
+             console.log(result, "<=====ReturnOrderResult");
+             expect(result.code).to.be.equal("10000");
+             done()
+         })
+     })*/
+
+    /*it("取消退票单", (done) => {
+        request({
+            url: url + "/CancelReturnOrder",
+            method: "POST",
+            json: true,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: {}
+        }, (err, res, body) => {
+            if (err) {
+                console.log(err);
+                return
+            }
+            let result;
+            try {
+                result = res.body
+            } catch (err) {
+                result = body
+            }
+            console.log(result, "<=======CancelReturnOrderResult");
+            expect(result.code).to.be.equal("10000");
+            done()
+        })
+    })*/
+
 });
+
 
