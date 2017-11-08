@@ -1,9 +1,10 @@
 'use strict';
 import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
-import {proxyHttp} from '../util'
+import {proxyHttp, getInfo, transAttributeName} from '../util'
 
 let config = require("@jingli/config");
 let reqs = require("request");
+const url = "http://121.41.36.97:6005/API.svc/GetOrderInfo";
 
 @Restful()
 export class ChangeController extends AbstractController {
@@ -17,10 +18,31 @@ export class ChangeController extends AbstractController {
 
     //创建改签单
     async add(req, res, next) {
-        // let query = req.body;
+        let query = req.body;
+        let {auth} = req.headers;
+        auth = JSON.parse(decodeURIComponent(auth));
+
+        for (let i = 0; i < query.flightList.length; i++) {
+            query.flightList[i].departureCity = query.flightList[i].departureCode;
+            query.flightList[i].arrivalCity = query.flightList[i].arrivalCode;
+            query.flightList[i].departureDate = query.flightList[i].depDate;
+            delete query.flightList[i].depDate;
+            delete query.flightList[i].arrivalCode;
+            delete query.flightList[i].departureCode
+        }
+        let contactListNewName = [
+            {
+                newname: "contactName",
+                oldname: "name"
+            }
+        ];
+        transAttributeName(query.contactList, contactListNewName);
+        query.sessionId = auth.sessionId;
+        let datas = await getInfo(url, query.sessionId, query.originalOrderNo);
+        query.passengerList = datas["passengerCode"];
         let params = {
             url: `${config.meiyaUrl}` + "/CreateChangeOrder",
-            body: {},
+            body: query,
             header: {
                 'content-type': 'application/json'
             }
@@ -28,7 +50,10 @@ export class ChangeController extends AbstractController {
 
         let data: any = await proxyHttp(params);
         if (data.code == '10000') {
-            res.json(Reply(0, data));
+            let orderNos = {
+                orderNos: data.orderNo
+            };
+            res.json(Reply(0, orderNos));
         } else {
             res.json(Reply(502, null));
         }
@@ -43,17 +68,14 @@ export class ChangeController extends AbstractController {
 
         let params = {
             url: `${config.meiyaUrl}` + "/CancelChangeOrder",
-            body: {
-                "orderNo": `${query.orderNo}`,
-                "sessionId":`${query.sessionId}`
-            },
+            body: query,
             header: {
                 'content-type': 'application/json'
             }
         };
         let data: any = await proxyHttp(params);
         if (data.code == "10000") {
-            res.json(Reply(0, data))
+            res.json(Reply(0, data.description))
         } else {
             res.json(Reply(502, null))
         }
@@ -85,10 +107,7 @@ export class ChangeController extends AbstractController {
 
         let params = {
             url: `${config.meiyaUrl}` + "/GetChangeOrderInfo",
-            body: {
-                "orderNo": `${query.orderNo}`,
-                "sessionId":`${query.sessionId}`
-            },
+            body: query,
             header: {
                 'content-type': 'application/json'
             }

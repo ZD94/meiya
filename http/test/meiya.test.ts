@@ -241,8 +241,8 @@ describe('/美亚订票流程', function () {
         })
     });
 
-
-    /*it("创建改签单",(done)=>{
+/*
+    it("创建改签单",(done)=>{
         request({
             url:url+"/CreateChangeOrder",
             method:"POST",

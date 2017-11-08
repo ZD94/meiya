@@ -1,6 +1,6 @@
 'use strict';
 import {AbstractController, Restful, Router, Reply} from '@jingli/restful'
-import {proxyHttp} from '../util'
+import {proxyHttp,getInfo} from '../util'
 
 let config = require("@jingli/config");
 let reqs = require("request");
@@ -17,12 +17,17 @@ export class ReturnController extends AbstractController {
 
     //订购单创建退票单
     async add(req, res, next) {
+        let query = req.body;
+        let {auth} = req.headers;
+        auth = JSON.parse(decodeURIComponent(auth));
+        query.sessionId = auth.sessionId;
+
         let params = {
             url: `${config.meiyaUrl}` + "/CreateReturnOrder",
             header: {
                 'content-type': 'application/json'
             },
-            body: {},
+            body: query,
         };
         let data: any = await proxyHttp(params);
         if (data.code == '10000') {
@@ -65,7 +70,7 @@ export class ReturnController extends AbstractController {
             header: {
                 'content-type': 'application/json'
             }
-        }
+        };
         let data: any = await proxyHttp(params);
         if (data.code == "10000") {
             res.json(Reply(0, data))
@@ -93,9 +98,14 @@ export class ReturnController extends AbstractController {
 
     //退票单详情
     async get (req, res, next) {
+        let query = res.body;
+        let {auth} = req.headers;
+        auth = JSON.parse(decodeURIComponent(auth));
+        query.sessionId = auth.sessionId;
+
         let params = {
             url: `${config.meiyaUrl}` + "/GetReturnOrderInfo",
-            body: {},
+            body: query,
             header: {
                 'content-type': 'application/json'
             }
@@ -108,25 +118,3 @@ export class ReturnController extends AbstractController {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
