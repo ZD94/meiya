@@ -21,7 +21,8 @@ registerControllerToRouter(router);
 
 export async function initHttp(app) {
     app.use("/", (req, res, next)=>{
-        console.log("url==>", req.url);
+        console.log("url==>", req.url,req.method);
+
         next();
     });
 

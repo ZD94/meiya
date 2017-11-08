@@ -39,7 +39,7 @@ export class AuthController extends AbstractController {
         if (data.code == '10000') {
             let sessionId = {
                 sessionId:data.sessionId
-            }
+            };
             res.json(Reply(0, sessionId));
         } else {
             res.json(Reply(502, null));
