@@ -1,9 +1,10 @@
 'use strict';
 import {AbstractController, Restful, Router, Reply} from '@jingli/restful'
-import {proxyHttp,getInfo} from '../util'
+import {proxyHttp,getInfo,transAttributeName} from '../util'
 
 let config = require("@jingli/config");
 let reqs = require("request");
+const url = "http://121.41.36.97:6005/API.svc/GetOrderInfo";
 
 @Restful()
 export class ReturnController extends AbstractController {
@@ -22,6 +23,20 @@ export class ReturnController extends AbstractController {
         auth = JSON.parse(decodeURIComponent(auth));
         query.sessionId = auth.sessionId;
 
+        if(query.flightList){
+            delete query.flightList
+        }
+        let datas = await getInfo(url, query.sessionId, query.originalOrderNo);
+        query.passengerList = datas["passengerCode"];
+        query.segmentList = datas["segmentNo"];
+        let contactListNewName = [
+            {
+                newname: "contactName",
+                oldname: "name"
+            }
+        ];
+        transAttributeName(query.contactList, contactListNewName);
+        console.log(query,"<=========query");
         let params = {
             url: `${config.meiyaUrl}` + "/CreateReturnOrder",
             header: {
