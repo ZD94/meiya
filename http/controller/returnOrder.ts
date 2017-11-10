@@ -82,7 +82,7 @@ export class ReturnController extends AbstractController {
 
         let params = {
             url: `${config.meiyaUrl}` + "/SubmitReturnOrder",
-            body: {},
+            body: query,
             header: {
                 'content-type': 'application/json'
             }
