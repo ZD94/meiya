@@ -3,7 +3,6 @@ import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
 import {proxyHttp, transAttributeName} from '../util'
 
 let config = require("@jingli/config");
-let reqs = require('request');
 
 @Restful()
 export class OrderController extends AbstractController {

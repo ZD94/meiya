@@ -7,8 +7,6 @@ import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
 import {proxyHttp} from '../util'
 
 let config = require("@jingli/config");
-let reqs = require('request');
-
 
 @Restful()
 export class AuthController extends AbstractController {

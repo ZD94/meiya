@@ -4,8 +4,6 @@ import {proxyHttp, transAttributeName} from '../util'
 
 let config = require("@jingli/config");
 
-let reqs = require('request');
-
 @Restful()
 export class SearchFlightController extends AbstractController {
     constructor() {

@@ -3,7 +3,6 @@ import {AbstractController, Restful, Router, Reply} from '@jingli/restful'
 import {proxyHttp,getInfo,transAttributeName} from '../util'
 
 let config = require("@jingli/config");
-let reqs = require("request");
 const url = "http://121.41.36.97:6005/API.svc/GetOrderInfo";
 
 @Restful()
