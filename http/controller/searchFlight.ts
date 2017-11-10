@@ -36,7 +36,6 @@ export class SearchFlightController extends AbstractController {
                 oldname: "departureCode"
             }
         ];
-
         transAttributeName(query, testArr);
 
         let params = {

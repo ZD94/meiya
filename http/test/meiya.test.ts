@@ -49,7 +49,7 @@ describe('/美亚订票流程', function () {
                 "flightID": "",
                 "departureCity": "PEK",
                 "arrivalCity": "SHA",
-                "departureDate": "2018-03-01",
+                "departureDate": "2018-07-14",
                 "departureTime":
                     [0],
                 "airline": "",
@@ -85,9 +85,11 @@ describe('/美亚订票流程', function () {
             done()
         })
     });
+
+
     let order;
     it("/创建订单", (done) => {
-        setTimeout(() => {
+        // setTimeout(() => {
             request({
                 url: url + "/CreateOrder",
                 method: 'POST',
@@ -113,24 +115,15 @@ describe('/美亚订票流程', function () {
                             "passengerType": "成人",
                             "companyId": "S117325",
                             "cnName": "张栋",
-                            "enName": "",
-                            "userName": "",
-                            "dName": "",
-                            "nationality": "",
-                            "birthday": "",
-                            "mobile": "",
-                            "email": "",
                             "certificatesList":
                                 [{
                                     "certType": "身份证",
                                     "certNumber": "411527199408012773",
-                                    "expiration": "",
                                     "isFlightCertificate": false
                                 }],
                         }],
                     "contactList":
                         {
-                            "orderNo": "",
                             "contactName": "张栋",
                             "mobile": "15978561146"
                         },
@@ -145,43 +138,46 @@ describe('/美亚订票流程', function () {
                 try {
                     result = res.body
                 } catch (err) {
-                    result.body
+                    result = body
                 }
-                console.log(result,"<=====creatOrderResult");
+                console.log(result, "<========CreateOrder");
                 order = result.orderNos;
                 expect(result.code).to.be.equal("10000");
                 done()
-            }, 1000)
-        })
+            })
+        // }, 1000)
     });
 
-    it("订单详情", (done) => {
-        request({
-            url: url + "/GetOrderInfo",
-            method: "POST",
-            json: true,
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: {
-                "orderNo": order[0],
-                "sessionId": sessionId
-            }
-        }, (err, res, body) => {
-            if (err) {
-                console.log(err);
-                return
-            }
-            let result;
-            try {
-                result = res.body;
-            } catch (err) {
-                result = body
-            }
-            expect(result.code).to.be.equal("10000");
-            done()
-        })
-    });
+
+    /*
+        it("订单详情", (done) => {
+            request({
+                url: url + "/GetOrderInfo",
+                method: "POST",
+                json: true,
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: {
+                    "orderNo": order[0],
+                    "sessionId": sessionId
+                }
+            }, (err, res, body) => {
+                if (err) {
+                    console.log(err);
+                    return
+                }
+                let result;
+                try {
+                    result = res.body;
+                } catch (err) {
+                    result = body
+                }
+                expect(result.code).to.be.equal("10000");
+                done()
+            })
+        });
+    */
 
     /*it("取消订单", (done) => {
         request({
@@ -212,61 +208,61 @@ describe('/美亚订票流程', function () {
     });
 */
 
-    it("提交审批", (done) => {
-        request({
-            url: url + "/SubmitOrder",
-            method: "POST",
-            headers: {
-                'content-type': 'application/json'
-            },
-            json: true,
-            body: {
-                "orderNo": order[0],
-                "sessionId": sessionId
-            }
-        }, (err, res, body) => {
-            if (err) {
-                console.log(err);
-                return
-            }
-            let result;
-            try {
-                result = res.body;
-            } catch (err) {
-                result = body
-            }
-            console.log(result, "<=====result");
-            expect(result.code).to.be.equal("10000");
-            done()
-        })
-    });
+    // it("提交审批", (done) => {
+    //     request({
+    //         url: url + "/SubmitOrder",
+    //         method: "POST",
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         json: true,
+    //         body: {
+    //             "orderNo": order[0],
+    //             "sessionId": sessionId
+    //         }
+    //     }, (err, res, body) => {
+    //         if (err) {
+    //             console.log(err);
+    //             return
+    //         }
+    //         let result;
+    //         try {
+    //             result = res.body;
+    //         } catch (err) {
+    //             result = body
+    //         }
+    //         console.log(result, "<=====result");
+    //         expect(result.code).to.be.equal("10000");
+    //         done()
+    //     })
+    // });
 
-/*
-    it("创建改签单",(done)=>{
-        request({
-            url:url+"/CreateChangeOrder",
-            method:"POST",
-            json:true,
-            headers:{
-                'content-type': 'application/json'
-            },
-            body:{}
-        },(err,res,body)=>{
-            if(err){
-                console.log(err);
-                return
-            }
-            let result;
-            try {
-                result = res.body
-            }catch (err){
-                result = body
-            }
-            console.log(result,"<=======changeOrderResult");
-            expect(result.code).to.be.equal("10000");
-            done()
-        })
-    })*/
+    /*
+        it("创建改签单",(done)=>{
+            request({
+                url:url+"/CreateChangeOrder",
+                method:"POST",
+                json:true,
+                headers:{
+                    'content-type': 'application/json'
+                },
+                body:{}
+            },(err,res,body)=>{
+                if(err){
+                    console.log(err);
+                    return
+                }
+                let result;
+                try {
+                    result = res.body
+                }catch (err){
+                    result = body
+                }
+                console.log(result,"<=======changeOrderResult");
+                expect(result.code).to.be.equal("10000");
+                done()
+            })
+        })*/
 
     /*it("取消改签单", (done) => {
         request({

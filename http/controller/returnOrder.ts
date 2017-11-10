@@ -61,10 +61,7 @@ export class ReturnController extends AbstractController {
 
         let params = {
             url: `${config.meiyaUrl}` + "/CancelReturnOrder",
-            body: {
-                "orderNo": `${query.orderNo}`,
-                "sessionId":`${query.sessionId}`
-            },
+            body: query,
             header: {
                 'content-type': 'application/json'
             }
@@ -79,6 +76,11 @@ export class ReturnController extends AbstractController {
 
     //提交退票审批
     async update(req, res, next) {
+        let query = req.body;
+        let {auth} = req.headers;
+        auth = JSON.parse(decodeURIComponent(auth));
+        query.sessionId = auth.sessionId;
+
         let params = {
             url: `${config.meiyaUrl}` + "/SubmitReturnOrder",
             body: {},
