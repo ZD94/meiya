@@ -7,17 +7,8 @@ export async function proxyHttp(params: {
     qs?: object;
     header?: object;
 }) {
-    let {url, body = {}, method = "post", qs = {}, header = {}} = params;
+    let { url, body = {}, method = "post", qs = {}, header = {} } = params;
     return new Promise((resolve, reject) => {
-        console.log({
-            url,
-            body,
-            json: true,
-            method,
-            qs,
-            headers: header
-
-        }, "<====params");
         request({
             url,
             body,
@@ -27,7 +18,6 @@ export async function proxyHttp(params: {
             headers: header
 
         }, (err, resp, result) => {
-            console.log(result, "<======result");
             try {
                 if (typeof result == 'string') {
                     try {
