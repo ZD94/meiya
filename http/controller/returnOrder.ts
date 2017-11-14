@@ -1,6 +1,6 @@
 'use strict';
-import {AbstractController, Restful, Router, Reply} from '@jingli/restful'
-import {proxyHttp,getInfo,transAttributeName} from '../util'
+import { AbstractController, Restful, Router, Reply } from '@jingli/restful'
+import { proxyHttp, getInfo, transAttributeName } from '../util'
 
 let config = require("@jingli/config");
 const url = "http://121.41.36.97:6005/API.svc/GetOrderInfo";
@@ -18,11 +18,11 @@ export class ReturnController extends AbstractController {
     //订购单创建退票单
     async add(req, res, next) {
         let query = req.body;
-        let {auth} = req.headers;
+        let { auth } = req.headers;
         auth = JSON.parse(decodeURIComponent(auth));
         query.sessionId = auth.sessionId;
 
-        if(query.flightList){
+        if (query.flightList) {
             delete query.flightList
         }
         let datas = await getInfo(url, query.sessionId, query.originalOrderNo);
@@ -35,7 +35,6 @@ export class ReturnController extends AbstractController {
             }
         ];
         transAttributeName(query.contactList, contactListNewName);
-        console.log(query,"<=========query");
         let params = {
             url: `${config.meiyaUrl}` + "/CreateReturnOrder",
             header: {
@@ -54,7 +53,7 @@ export class ReturnController extends AbstractController {
     //取消退票
     async delete(req, res, next) {
         let query = req.body;
-        let {auth} = req.headers;
+        let { auth } = req.headers;
         auth = JSON.parse(decodeURIComponent(auth));
         query.sessionId = auth.sessionId;
 
@@ -76,7 +75,7 @@ export class ReturnController extends AbstractController {
     //提交退票审批
     async update(req, res, next) {
         let query = req.body;
-        let {auth} = req.headers;
+        let { auth } = req.headers;
         auth = JSON.parse(decodeURIComponent(auth));
         query.sessionId = auth.sessionId;
 
@@ -97,25 +96,37 @@ export class ReturnController extends AbstractController {
 
     //退票单列表
     async find(req, res, next) {
+        let query = req.query || {};
+        let { auth } = req.headers;
+        auth = JSON.parse(decodeURIComponent(auth));
+        query.sessionId = auth.sessionId;
         let params = {
             url: `${config.meiyaUrl}` + "/GetReturnOrderList",
-            body: {},
+            body: query,
             header: {
                 'content-type': 'application/json'
             }
         };
         let data: any = await proxyHttp(params);
         if (data.code == "10000") {
-            res.json(Reply(0, data))
+
+            for (let item of data.returnOrderList) {
+                item.priceList = item.returnPriceList;
+                for (let price of item.priceList) {
+                    price.price = price.sellAmount;
+                }
+            }
+
+            res.json(Reply(0, { result: data.returnOrderList, total: data.totalCount }))
         } else {
             res.json(Reply(502, null))
         }
     }
 
     //退票单详情
-    async get (req, res, next) {
+    async get(req, res, next) {
         let query = res.body;
-        let {auth} = req.headers;
+        let { auth } = req.headers;
         auth = JSON.parse(decodeURIComponent(auth));
         query.sessionId = auth.sessionId;
 

@@ -82,16 +82,27 @@ export class ChangeController extends AbstractController {
 
     //改签单列表
     async find(req, res, next) {
+        let query = req.query || {};
+        let {auth} = req.headers;
+        auth = JSON.parse(decodeURIComponent(auth));
+        query.sessionId = auth.sessionId;
         let params = {
             url: `${config.meiyaUrl}` + "/GetChangeOrderList",
-            body: {},
+            body: query,
             header: {
                 'content-type': 'application/json'
             }
         };
         let data: any = await proxyHttp(params);
         if (data.code == "10000") {
-            res.json(Reply(0, data))
+
+            for(let item of data.changeOrderList){
+                for(let price of item.priceList){
+                    price.price = price.sellAmount;
+                }
+            }
+
+            res.json(Reply(0, {result: data.changeOrderList, total: data.totalCount}))
         } else {
             res.json(Reply(502, null))
         }
