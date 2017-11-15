@@ -36,7 +36,6 @@ export class ChangeController extends AbstractController {
             }
         ];
         transAttributeName(query.contactList, contactListNewName);
-        query.sessionId = auth.sessionId;
         let datas = await getInfo(url, query.sessionId, query.originalOrderNo);
         query.passengerList = datas["passengerCode"];
         let params = {
@@ -46,16 +45,7 @@ export class ChangeController extends AbstractController {
                 'content-type': 'application/json'
             }
         };
-
         let data: any = await proxyHttp(params);
-        if (data.code == '10000') {
-            let orderNos = {
-                orderNos: data.orderNo
-            };
-            res.json(Reply(0, orderNos));
-        } else {
-            res.json(Reply(502, null));
-        }
     }
 
     //取消改签单

@@ -4,7 +4,7 @@
 
 'use strict';
 import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
-import {proxyHttp} from '../util'
+import {login} from '../../model/agent';
 
 let config = require("@jingli/config");
 
@@ -19,30 +19,12 @@ export class AuthController extends AbstractController {
     }
 
     async add(req, res, next) {
-        let {userName,password} = req.body;
-        let params = {
-            url: `${config.meiyaUrl}` + '/Login',
-            body: {
-                userName,
-                password,
-                "passwordType":"3"
-            },
-            header: {
-                'content-type': 'application/json'
-            },
-            method:"POST"
-        };
-
-        let data: any = await proxyHttp(params);
-        if (data.code == '10000') {
-            let sessionId = {
-                sessionId:data.sessionId
-            };
-            res.json(Reply(0, sessionId));
-        } else {
-            res.json(Reply(502, null));
+        let {userName, password} = req.body;
+        try{
+            let data = await login(userName, password);
+            res.json(data);
+        }catch (err){
+            console.log(err)
         }
     }
 }
-
-

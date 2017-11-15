@@ -1,7 +1,7 @@
 'use strict';
 import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
 import {proxyHttp, transAttributeName} from '../util'
-
+import {searchFlight} from "../../model/search"
 let config = require("@jingli/config");
 
 @Restful()
@@ -16,36 +16,14 @@ export class SearchFlightController extends AbstractController {
 
     async find(req, res, next) {
         let query = req.query;
-        let {auth} = req.headers;
-        auth = JSON.parse(decodeURIComponent(auth));
-        query.sessionId = auth.sessionId;
+        // let {auth} = req.headers;
+        // auth = JSON.parse(decodeURIComponent(auth));
+        // query.sessionId = auth.sessionId;
 
-        let testArr = [
-            {
-                newname: "departureDate",
-                oldname: "depDate"
-            },
-            {
-                newname: "arrivalCity",
-                oldname: "arrivalCode"
-            },
-            {
-                newname: "departureCity",
-                oldname: "departureCode"
-            }
-        ];
-        transAttributeName(query, testArr);
 
-        let params = {
-            url: `${config.meiyaUrl}` + '/QueryFlights',
-            body: query,
-            header: {
-                'content-type': 'application/json'
-            },
-        };
         let data: any;
         try {
-            data = await proxyHttp(params);
+            data = await searchFlight(query);
             if (data.code == '10000') {
                 let changeName = [
                     {
@@ -79,7 +57,6 @@ export class SearchFlightController extends AbstractController {
             } else {
                 return res.json(Reply(502, null));
             }
-            // res.json(Reply(0,data))
         } catch (err) {
             console.log(err, '<======err');
             return res.json(Reply(502, null))
