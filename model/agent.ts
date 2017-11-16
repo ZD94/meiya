@@ -20,17 +20,18 @@ export async function login(userName, password) {
     };
 
     let datas: any = await proxyHttp(params);
-    //redis 存储
-    let cacheId = userName + password;
-    let param = md5(cacheId);
-    console.log(param,datas.sessionId,"=========");
-    await cache.write(param, datas.sessionId, config.tmcCacheTime * 1000 * 60);
-    let aa = await cache.read(param);
-    console.log(aa,"<=======aa");
+
+
     if (datas.code == '10000') {
         let sessionId = {
             sessionId: datas.sessionId
         };
+        //redis 存储
+        let cacheId = userName + password;
+        let param = md5(cacheId);
+        console.log(param,datas.sessionId,"=========");
+        await cache.write(param, sessionId, config.tmcCacheTime * 1000 * 60);
+
         return Reply(0, sessionId)
     } else {
         return Reply(502, null)
