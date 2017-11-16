@@ -48,7 +48,7 @@ describe('/美亚订票流程', function () {
             qs: {
                 "departureCode": "PEK",
                 "arrivalCode": "SHA",
-                "depDate": "2018-09-21",
+                "depDate": "2018-09-23",
                 supplier: "meiya",
                 tripType: 1
             }
@@ -171,7 +171,7 @@ describe('/美亚订票流程', function () {
             } catch (err) {
                 result = body
             }
-            console.log(result, "<=====result");
+            console.log(res.body, "<=====result");
             expect(result.code).to.be.equal(0);
             done()
         })

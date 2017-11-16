@@ -4,6 +4,7 @@ import {proxyHttp, transAttributeName} from '../../util'
 import {creatOrder, createChangeOrder, createReturnOrder, getOrderList, getOrderInfo} from "model/flight/order"
 import {cancelOrder, cancelChangeOrder, cancelReturnOrder} from "model/flight/cancle"
 import {submitOrder, submitReturnOrder} from "model/flight/confirm"
+
 let md5 = require("md5");
 let config = require("@jingli/config");
 import cache from "@jingli/cache"
@@ -17,6 +18,7 @@ export class OrderController extends AbstractController {
     $isValidId(id: string) {
         return true;
     }
+
     async $before(req, res, next) {
         let {username, password} = req.headers;
         if (!username || !password) {
@@ -31,6 +33,7 @@ export class OrderController extends AbstractController {
         }
         next()
     }
+
     //订票单，改签单，退票单创建
     async add(req, res, next) {
         let query = req.body;
@@ -57,7 +60,7 @@ export class OrderController extends AbstractController {
             * 订购单创建退票单
             * */
             try {
-                data =await createReturnOrder(query);
+                data = await createReturnOrder(query);
                 res.json(data);
             } catch (err) {
                 console.log(err)
@@ -77,7 +80,7 @@ export class OrderController extends AbstractController {
         // query.sessionId = auth.sessionId;
         if (query.type == "order") {
             try {
-                data = cancelOrder(query);
+                data = await cancelOrder(query);
                 res.json(data);
             } catch (err) {
                 console.log(err)
@@ -85,7 +88,7 @@ export class OrderController extends AbstractController {
 
         } else if (query.type == "change") {
             try {
-                data =await cancelChangeOrder(query);
+                data = await cancelChangeOrder(query);
                 res.json(data)
             } catch (err) {
                 console.log(err)
@@ -93,7 +96,7 @@ export class OrderController extends AbstractController {
 
         } else if (query.type == "return") {
             try {
-                data =await cancelReturnOrder(query);
+                data = await cancelReturnOrder(query);
                 res.json(data)
             } catch (err) {
                 console.log(err)
@@ -106,21 +109,18 @@ export class OrderController extends AbstractController {
         let query = req.body;
         let {id} = req.params;
         query.orderNo = id;
-        console.log(req.params,"<========qqqqq");
         let data;
-        // let {auth} = req.headers;
-        // auth = JSON.parse(decodeURIComponent(auth));
-        // query.sessionId = auth.sessionId;
         if (query.type == "order") {
             try {
-                data =await submitOrder(query);
+                data = await submitOrder(query);
+                console.log(data, "<==========2222222");
                 res.json(data)
             } catch (err) {
                 console.log(err)
             }
         } else if (query.type == "return") {
             try {
-                data =await submitReturnOrder(query);
+                data = await submitReturnOrder(query);
                 res.json(data)
             } catch (err) {
                 console.log(err)
@@ -158,3 +158,4 @@ export class OrderController extends AbstractController {
         }
     }
 }
+
