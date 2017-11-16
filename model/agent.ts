@@ -23,9 +23,10 @@ export async function login(userName, password) {
     //redis 存储
     let cacheId = userName + password;
     let param = md5(cacheId);
-
-    await cache.write(cacheId, datas.sessionId, config.tmcCacheTime * 1000 * 60);
-
+    console.log(param,datas.sessionId,"=========");
+    await cache.write(param, datas.sessionId, config.tmcCacheTime * 1000 * 60);
+    let aa = await cache.read(param);
+    console.log(aa,"<=======aa");
     if (datas.code == '10000') {
         let sessionId = {
             sessionId: datas.sessionId

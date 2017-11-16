@@ -1,7 +1,7 @@
 'use strict';
 import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
 import {proxyHttp, transAttributeName} from '../util'
-import {searchFlight} from "../../model/search"
+import {searchFlight} from "model/search"
 
 let config = require("@jingli/config");
 

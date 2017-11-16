@@ -4,7 +4,7 @@
 
 'use strict';
 import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
-import {login} from '../../model/agent';
+import {login} from 'model/agent';
 
 let config = require("@jingli/config");
 
