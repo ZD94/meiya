@@ -38,9 +38,6 @@ export class OrderController extends AbstractController {
     async add(req, res, next) {
         let query = req.body;
         let data;
-        // let {auth} = req.headers;
-        // auth = JSON.parse(decodeURIComponent(auth));
-        // query.sessionId = auth.sessionId;
         if (query.type == "order") {
             try {
                 data = await creatOrder(query);
@@ -75,9 +72,7 @@ export class OrderController extends AbstractController {
     async delete(req, res, next) {
         let query = req.body;
         let data;
-        // let {auth} = req.headers;
-        // auth = JSON.parse(decodeURIComponent(auth));
-        // query.sessionId = auth.sessionId;
+
         if (query.type == "order") {
             try {
                 data = await cancelOrder(query);
@@ -132,9 +127,7 @@ export class OrderController extends AbstractController {
     async get (req, res, next) {
         let query = req.query;
         let data;
-        // let {auth} = req.headers;
-        // auth = JSON.parse(decodeURIComponent(auth));
-        // query.sessionId = auth.sessionId;
+
         try {
             data = await getOrderInfo(query);
             res.json(data);
@@ -147,9 +140,7 @@ export class OrderController extends AbstractController {
     async find(req, res, next) {
         let query = req.body;
         let data;
-        // let {auth} = req.headers;
-        // auth = JSON.parse(decodeURIComponent(auth));
-        // query.sessionId = auth.sessionId;
+
         try {
             data = await getOrderList(query);
             res.json(data);

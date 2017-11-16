@@ -48,7 +48,7 @@ describe('/美亚订票流程', function () {
             qs: {
                 "departureCode": "PEK",
                 "arrivalCode": "SHA",
-                "depDate": "2018-09-23",
+                "depDate": "2018-09-24",
                 supplier: "meiya",
                 tripType: 1
             }
@@ -148,7 +148,6 @@ describe('/美亚订票流程', function () {
     });
 
     it("提交审批", (done) => {
-        console.log(order,"<==========order");
         request({
             url: url + "Order/" + order,
             method: "PUT",
@@ -158,7 +157,7 @@ describe('/美亚订票流程', function () {
             },
             json: true,
             body: {
-                "type":"order",
+                "type": "order",
             }
         }, (err, res, body) => {
             if (err) {
@@ -294,8 +293,6 @@ describe('/美亚订票流程', function () {
         })
     });
 */
-
-
 
 
     /*it("取消改签单", (done) => {
