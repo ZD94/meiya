@@ -1,5 +1,6 @@
 let config = require("@jingli/config");
 import {proxyHttp, transAttributeName} from "../http/util";
+import {Reply} from "@jingli/restful";
 import cache from "@jingli/cache"
 
 export async function searchFlight(query) {
@@ -21,14 +22,45 @@ export async function searchFlight(query) {
     let querys = transAttributeName(query, testArr);
     let params = {
         url: `${config.meiyaUrl}` + "/QueryFlights",
-        body: query,
+        body: querys,
         header: {
             'content-type': 'application/json'
         },
         method: "POST"
     };
-
-    let datas = await proxyHttp(params);
-    console.log(datas, "<======datas");
-    return datas
+    let datas;
+    datas = await proxyHttp(params);
+    if (datas.code == "10000") {
+        let changeName = [
+            {
+                newname: "departure",
+                oldname: "orgCity"
+            },
+            {
+                newname: "departureCode",
+                oldname: "orgCityCode"
+            },
+            {
+                newname: "arrival",
+                oldname: "desCity"
+            },
+            {
+                newname: "arrivalCode",
+                oldname: "desCityCode"
+            },
+            {
+                newname: "airline",
+                oldname: "airlineName"
+            }
+        ];
+        transAttributeName(datas.flightInfoList, changeName);
+        for (let item of datas.flightInfoList) {
+            for (let items of item.flightPriceInfoList) {
+                items.price = items.ticketPrice;
+            }
+        }
+        return Reply(0, datas.flightInfoList) || [];
+    } else {
+        return Reply(502, null);
+    }
 }

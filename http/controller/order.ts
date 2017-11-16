@@ -3,7 +3,7 @@ import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
 import {proxyHttp, transAttributeName} from '../util'
 import {creatOrder, createChangeOrder, createReturnOrder, getOrderList, getOrderInfo} from "../../model/order"
 import {cancelOrder, cancelChangeOrder, cancelReturnOrder} from "../../model/cancle"
-
+import {submitOrder, submitReturnOrder} from "../../model/confirm"
 
 let config = require("@jingli/config");
 
@@ -42,16 +42,15 @@ export class OrderController extends AbstractController {
             /*
             * 订购单创建退票单
             * */
-            try{
+            try {
                 data = createReturnOrder(query);
                 res.json(data);
-            }catch (err){
+            } catch (err) {
                 console.log(err)
             }
             /*
             * 改签单创建退票单
             * */
-
         }
     }
 
@@ -63,18 +62,18 @@ export class OrderController extends AbstractController {
         // auth = JSON.parse(decodeURIComponent(auth));
         // query.sessionId = auth.sessionId;
         if (query.type == "order") {
-            try{
+            try {
                 data = cancelOrder(query);
                 res.json(data);
-            }catch (err){
+            } catch (err) {
                 console.log(err)
             }
 
         } else if (query.type == "change") {
-            try{
+            try {
                 data = cancelChangeOrder(query);
                 res.json(data)
-            }catch (err){
+            } catch (err) {
                 console.log(err)
             }
 
@@ -82,34 +81,35 @@ export class OrderController extends AbstractController {
             try {
                 data = cancelReturnOrder(query);
                 res.json(data)
-            }catch (err){
+            } catch (err) {
                 console.log(err)
             }
         }
     }
 
-    // //提交订票单、改签单、退票单审批
-    // async update(req, res, next) {
-    //     let query = req.body;
-    //     // let {auth} = req.headers;
-    //     // auth = JSON.parse(decodeURIComponent(auth));
-    //     // query.sessionId = auth.sessionId;
-    //
-    //     let params = {
-    //         url: `${config.meiyaUrl}` + "/SubmitOrder",
-    //         body: query,
-    //         header: {
-    //             'content-type': 'application/json'
-    //         }
-    //     };
-    //     let data: any = await proxyHttp(params);
-    //
-    //     if (data.code == '10000') {
-    //         res.json(Reply(0, data.description));
-    //     } else {
-    //         res.json(Reply(502, null));
-    //     }
-    // }
+    //提交订票单、改签单、退票单审批
+    async update(req, res, next) {
+        let query = req.body;
+        let data;
+        // let {auth} = req.headers;
+        // auth = JSON.parse(decodeURIComponent(auth));
+        // query.sessionId = auth.sessionId;
+        if (query.type == "order") {
+            try {
+                data = submitOrder(query);
+                res.json(data)
+            } catch (err) {
+                console.log(err)
+            }
+        } else if (query.type == "return") {
+            try {
+                data = submitReturnOrder(query);
+                res.json(data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    }
 
     //订单详情
     async get (req, res, next) {
@@ -121,10 +121,9 @@ export class OrderController extends AbstractController {
         try {
             data = await getOrderInfo(query);
             res.json(data);
-        }catch (err){
+        } catch (err) {
             console.log(err)
         }
-
     }
 
     //订单列表
@@ -140,6 +139,5 @@ export class OrderController extends AbstractController {
         } catch (err) {
             console.log(err)
         }
-
     }
 }
