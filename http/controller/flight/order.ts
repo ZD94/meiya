@@ -1,9 +1,9 @@
 'use strict';
 import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
-import {proxyHttp, transAttributeName} from '../util'
-import {creatOrder, createChangeOrder, createReturnOrder, getOrderList, getOrderInfo} from "model/order"
-import {cancelOrder, cancelChangeOrder, cancelReturnOrder} from "model/cancle"
-import {submitOrder, submitReturnOrder} from "model/confirm"
+import {proxyHttp, transAttributeName} from '../../util'
+import {creatOrder, createChangeOrder, createReturnOrder, getOrderList, getOrderInfo} from "model/flight/order"
+import {cancelOrder, cancelChangeOrder, cancelReturnOrder} from "model/flight/cancle"
+import {submitOrder, submitReturnOrder} from "model/flight/confirm"
 
 let config = require("@jingli/config");
 

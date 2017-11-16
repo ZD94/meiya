@@ -1,6 +1,6 @@
 let config = require("@jingli/config");
 let md5 =require("md5");
-import {proxyHttp} from '../http/util';
+import {proxyHttp} from '../../http/util';
 import {Reply} from "@jingli/restful";
 
 import cache from "@jingli/cache"
@@ -29,7 +29,6 @@ export async function login(userName, password) {
         //redis 存储
         let cacheId = userName + password;
         let param = md5(cacheId);
-        console.log(param,datas.sessionId,"=========");
         await cache.write(param, sessionId, config.tmcCacheTime * 1000 * 60);
 
         return Reply(0, sessionId)

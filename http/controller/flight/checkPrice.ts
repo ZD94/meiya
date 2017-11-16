@@ -1,6 +1,6 @@
 'use strict';
 import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
-import {proxyHttp} from '../util'
+import {proxyHttp} from '../../util'
 
 let config = require("@jingli/config");
 

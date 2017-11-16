@@ -1,5 +1,5 @@
 let config = require("@jingli/config");
-import {proxyHttp} from '../http/util'
+import {proxyHttp} from '../../http/util'
 import {Reply} from "@jingli/restful";
 
 import cache from "@jingli/cache"
