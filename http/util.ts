@@ -119,6 +119,12 @@ function recordedData(url: string, data?: object) {
         return filename;
     }
 
+    try {
+        fs.statSync(path.join(process.cwd(), "test/data"));
+    } catch (e) {
+        fs.mkdirSync(path.join(process.cwd(), "test/data"));
+    }
+
     let source = fs.createWriteStream(filepath);
     let result = JSON.stringify(data, null, 4);
 
