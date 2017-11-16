@@ -57,7 +57,7 @@ export class OrderController extends AbstractController {
             * 订购单创建退票单
             * */
             try {
-                data = createReturnOrder(query);
+                data =await createReturnOrder(query);
                 res.json(data);
             } catch (err) {
                 console.log(err)
@@ -77,7 +77,7 @@ export class OrderController extends AbstractController {
         // query.sessionId = auth.sessionId;
         if (query.type == "order") {
             try {
-                data = cancelOrder(query);
+                data =await cancelOrder(query);
                 res.json(data);
             } catch (err) {
                 console.log(err)
@@ -85,7 +85,7 @@ export class OrderController extends AbstractController {
 
         } else if (query.type == "change") {
             try {
-                data = cancelChangeOrder(query);
+                data =await cancelChangeOrder(query);
                 res.json(data)
             } catch (err) {
                 console.log(err)
@@ -93,7 +93,7 @@ export class OrderController extends AbstractController {
 
         } else if (query.type == "return") {
             try {
-                data = cancelReturnOrder(query);
+                data =await cancelReturnOrder(query);
                 res.json(data)
             } catch (err) {
                 console.log(err)
@@ -106,14 +106,14 @@ export class OrderController extends AbstractController {
         let query = req.body;
         let {id} = req.params;
         query.orderNo = id;
-        console.log(req.params,"<========qqqqq")
         let data;
         // let {auth} = req.headers;
         // auth = JSON.parse(decodeURIComponent(auth));
         // query.sessionId = auth.sessionId;
         if (query.type == "order") {
             try {
-                data = submitOrder(query);
+                data = await submitOrder(query);
+                console.log(data,"<==========2222222");
                 res.json(data)
             } catch (err) {
                 console.log(err)
