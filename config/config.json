@@ -6,20 +6,31 @@
     "ts_node": true,
     "cluster": true,
     "port": 80,
-    "apiPort": 4104,
+    "tmcCacheTime": 60,
+    "redis": {
+        "url": "${JL_APP_REDIS}"
+    },
     "socket_file": "${{rootDir}}/web.sock",
     "pid_file": "${{rootDir}}/tmp/server.pid",
-    "meiyaUrl":"http://121.41.36.97:6005/API.svc",
+    "meiyaUrl": "http://121.41.36.97:6005/API.svc",
     "logger": {
         "path": "${{rootDir}}/log",
         "prefix": "${{appName}}_",
         "httptype": "short",
         "mods": {
-            "sequelize": { "prefix": "${{appName}}_sql_", "console": false },
-            "sqlinit": { "prefix": "${{appName}}_sql_", "console": false },
+            "sequelize": {
+                "prefix": "${{appName}}_sql_",
+                "console": false
+            },
+            "sqlinit": {
+                "prefix": "${{appName}}_sql_",
+                "console": false
+            },
             "http": {
                 "mods": {
-                    "access": { "console": false }
+                    "access": {
+                        "console": false
+                    }
                 }
             }
         }

@@ -4,14 +4,14 @@ let request = require("request");
 
 let expect = require("chai").expect;
 
-const url = "http://121.41.36.97:6005/API.svc";
+const url = "http://localhost:3000/";
 
 describe('/美亚订票流程', function () {
     let sessionId;
     this.timeout(5000);
-    before((done) => {
+    before("login",(done) => {
         request({
-            url: url + "/Login",
+            url: url + "Auth",
             method: 'POST',
             json: true,
             headers: {
@@ -20,32 +20,30 @@ describe('/美亚订票流程', function () {
             body: {
                 "userName": "JingLiZhiXiang",
                 "password": '123456',
-                "passwordType": "3",
             }
         }, function (err, res, body) {
             let result;
             if (!err && res.statusCode == 200) {
-                let id = res.body.sessionId;
                 result = res.body;
             } else {
                 console.log(err);
             }
-            sessionId = result.sessionId;
-            expect(result.code).to.be.equal("10000");
+            sessionId = result.data.sessionId;
+            expect(result.code).to.be.equal(0);
             done()
         });
     });
 
-    let data, flightID, departureCity, arrivalCity, departureDate, airline, cabinType, flightNo, price;
     it("get /查询航班", (done) => {
         request({
-            url: url + "/QueryFlights",
-            method: 'POST',
+            url: url + "SearchFlight",
+            method: 'GET',
             json: true,
             headers: {
-                'content-type': 'application/json'
+                userName:"JingLiZhiXiang",
+                password:"123456"
             },
-            body: {
+            qs: {
                 "flightID": "",
                 "departureCity": "PEK",
                 "arrivalCity": "SHA",
@@ -67,25 +65,27 @@ describe('/美亚订票流程', function () {
             }
             let result;
             try {
+                console.log(res.body,"<======body");
                 result = res.body
             } catch (err) {
                 result = body
             }
-            data = result.flightInfoList[0];
-            flightID = data.flightPriceInfoList[0].flightID;
-            departureCity = data.orgAirportCode;
-            arrivalCity = data.desAirportCode;
-            departureDate = data.depDate;
-            airline = data.airlineName;
-            cabinType = data.flightPriceInfoList[0].cabinType;
-            flightNo = data.flightNo;
-            price = data.flightPriceInfoList[0].ticketPrice;
-            console.log(flightID, departureCity, arrivalCity, departureDate, airline, cabinType, flightNo, price, "<====data");
+            // data = result.flightInfoList[0];
+            // flightID = data.flightPriceInfoList[0].flightID;
+            // departureCity = data.orgAirportCode;
+            // arrivalCity = data.desAirportCode;
+            // departureDate = data.depDate;
+            // airline = data.airlineName;
+            // cabinType = data.flightPriceInfoList[0].cabinType;
+            // flightNo = data.flightNo;
+            // price = data.flightPriceInfoList[0].ticketPrice;
+            // console.log(flightID, departureCity, arrivalCity, departureDate, airline, cabinType, flightNo, price, "<====data");
             expect(result.code).to.be.equal("10000");
             done()
         })
     });
 
+/*
 
     let order;
     it("/创建订单", (done) => {
@@ -149,7 +149,7 @@ describe('/美亚订票流程', function () {
     });
 
 
-    /*
+    /!*
         it("订单详情", (done) => {
             request({
                 url: url + "/GetOrderInfo",
@@ -177,9 +177,9 @@ describe('/美亚订票流程', function () {
                 done()
             })
         });
-    */
+    *!/
 
-    /*it("取消订单", (done) => {
+    /!*it("取消订单", (done) => {
         request({
             url: url + "/CancelOrder",
             method: "POST",
@@ -206,7 +206,7 @@ describe('/美亚订票流程', function () {
             done()
         })
     });
-*/
+*!/
 
     // it("提交审批", (done) => {
     //     request({
@@ -237,7 +237,7 @@ describe('/美亚订票流程', function () {
     //     })
     // });
 
-    /*
+    /!*
         it("创建改签单",(done)=>{
             request({
                 url:url+"/CreateChangeOrder",
@@ -262,9 +262,9 @@ describe('/美亚订票流程', function () {
                 expect(result.code).to.be.equal("10000");
                 done()
             })
-        })*/
+        })*!/
 
-    /*it("取消改签单", (done) => {
+    /!*it("取消改签单", (done) => {
         request({
             url: url + "/CancelChangeOrder",
             method:"POST",
@@ -289,9 +289,9 @@ describe('/美亚订票流程', function () {
             done()
         })
     })
-*/
+*!/
 
-    /* it("订购单创建退票单", (done) => {
+    /!* it("订购单创建退票单", (done) => {
          request({
              url: url + "/CreateReturnOrder",
              method: "POST",
@@ -315,9 +315,9 @@ describe('/美亚订票流程', function () {
              expect(result.code).to.be.equal("10000");
              done()
          })
-     })*/
+     })*!/
 
-    /*it("取消退票单", (done) => {
+    /!*it("取消退票单", (done) => {
         request({
             url: url + "/CancelReturnOrder",
             method: "POST",
@@ -341,7 +341,8 @@ describe('/美亚订票流程', function () {
             expect(result.code).to.be.equal("10000");
             done()
         })
-    })*/
+    })*!/
+*/
 
 });
 
