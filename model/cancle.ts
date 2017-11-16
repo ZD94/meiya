@@ -40,6 +40,7 @@ export async function cancelChangeOrder(query) {
 
 
     if (datas.code == "10000") {
+        let dataas = 1;
         return Reply(0, datas.description)
     } else {
         return Reply(502, null)
