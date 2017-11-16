@@ -24,6 +24,7 @@ export async function proxyHttp(params: {
     if (config.recordData) {
         data = await request(options);
         recordedData(url, data);
+        console.log(data,"<========data")
         return data;
     }
 
