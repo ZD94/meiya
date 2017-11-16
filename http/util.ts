@@ -1,4 +1,7 @@
-let request = require("request");
+let request = require("request-promise");
+import config = require("@jingli/config");
+import * as fs from "fs";
+import * as path from "path";
 
 export async function proxyHttp(params: {
     url: string;
@@ -6,42 +9,25 @@ export async function proxyHttp(params: {
     body: object;
     qs?: object;
     header?: object;
-}) {
-    let {url, body = {}, method = "post", qs = {}, header = {}} = params;
-    return new Promise((resolve, reject) => {
-        console.log({
-            url,
-            body,
-            json: true,
-            method,
-            qs,
-            headers: header
+}): Promise<any> {
+    let { url, body = {}, method = "post", qs = {}, header = {} } = params;
+    let options = {
+        url,
+        body,
+        json: true,
+        method,
+        qs,
+        headers: header
+    };
 
-        }, "<====params");
-        request({
-            url,
-            body,
-            json: true,
-            method,
-            qs,
-            headers: header
+    let data;
+    if (config.recordData) {
+        data = await request(options);
+        recordedData(url, data);
+        return data;
+    }
 
-        }, (err, resp, result) => {
-            console.log(result, "<======result");
-            try {
-                if (typeof result == 'string') {
-                    try {
-                        result = JSON.parse(result);
-                    } catch (e) {
-                        return reject(e);
-                    }
-                }
-                return resolve(result);
-            } catch (err) {
-                return reject(err)
-            }
-        });
-    })
+    return await request(options);
 }
 
 //参数名转换
@@ -122,3 +108,22 @@ export async function getInfo(url, id, orderNo) {
     })
 }
 
+
+
+function recordedData(url: string, data?: object) {
+    let reg = /\/|\:/ig;
+    let filename = url.replace(reg, "") + ".json";
+    let filepath = path.join(process.cwd(), "test/data", filename);
+
+    if (!data) {
+        return filename;
+    }
+
+    let source = fs.createWriteStream(filepath);
+    let result = JSON.stringify(data, null, 4);
+
+    source.write(result);
+    source.end(() => {
+        console.log("数据记录结束 :", filepath);
+    });
+}
