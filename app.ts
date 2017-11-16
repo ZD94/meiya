@@ -10,8 +10,6 @@ app.use(bodyParser.urlencoded({ limit: '8mb', extended: true }));
 app.use(express.static(path.join(__dirname, "www")));
 
 
-// require("./db");
-
 import router from "./http";
 app.use(router);
 

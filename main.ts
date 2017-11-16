@@ -1,18 +1,23 @@
+'use strict';
 import http = require("http");
 import app from "./app";
 import config = require("@jingli/config");
-
+import { serverInit, serverStart } from "@jingli/server";
+import path = require("path");
 
 /* redis */
 import cache from "@jingli/cache";
-let config = require("@jingli/config");
 cache.init({ redis_conf: config.redis.url, prefix: 'tmc:cache:' + config.appName });
 
+import Logger from "@jingli/logger";
+import * as cluster from 'cluster';
+Logger.init(config.logger);
 
-
-const server = http.createServer(app);
-
-server.listen(config.port, () => {
-    console.info("server running");
+serverInit({
+    name: config.appName,
+    workerNumbers: 0,
+    entryPath: path.join(__dirname, './handle'),
+    cluster: config.cluster,
 });
 
+serverStart();

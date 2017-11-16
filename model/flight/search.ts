@@ -1,6 +1,6 @@
 let config = require("@jingli/config");
-import {proxyHttp, transAttributeName} from "../../http/util";
-import {Reply} from "@jingli/restful";
+import { proxyHttp, transAttributeName } from "../../http/util";
+import { Reply } from "@jingli/restful";
 import cache from "@jingli/cache"
 
 export async function searchFlight(query) {
@@ -21,7 +21,7 @@ export async function searchFlight(query) {
     ];
     let querys = transAttributeName(query, testArr);
 
-    console.log(querys,"<=====querys")
+    console.log(querys, "<=====querys")
     let params = {
         url: `${config.meiyaUrl}` + "/QueryFlights",
         body: querys,
@@ -32,6 +32,7 @@ export async function searchFlight(query) {
     };
     let datas;
     datas = await proxyHttp(params);
+
     if (datas.code == "10000") {
         let changeName = [
             {
