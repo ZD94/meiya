@@ -4,8 +4,9 @@ import {proxyHttp, transAttributeName} from '../../util'
 import {creatOrder, createChangeOrder, createReturnOrder, getOrderList, getOrderInfo} from "model/flight/order"
 import {cancelOrder, cancelChangeOrder, cancelReturnOrder} from "model/flight/cancle"
 import {submitOrder, submitReturnOrder} from "model/flight/confirm"
-
+let md5 = require("md5");
 let config = require("@jingli/config");
+import cache from "@jingli/cache"
 
 @Restful()
 export class OrderController extends AbstractController {
@@ -16,7 +17,20 @@ export class OrderController extends AbstractController {
     $isValidId(id: string) {
         return true;
     }
-
+    async $before(req, res, next) {
+        let {username, password} = req.headers;
+        if (!username || !password) {
+            return res.json(Reply(500, null));
+        }
+        let key = md5(username + password);
+        let sessionId = await cache.read(key);
+        if (req.method == "GET") {
+            req.query.sessionId = sessionId["sessionId"]
+        } else {
+            req.body.sessionId = sessionId["sessionId"]
+        }
+        next()
+    }
     //订票单，改签单，退票单创建
     async add(req, res, next) {
         let query = req.body;
@@ -90,6 +104,9 @@ export class OrderController extends AbstractController {
     //提交订票单、改签单、退票单审批
     async update(req, res, next) {
         let query = req.body;
+        let {id} = req.params;
+        query.orderNo = id;
+        console.log(req.params,"<========qqqqq")
         let data;
         // let {auth} = req.headers;
         // auth = JSON.parse(decodeURIComponent(auth));
