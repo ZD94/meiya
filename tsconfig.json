@@ -3,21 +3,21 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "outDir": "tmp/tsreq",
+    "outDir": "dist/",
     "noEmitHelpers": true,
     "importHelpers": true,
     "sourceMap": true,
     "declaration": true,
-    "declarationDir": "tmp/@types",
+    "declarationDir": "dist/",
     "alwaysStrict": true,
     "experimentalDecorators": true,
     "noImplicitUseStrict": false,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
-    "paths": {
-      "*": ["*", "*/index"]
-    },
-    "lib": ["es2015", "dom"]
+    "lib": [
+      "es2015",
+      "dom"
+    ]
   },
   "compilerOptionsNotUsing": {
     "emitDecoratorMetadata": true,
@@ -35,6 +35,5 @@
     "*.tar.gz",
     "http/test"
   ],
-  "excludeNotUsing": [
-  ]
+  "excludeNotUsing": []
 }
