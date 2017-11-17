@@ -19,12 +19,12 @@ export async function proxyHttp(params: {
         qs,
         headers: header
     };
-
+        // console.log(options,"<==========options")
     let data;
     if (config.recordData) {
         data = await request(options);
         recordedData(url, data);
-        console.log(data,"<========data")
+        console.log(data,"<========data");
         return data;
     }
 
@@ -64,12 +64,7 @@ export function transAttributeName(origin, arr, normal = true) {
 //获取旅客编号和航段信息
 export async function getInfo(url, id, orderNo) {
     return new Promise((resolve, reject) => {
-        let obj = {
-            segmentNo: [],
-            passengerCode: [],
-            contactName: "",
-            mobile: ""
-        };
+
         request({
             url: `${url}`,
             method: 'POST',
@@ -84,9 +79,16 @@ export async function getInfo(url, id, orderNo) {
         }, function (err, res, body) {
             if (!err && res.statusCode == 200) {
                 let result = JSON.stringify(res.body);
+                console.log(res.body.orderInfo.baseInfo.statusText,"<===============resk");
                 if (res.body.orderInfo.baseInfo.statusText != '已出票') {
-                    getInfo(url, id, orderNo);
+                      getInfo(url, id, orderNo);
                 } else {
+                    let obj = {
+                        segmentNo: [],
+                        passengerCode: [],
+                        contactName: "",
+                        mobile: ""
+                    };
                     for (let i = 0; i < res.body.orderInfo.segmentList.length; i++) {
                         let segmentNo = res.body.orderInfo.segmentList[i].segmentNo;
                         obj.segmentNo.push(segmentNo)
@@ -98,9 +100,10 @@ export async function getInfo(url, id, orderNo) {
                     let contactName = res.body.orderInfo.contactInfo.contactName;
                     obj.contactName = contactName;
                     let mobile = res.body.orderInfo.contactInfo.mobile;
-                    obj.mobile = mobile
+                    obj.mobile = mobile;
+                    console.log(obj,"<=======obj");
+                    resolve(obj)
                 }
-                resolve(obj)
             } else {
                 console.log(err);
                 reject(err)

@@ -59,7 +59,6 @@ export async function creatOrder(query) {
 
 //创建改签单
 export async function createChangeOrder(query) {
-
     for (let i = 0; i < query.flightList.length; i++) {
         query.flightList[i].departureCity = query.flightList[i].departureCode;
         query.flightList[i].arrivalCity = query.flightList[i].arrivalCode;

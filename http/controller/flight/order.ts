@@ -71,6 +71,8 @@ export class OrderController extends AbstractController {
     //订单，改签单，退票单的取消
     async delete(req, res, next) {
         let query = req.body;
+        let {id} = req.params;
+        query.orderNo = id;
         let data;
 
         if (query.type == "order") {
@@ -108,7 +110,6 @@ export class OrderController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await submitOrder(query);
-                console.log(data, "<==========2222222");
                 res.json(data)
             } catch (err) {
                 console.log(err)
@@ -126,8 +127,9 @@ export class OrderController extends AbstractController {
     //订单详情
     async get (req, res, next) {
         let query = req.query;
+        let {id} = req.params;
+        query.orderNo = id;
         let data;
-
         try {
             data = await getOrderInfo(query);
             res.json(data);
