@@ -8,7 +8,7 @@ const url = "http://localhost:3000/";
 
 describe('/美亚订票流程', function () {
     let sessionId;
-    this.timeout(5 * 6 * 1000);
+    this.timeout(5 * 60 * 10000);
 
     before("login", (done) => {
         request({
@@ -49,7 +49,7 @@ describe('/美亚订票流程', function () {
             qs: {
                 "departureCode": "PEK",
                 "arrivalCode": "SHA",
-                "depDate": "2018-01-03",
+                "depDate": "2018-01-16",
                 supplier: "meiya",
                 tripType: 1
             }
@@ -201,6 +201,7 @@ describe('/美亚订票流程', function () {
         })
     });
 
+/*
     it("取消订单", (done) => {
         request({
             url: url + "Order/" + order,
@@ -228,6 +229,7 @@ describe('/美亚订票流程', function () {
             done()
         })
     });
+*/
 
     it("订单列表", (done) => {
         request({
@@ -249,14 +251,13 @@ describe('/美亚订票流程', function () {
             }catch (err){
                 result = body
             }
-            console.log(result,"<==========orderList");
             expect(result.code).to.be.equal(0);
             done()
         })
     })
 
     /************************************************************/
-    /*
+/*
         it("创建改签单", (done) => {
             request({
                 url: url + "Order",
@@ -313,7 +314,7 @@ describe('/美亚订票流程', function () {
                 done()
             })
         })
-    */
+*/
 
     /*
     it("订购单创建退票单", (done) => {
