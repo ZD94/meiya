@@ -24,7 +24,7 @@ export async function proxyHttp(params: {
     if (config.recordData) {
         data = await request(options);
         recordedData(url, data);
-        console.log(data,"<========data")
+        console.log(data, "<========data")
         return data;
     }
 
@@ -134,3 +134,27 @@ function recordedData(url: string, data?: object) {
         console.log("数据记录结束 :", filepath);
     });
 }
+
+
+import crypto from "crypto";
+
+export function aesEncrypt(data, key) {
+    const cipher = crypto.createCipher('aes192', key);
+    var crypted = cipher.update(data, 'utf8', 'hex');
+    crypted += cipher.final('hex');
+    return crypted;
+}
+
+export function aesDecrypt(encrypted, key) {
+    const decipher = crypto.createDecipher('aes192', key);
+    var decrypted = decipher.update(encrypted, 'hex', 'utf8');
+    decrypted += decipher.final('utf8');
+    return decrypted;
+}
+
+// var data = 'Hello, this is a secret message!';
+// var key = config.AES;
+// var encrypted = aesEncrypt(data, key);
+// var decrypted = aesDecrypt(encrypted, key);
+
+// console.log(encrypted, decrypted);
