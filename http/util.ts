@@ -112,8 +112,6 @@ export async function getInfo(url, id, orderNo) {
     })
 }
 
-
-
 function recordedData(url: string, data?: object) {
     let reg = /\/|\:/ig;
     let filename = url.replace(reg, "") + ".json";
