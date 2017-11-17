@@ -140,7 +140,7 @@ export async function getOrderList(query) {
         }
     };
     let datas;
-        datas = await proxyHttp(params);
+    datas = await proxyHttp(params);
     if (datas.code == '10000') {
         return Reply(0, {result: datas.orderList, total: datas.totalCount});
     } else {
@@ -158,26 +158,12 @@ export async function getOrderInfo(query) {
         }
     };
     let datas;
-        datas = await proxyHttp(params);
+    datas = await proxyHttp(params);
     if (datas.code == '10000') {
-        return Reply(0, datas.orderInfo);
+        return Reply(0, datas.orderInfo)
     } else {
-        return Reply(502, null);
+        return Reply(502, null)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

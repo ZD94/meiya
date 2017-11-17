@@ -19,7 +19,7 @@ export async function proxyHttp(params: {
         qs,
         headers: header
     };
-        // console.log(options,"<==========options")
+        console.log(options,"<==========options");
     let data;
     if (config.recordData) {
         data = await request(options);
@@ -27,7 +27,6 @@ export async function proxyHttp(params: {
         console.log(data, "<========data");
         return data;
     }
-
     return await request(options);
 }
 

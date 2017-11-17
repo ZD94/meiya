@@ -30,10 +30,9 @@ export async function submitReturnOrder(query){
         header: {
             'content-type': 'application/json'
         }
-    }
+    };
     let datas;
     datas = await proxyHttp(params);
-
     if(datas.code == "10000"){
         return Reply(0,datas)
     }else {

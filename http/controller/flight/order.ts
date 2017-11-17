@@ -140,9 +140,8 @@ export class OrderController extends AbstractController {
 
     //订单列表
     async find(req, res, next) {
-        let query = req.body;
+        let query = req.query;
         let data;
-
         try {
             data = await getOrderList(query);
             res.json(data);
