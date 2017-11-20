@@ -12,4 +12,9 @@ app.use(express.static(path.join(__dirname, "www")));
 import router from "./http";
 app.use(router);
 
+app.get("/test", (req, res, next) => {
+    console.log("test has been called.");
+    res.send("test ok");
+});
+
 export default app;

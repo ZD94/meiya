@@ -10,7 +10,7 @@ export async function proxyHttp(params: {
     qs?: object;
     header?: object;
 }): Promise<any> {
-    let { url, body = {}, method = "post", qs = {}, header = {} } = params;
+    let {url, body = {}, method = "post", qs = {}, header = {}} = params;
     let options = {
         url,
         body,
@@ -19,15 +19,22 @@ export async function proxyHttp(params: {
         qs,
         headers: header
     };
-        console.log(options,"<==========options");
+    // if (typeof describe == "function") {
+    //     let filepath = recordedData(url);
+    //     return require(filepath);
+    // }
+
     let data;
-    if (config.recordData) {
-        data = await request(options);
-        recordedData(url, data);
-        console.log(data, "<========data");
-        return data;
-    }
-    return await request(options);
+    let filepath = recordedData(url);
+    data = require(filepath);
+    // if (config.recordData) {
+    //     data = await request(options);
+    //     if (data.code == "10000") {
+    //         recordedData(url, data);
+    //     }
+    //
+    // }
+    return data;
 }
 
 //参数名转换
@@ -57,6 +64,7 @@ export function transAttributeName(origin, arr, normal = true) {
             }
         }
     }
+
     return origin;
 }
 
@@ -78,9 +86,8 @@ export async function getInfo(url, id, orderNo) {
         }, function (err, res, body) {
             if (!err && res.statusCode == 200) {
                 let result = JSON.stringify(res.body);
-                console.log(res.body.orderInfo.baseInfo.statusText,"<===============resk");
                 if (res.body.orderInfo.baseInfo.statusText != '已出票') {
-                      getInfo(url, id, orderNo);
+                    getInfo(url, id, orderNo);
                 } else {
                     let obj = {
                         segmentNo: [],
@@ -100,7 +107,7 @@ export async function getInfo(url, id, orderNo) {
                     obj.contactName = contactName;
                     let mobile = res.body.orderInfo.contactInfo.mobile;
                     obj.mobile = mobile;
-                    console.log(obj,"<=======obj");
+                    console.log(obj, "<=======obj");
                     resolve(obj)
                 }
             } else {
@@ -117,9 +124,8 @@ function recordedData(url: string, data?: object) {
     let filepath = path.join(process.cwd(), "test/data", filename);
 
     if (!data) {
-        return filename;
+        return filepath;
     }
-
     try {
         fs.statSync(path.join(process.cwd(), "test/data"));
     } catch (e) {
@@ -134,7 +140,6 @@ function recordedData(url: string, data?: object) {
         console.log("数据记录结束 :", filepath);
     });
 }
-
 
 import crypto from "crypto";
 
