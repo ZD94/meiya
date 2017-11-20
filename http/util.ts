@@ -19,21 +19,18 @@ export async function proxyHttp(params: {
         qs,
         headers: header
     };
-    // if (typeof describe == "function") {
-    //     let filepath = recordedData(url);
-    //     return require(filepath);
-    // }
 
     let data;
     let filepath = recordedData(url);
     data = require(filepath);
+
     // if (config.recordData) {
     //     data = await request(options);
     //     if (data.code == "10000") {
     //         recordedData(url, data);
     //     }
-    //
     // }
+    // console.log("data=====>",data,"<=======data");
     return data;
 }
 
@@ -122,7 +119,6 @@ function recordedData(url: string, data?: object) {
     let reg = /\/|\:/ig;
     let filename = url.replace(reg, "") + ".json";
     let filepath = path.join(process.cwd(), "test/data", filename);
-
     if (!data) {
         return filepath;
     }
