@@ -20,11 +20,17 @@ export async function proxyHttp(params: {
         headers: header
     };
 
+    if (typeof describe == "function") {
+        let filepath = recordedData(url);
+        return require(filepath);
+    }
+
     let data;
     if (config.recordData) {
         data = await request(options);
-        recordedData(url, data);
-        console.log(data, "<========data")
+        if (data.code == "10000") {
+            recordedData(url, data);
+        }
         return data;
     }
 
@@ -117,7 +123,7 @@ function recordedData(url: string, data?: object) {
     let filepath = path.join(process.cwd(), "test/data", filename);
 
     if (!data) {
-        return filename;
+        return filepath;
     }
 
     try {
