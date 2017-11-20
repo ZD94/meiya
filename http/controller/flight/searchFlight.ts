@@ -1,5 +1,5 @@
 'use strict';
-import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
+import {AbstractController, Restful, Router, reply} from "@jingli/restful";
 import {proxyHttp, transAttributeName} from '../../util'
 import {searchFlight} from "model/flight/search"
 
@@ -20,7 +20,7 @@ export class SearchFlightController extends AbstractController {
     async $before(req, res, next) {
         let {username, password} = req.headers;
         if (!username || !password) {
-            return res.json(Reply(500, null));
+            return res.json(reply(500, null));
         }
         let key = md5(username + password);
         let sessionId = await cache.read(key);

@@ -1,9 +1,9 @@
 let config = require("@jingli/config");
 import { proxyHttp, transAttributeName } from "../../http/util";
-import { Reply } from "@jingli/restful";
+import { reply, ReplyData } from "@jingli/restful";
 import cache from "@jingli/cache"
 
-export async function searchFlight(query) {
+export async function searchFlight(query): Promise<ReplyData> {
 
     let testArr = [
         {
@@ -61,8 +61,8 @@ export async function searchFlight(query) {
                 items.price = items.ticketPrice;
             }
         }
-        return Reply(0, datas.flightInfoList) || [];
+        return reply(0, datas.flightInfoList || []);
     } else {
-        return Reply(502, null);
+        return reply(502, null);
     }
 }

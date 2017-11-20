@@ -6,14 +6,14 @@
 
 import http = require("http");
 
-import {scannerDecoration, registerControllerToRouter, Reply} from "@jingli/restful";
+import { scannerDecoration, registerControllerToRouter, reply } from "@jingli/restful";
 
 import path = require("path");
 let express = require("express");
 
 let router = express.Router();
 
-scannerDecoration(path.join(__dirname, 'controller'));
+scannerDecoration(path.join(__dirname, 'controller'), [".d"]);
 registerControllerToRouter(router);
 
 export default router

@@ -1,5 +1,5 @@
 'use strict';
-import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
+import {AbstractController, Restful, Router, reply} from "@jingli/restful";
 import {proxyHttp} from '../../util'
 
 let config = require("@jingli/config");
@@ -27,9 +27,9 @@ export class CheckController extends AbstractController {
         let data: any = await proxyHttp(params);
 
         if (data.code == '10000') {
-            res.json(Reply(0, data));
+            res.json(reply(0, data));
         } else {
-            res.json(Reply(502, null));
+            res.json(reply(502, null));
         }
     }
 }

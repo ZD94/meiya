@@ -1,12 +1,12 @@
 let config = require("@jingli/config");
-import {proxyHttp, transAttributeName, getInfo} from '../../http/util'
-import {Reply} from "@jingli/restful";
+import { proxyHttp, transAttributeName, getInfo } from '../../http/util'
+import { reply, ReplyData } from "@jingli/restful";
 import cache from "@jingli/cache"
 
 const url = "http://121.41.36.97:6005/API.svc/GetOrderInfo";
 
 //订单的创建
-export async function creatOrder(query) {
+export async function creatOrder(query): Promise<ReplyData> {
 
     for (let i = 0; i < query.flightList.length; i++) {
         query.flightList[i].departureCity = query.flightList[i].departureCode;
@@ -51,14 +51,14 @@ export async function creatOrder(query) {
         let orderNos = {
             orderNos: datas.orderNos
         };
-        return Reply(0, orderNos)
+        return reply(0, orderNos)
     } else {
-        return Reply(502, null);
+        return reply(502, null);
     }
 }
 
 //创建改签单
-export async function createChangeOrder(query) {
+export async function createChangeOrder(query): Promise<ReplyData> {
 
     for (let i = 0; i < query.flightList.length; i++) {
         query.flightList[i].departureCity = query.flightList[i].departureCode;
@@ -91,14 +91,14 @@ export async function createChangeOrder(query) {
         let orderNos = {
             orderNos: datas.orderNo
         };
-        return Reply(0, orderNos);
+        return reply(0, orderNos);
     } else {
-        return Reply(502, null);
+        return reply(502, null);
     }
 }
 
 //订购单创建退票单
-export async function createReturnOrder(query) {
+export async function createReturnOrder(query): Promise<ReplyData> {
 
     if (query.flightList) {
         delete query.flightList
@@ -125,14 +125,14 @@ export async function createReturnOrder(query) {
     };
     datas = await proxyHttp(params);
     if (datas.code == '10000') {
-        return Reply(0, datas);
+        return reply(0, datas);
     } else {
-        return Reply(502, null);
+        return reply(502, null);
     }
 }
 
 //订单列表
-export async function getOrderList(query) {
+export async function getOrderList(query): Promise<ReplyData> {
     let params = {
         url: `${config.meiyaUrl}` + "/GetOrderList",
         body: query,
@@ -141,16 +141,16 @@ export async function getOrderList(query) {
         }
     };
     let datas;
-        datas = await proxyHttp(params);
+    datas = await proxyHttp(params);
     if (datas.code == '10000') {
-        return Reply(0, {result: datas.orderList, total: datas.totalCount});
+        return reply(0, { result: datas.orderList, total: datas.totalCount });
     } else {
-        return Reply(502, null);
+        return reply(502, null);
     }
 }
 
 //订单详情
-export async function getOrderInfo(query) {
+export async function getOrderInfo(query): Promise<ReplyData> {
     let params = {
         url: `${config.meiyaUrl}` + "/GetOrderInfo",
         body: query,
@@ -159,11 +159,11 @@ export async function getOrderInfo(query) {
         }
     };
     let datas;
-        datas = await proxyHttp(params);
+    datas = await proxyHttp(params);
     if (datas.code == '10000') {
-        return Reply(0, datas.orderInfo);
+        return reply(0, datas.orderInfo);
     } else {
-        return Reply(502, null);
+        return reply(502, null);
     }
 }
 
