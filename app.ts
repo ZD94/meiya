@@ -9,7 +9,6 @@ app.use(bodyParser.json({ limit: '8mb' }));
 app.use(bodyParser.urlencoded({ limit: '8mb', extended: true }));
 app.use(express.static(path.join(__dirname, "www")));
 
-
 import router from "./http";
 app.use(router);
 

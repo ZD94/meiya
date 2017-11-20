@@ -1,11 +1,12 @@
 let config = require("@jingli/config");
-let md5 =require("md5");
+let md5 = require("md5");
 import {proxyHttp} from '../../http/util';
 import {Reply} from "@jingli/restful";
 
 import cache from "@jingli/cache"
 
-export async function login(userName, password) {
+export async function login(req) {
+    let {userName, password} = req.body;
     let params = {
         url: `${config.meiyaUrl}` + '/Login',
         body: {

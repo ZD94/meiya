@@ -49,7 +49,7 @@ describe('/美亚订票流程', function () {
             qs: {
                 "departureCode": "PEK",
                 "arrivalCode": "SHA",
-                "depDate": "2018-01-16",
+                "depDate": "2018-01-18",
                 supplier: "meiya",
                 tripType: 1
             }
@@ -201,19 +201,45 @@ describe('/美亚订票流程', function () {
         })
     });
 
-/*
-    it("取消订单", (done) => {
+    /*
+        it("取消订单", (done) => {
+            request({
+                url: url + "Order/" + order,
+                method: "DELETE",
+                json: true,
+                headers: {
+                    userName: "JingLiZhiXiang",
+                    password: "123456"
+                },
+                body: {
+                    "type": "order",
+                }
+            }, (err, res, body) => {
+                if (err) {
+                    console.log(err);
+                    return
+                }
+                let result;
+                try {
+                    result = res.body
+                } catch (err) {
+                    result = body
+                }
+                expect(result.code).to.be.equal(0);
+                done()
+            })
+        });
+    */
+
+    it("订单列表", (done) => {
         request({
-            url: url + "Order/" + order,
-            method: "DELETE",
+            url: url + "Order",
             json: true,
             headers: {
                 userName: "JingLiZhiXiang",
                 password: "123456"
             },
-            body: {
-                "type": "order",
-            }
+            method: "GET"
         }, (err, res, body) => {
             if (err) {
                 console.log(err);
@@ -229,92 +255,65 @@ describe('/美亚订票流程', function () {
             done()
         })
     });
-*/
 
-    it("订单列表", (done) => {
+    /************************************************************/
+
+    it("创建改签单", (done) => {
         request({
             url: url + "Order",
+            method: "POST",
             json: true,
             headers: {
                 userName: "JingLiZhiXiang",
                 password: "123456"
             },
-            method:"GET"
+            body: {
+                "originalOrderNo": `${order}`,
+                "flightList":
+                    [{
+                        "flightID": `${flightID2}`,
+                        "departureCode": `${departureCity2}`,
+                        "arrivalCode": `${arrivalCity2}`,
+                        "depDate": `${departureDate2}`,
+                        "airline": `${airline2}`,
+                        "cabinType": `${cabinType2}`,
+                        "flightNo": `${flightNo2}`,
+                        "price": price2
+                    }],
+                "passengerList":
+                    [{
+                        "name": "张栋",
+                        "mobile": "15978561146",
+                        "passengerType": "1",
+                        "companyId": "S117325",
+                        "certificatesList": [{
+                            "certType": "身份证",
+                            "certNumber": "411527199408012773"
+                        }]
+                    }],
+                "contactList":
+                    {
+                        "name": "张栋",
+                        "mobile": "15978561146"
+                    },
+                "type": "change",
+            }
         }, (err, res, body) => {
-            if(err){
+            if (err) {
                 console.log(err);
                 return
             }
             let result;
-            try{
+            try {
                 result = res.body
-            }catch (err){
+            } catch (err) {
                 result = body
             }
+            console.log(result, "<=======changeOrderResult");
             expect(result.code).to.be.equal(0);
             done()
         })
     })
-
-    /************************************************************/
-/*
-        it("创建改签单", (done) => {
-            request({
-                url: url + "Order",
-                method: "POST",
-                json: true,
-                headers: {
-                    userName: "JingLiZhiXiang",
-                    password: "123456"
-                },
-                body: {
-                    "originalOrderNo": `${order}`,
-                    "flightList":
-                        [{
-                            "flightID": `${flightID2}`,
-                            "departureCode": `${departureCity2}`,
-                            "arrivalCode": `${arrivalCity2}`,
-                            "depDate": `${departureDate2}`,
-                            "airline": `${airline2}`,
-                            "cabinType": `${cabinType2}`,
-                            "flightNo": `${flightNo2}`,
-                            "price": price2
-                        }],
-                    "passengerList":
-                        [{
-                            "name": "张栋",
-                            "mobile": "15978561146",
-                            "passengerType": "1",
-                            "companyId": "S117325",
-                            "certificatesList": [{
-                                "certType": "身份证",
-                                "certNumber": "411527199408012773"
-                            }]
-                        }],
-                    "contactList":
-                        {
-                            "name": "张栋",
-                            "mobile": "15978561146"
-                        },
-                    "type": "change",
-                }
-            }, (err, res, body) => {
-                if (err) {
-                    console.log(err);
-                    return
-                }
-                let result;
-                try {
-                    result = res.body
-                } catch (err) {
-                    result = body
-                }
-                console.log(result, "<=======changeOrderResult");
-                expect(result.code).to.be.equal(0);
-                done()
-            })
-        })
-*/
 
     /*
     it("订购单创建退票单", (done) => {

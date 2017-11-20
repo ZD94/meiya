@@ -19,9 +19,10 @@ export class AuthController extends AbstractController {
     }
 
     async add(req, res, next) {
-        let {userName, password} = req.body;
+        // let {userName, password} = req.body;
+
         try{
-            let data = await login(userName, password);
+            let data = await login(req);
             res.json(data);
         }catch (err){
             console.log(err)

@@ -3,8 +3,8 @@ import { proxyHttp, transAttributeName } from "../../http/util";
 import { Reply } from "@jingli/restful";
 import cache from "@jingli/cache"
 
-export async function searchFlight(query) {
-
+export async function searchFlight(req) {
+    let query = req.query;
     let testArr = [
         {
             newname: "departureDate",
