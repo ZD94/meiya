@@ -30,7 +30,7 @@ export async function proxyHttp(params: {
     //         recordedData(url, data);
     //     }
     // }
-    // console.log("data=====>",data,"<=======data");
+    console.log(data,"<=======data");
     return data;
 }
 
@@ -104,7 +104,6 @@ export async function getInfo(url, id, orderNo) {
                     obj.contactName = contactName;
                     let mobile = res.body.orderInfo.contactInfo.mobile;
                     obj.mobile = mobile;
-                    console.log(obj, "<=======obj");
                     resolve(obj)
                 }
             } else {
