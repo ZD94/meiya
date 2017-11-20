@@ -1,7 +1,6 @@
 {
     "appName": "${JL_APP_NAME}",
     "rootDir": "${JL_APP_DATA_DIR}",
-    "host": "${JL_APP_HOST}",
     "debug": false,
     "ts_node": true,
     "cluster": true,

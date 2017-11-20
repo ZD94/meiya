@@ -1,5 +1,7 @@
 'use strict';
+
 import http = require("http");
+require('app-module-path').addPath(__dirname);
 import app from "./app";
 import config = require("@jingli/config");
 import { serverInit, serverStart } from "@jingli/server";
