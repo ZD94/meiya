@@ -3,7 +3,7 @@
  */
 
 'use strict';
-import {AbstractController, Restful, Router, Reply} from "@jingli/restful";
+import {AbstractController, Restful, Router, reply} from "@jingli/restful";
 import {login} from 'model/flight/agent';
 
 let config = require("@jingli/config");
@@ -19,10 +19,9 @@ export class AuthController extends AbstractController {
     }
 
     async add(req, res, next) {
-        // let {userName, password} = req.body;
-
+        let {userName, password} = req.body;
         try{
-            let data = await login(req);
+            let data = await login(userName, password);
             res.json(data);
         }catch (err){
             console.log(err)

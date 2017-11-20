@@ -7,3 +7,4 @@ dist/
 *.tar.gz
 package-lock.json
 test/data/*.json
+.DS_Store

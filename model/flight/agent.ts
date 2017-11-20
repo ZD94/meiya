@@ -1,12 +1,13 @@
 let config = require("@jingli/config");
 let md5 = require("md5");
+
 import {proxyHttp} from '../../http/util';
-import {Reply} from "@jingli/restful";
+import {reply, ReplyData} from "@jingli/restful";
 
 import cache from "@jingli/cache"
 
-export async function login(req) {
-    let {userName, password} = req.body;
+export async function login(userName, password): Promise<ReplyData> {
+
     let params = {
         url: `${config.meiyaUrl}` + '/Login',
         body: {
@@ -22,7 +23,6 @@ export async function login(req) {
 
     let datas: any = await proxyHttp(params);
 
-
     if (datas.code == '10000') {
         let sessionId = {
             sessionId: datas.sessionId
@@ -32,9 +32,9 @@ export async function login(req) {
         let param = md5(cacheId);
         await cache.write(param, sessionId, config.tmcCacheTime * 1000 * 60);
 
-        return Reply(0, sessionId)
+        return reply(0, sessionId)
     } else {
-        return Reply(502, null)
+        return reply(502, null)
     }
 }
 
