@@ -10,6 +10,18 @@ app.use(bodyParser.urlencoded({ limit: '8mb', extended: true }));
 app.use(express.static(path.join(__dirname, "www")));
 
 import router from "./http";
+
+app.use("/", (req, res, next)=>{
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', req.headers['access-control-request-headers']);
+    if (req.method == 'OPTIONS') {
+        return res.send("OK");
+    }
+
+    next();
+});
+
 app.use(router);
 
 app.get("/test", (req, res, next) => {
