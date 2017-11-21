@@ -10,7 +10,7 @@ export async function proxyHttp(params: {
     qs?: object;
     header?: object;
 }): Promise<any> {
-    let { url, body = {}, method = "post", qs = {}, header = {} } = params;
+    let {url, body = {}, method = "post", qs = {}, header = {}} = params;
     let options = {
         url,
         body,
@@ -20,21 +20,18 @@ export async function proxyHttp(params: {
         headers: header
     };
 
-    if (typeof describe == "function") {
-        let filepath = recordedData(url);
-        return require(filepath);
-    }
-
     let data;
-    if (config.recordData) {
-        data = await request(options);
-        if (data.code == "10000") {
-            recordedData(url, data);
-        }
-        return data;
-    }
+    let filepath = recordedData(url);
+    data = require(filepath);
 
-    return await request(options);
+    // if (config.recordData) {
+    //     data = await request(options);
+    //     if (data.code == "10000") {
+    //         recordedData(url, data);
+    //     }
+    // }
+    console.log(data,"<=======data");
+    return data;
 }
 
 //参数名转换
@@ -64,18 +61,14 @@ export function transAttributeName(origin, arr, normal = true) {
             }
         }
     }
+
     return origin;
 }
 
 //获取旅客编号和航段信息
 export async function getInfo(url, id, orderNo) {
     return new Promise((resolve, reject) => {
-        let obj = {
-            segmentNo: [],
-            passengerCode: [],
-            contactName: "",
-            mobile: ""
-        };
+
         request({
             url: `${url}`,
             method: 'POST',
@@ -93,6 +86,12 @@ export async function getInfo(url, id, orderNo) {
                 if (res.body.orderInfo.baseInfo.statusText != '已出票') {
                     getInfo(url, id, orderNo);
                 } else {
+                    let obj = {
+                        segmentNo: [],
+                        passengerCode: [],
+                        contactName: "",
+                        mobile: ""
+                    };
                     for (let i = 0; i < res.body.orderInfo.segmentList.length; i++) {
                         let segmentNo = res.body.orderInfo.segmentList[i].segmentNo;
                         obj.segmentNo.push(segmentNo)
@@ -104,9 +103,9 @@ export async function getInfo(url, id, orderNo) {
                     let contactName = res.body.orderInfo.contactInfo.contactName;
                     obj.contactName = contactName;
                     let mobile = res.body.orderInfo.contactInfo.mobile;
-                    obj.mobile = mobile
+                    obj.mobile = mobile;
+                    resolve(obj)
                 }
-                resolve(obj)
             } else {
                 console.log(err);
                 reject(err)
@@ -115,17 +114,13 @@ export async function getInfo(url, id, orderNo) {
     })
 }
 
-
-
 function recordedData(url: string, data?: object) {
     let reg = /\/|\:/ig;
     let filename = url.replace(reg, "") + ".json";
     let filepath = path.join(process.cwd(), "test/data", filename);
-
     if (!data) {
         return filepath;
     }
-
     try {
         fs.statSync(path.join(process.cwd(), "test/data"));
     } catch (e) {
@@ -140,7 +135,6 @@ function recordedData(url: string, data?: object) {
         console.log("数据记录结束 :", filepath);
     });
 }
-
 
 import crypto from "crypto";
 

@@ -30,7 +30,7 @@ export async function submitReturnOrder(query): Promise<ReplyData> {
         header: {
             'content-type': 'application/json'
         }
-    }
+    };
     let datas;
     datas = await proxyHttp(params);
 

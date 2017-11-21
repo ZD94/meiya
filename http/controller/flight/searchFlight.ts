@@ -33,13 +33,13 @@ export class SearchFlightController extends AbstractController {
     }
 
     async find(req, res, next) {
-        let query = req.query;
+        // let query = req.query;
         let data: any;
         try {
-            data = await searchFlight(query);
+            data = await searchFlight(req);
             res.json(data)
         } catch (err) {
-            console.log(err, '<======err');
+            console.log(err);
         }
     }
 }

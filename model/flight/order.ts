@@ -58,8 +58,8 @@ export async function creatOrder(query): Promise<ReplyData> {
 }
 
 //创建改签单
-export async function createChangeOrder(query): Promise<ReplyData> {
 
+export async function createChangeOrder(query): Promise<ReplyData> {
     for (let i = 0; i < query.flightList.length; i++) {
         query.flightList[i].departureCity = query.flightList[i].departureCode;
         query.flightList[i].arrivalCity = query.flightList[i].arrivalCode;
@@ -161,24 +161,11 @@ export async function getOrderInfo(query): Promise<ReplyData> {
     let datas;
     datas = await proxyHttp(params);
     if (datas.code == '10000') {
+
         return reply(0, datas.orderInfo);
     } else {
         return reply(502, null);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
