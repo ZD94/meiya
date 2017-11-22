@@ -2,6 +2,8 @@ let express = require("express");
 let conn_timeout = require("connect-timeout");
 let bodyParser = require("body-parser");
 let path = require("path");
+let config = require("@jingli/config");
+
 /* logger */
 import Logger from "@jingli/logger";
 var logger = new Logger('main');
@@ -14,8 +16,12 @@ app.use(express.static(path.join(__dirname, "www")));
 
 import router from "./http";
 
-app.use("/", (req, res, next) => {
+app.use((req, res, next) => {
     logger.info(req.method, req.url, process.title);
+    let { tmckey } = req.headers;
+    if (tmckey != config.tmckey) {
+        return res.sendStatus(403);
+    }
     next();
 });
 app.use(router);
