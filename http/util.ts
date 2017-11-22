@@ -11,27 +11,38 @@ export async function proxyHttp(params: {
     header?: object;
 }): Promise<any> {
     let {url, body = {}, method = "post", qs = {}, header = {}} = params;
-    let options = {
-        url,
-        body,
-        json: true,
-        method,
-        qs,
-        headers: header
-    };
-
-    let data;
-    let filepath = recordedData(url);
-    data = require(filepath);
-
-    // if (config.recordData) {
-    //     data = await request(options);
-    //     if (data.code == "10000") {
-    //         recordedData(url, data);
-    //     }
-    // }
-    console.log(data,"<=======data");
-    return data;
+    return new Promise((resolve, reject) => {
+        console.log({
+            url,
+            body,
+            json: true,
+            method,
+            qs,
+            headers: header
+        }, "<====params");
+        request({
+            url,
+            body,
+            json: true,
+            method,
+            qs,
+            headers: header
+        }, (err, resp, result) => {
+            console.log(resp, "<======result");
+            try {
+                if (typeof result == 'string') {
+                    try {
+                        result = JSON.parse(result);
+                    } catch (e) {
+                        return reject(e);
+                    }
+                }
+                return resolve(result);
+            } catch (err) {
+                return reject(err)
+            }
+        });
+    })
 }
 
 //参数名转换
