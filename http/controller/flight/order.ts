@@ -1,13 +1,11 @@
 'use strict';
-import {AbstractController, Restful, Router, reply} from "@jingli/restful";
-import {proxyHttp, transAttributeName} from '../../util'
-import {creatOrder, createChangeOrder, createReturnOrder, getOrderList, getOrderInfo} from "model/flight/order"
-import {cancelOrder, cancelChangeOrder, cancelReturnOrder} from "model/flight/cancle"
-import {submitOrder, submitReturnOrder} from "model/flight/confirm"
 
-let md5 = require("md5");
-let config = require("@jingli/config");
-import cache from "@jingli/cache"
+import { AbstractController, Restful, Router, reply } from "@jingli/restful";
+import { proxyHttp, transAttributeName } from '../../util';
+import { creatOrder, createChangeOrder, createReturnOrder, getOrderList, getOrderInfo } from "model/flight/order";
+import { cancelOrder, cancelChangeOrder, cancelReturnOrder } from "model/flight/cancle";
+import { submitOrder, submitReturnOrder } from "model/flight/confirm";
+import { dealLogin } from "model/flight/agent";
 
 @Restful()
 export class OrderController extends AbstractController {
@@ -20,16 +18,16 @@ export class OrderController extends AbstractController {
     }
 
     async $before(req, res, next) {
-        let {username, password} = req.headers;
-        if (!username || !password) {
+        let { auth } = req.headers;
+        let result = await dealLogin(auth);
+        if (result.code != 0) {
             return res.json(reply(500, null));
         }
-        let key = md5(username + password);
-        let sessionId = await cache.read(key);
+
         if (req.method == "GET") {
-            req.query.sessionId = sessionId["sessionId"]
+            req.query.sessionId = result.data;
         } else {
-            req.body.sessionId = sessionId["sessionId"]
+            req.body.sessionId = result.data;
         }
         next()
     }
@@ -71,7 +69,7 @@ export class OrderController extends AbstractController {
     //订单，改签单，退票单的取消
     async delete(req, res, next) {
         let query = req.body;
-        let {id} = req.params;
+        let { id } = req.params;
         query.orderNo = id;
         let data;
 
@@ -104,7 +102,7 @@ export class OrderController extends AbstractController {
     //提交订票单、改签单、退票单审批
     async update(req, res, next) {
         let query = req.body;
-        let {id} = req.params;
+        let { id } = req.params;
         query.orderNo = id;
         let data;
         if (query.type == "order") {
@@ -125,9 +123,9 @@ export class OrderController extends AbstractController {
     }
 
     //订单详情
-    async get (req, res, next) {
+    async get(req, res, next) {
         let query = req.query;
-        let {id} = req.params;
+        let { id } = req.params;
         query.orderNo = id;
         let data;
         try {

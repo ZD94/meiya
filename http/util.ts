@@ -10,7 +10,7 @@ export async function proxyHttp(params: {
     qs?: object;
     header?: object;
 }): Promise<any> {
-    let {url, body = {}, method = "post", qs = {}, header = {}} = params;
+    let { url, body = {}, method = "post", qs = {}, header = {} } = params;
     let options = {
         url,
         body,
@@ -21,16 +21,30 @@ export async function proxyHttp(params: {
     };
 
     let data;
-    let filepath = recordedData(url);
-    data = require(filepath);
+    if (config.fake_data) {
+        let filepath = recordedData(url);
+        try {
+            data = require(filepath);
+        } catch (e) {
 
-    // if (config.recordData) {
-    //     data = await request(options);
-    //     if (data.code == "10000") {
-    //         recordedData(url, data);
-    //     }
-    // }
-    console.log(data,"<=======data");
+        }
+    }
+
+    if (!data) {
+        try {
+            data = await request(options);
+        } catch (e) {
+            console.log(e);
+            return null;
+        }
+
+    }
+
+    if (config.recordData) {
+        if (data.code == "10000") {
+            recordedData(url, data);
+        }
+    }
     return data;
 }
 
