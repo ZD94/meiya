@@ -37,6 +37,7 @@ export class SearchFlightController extends AbstractController {
             res.json(data)
         } catch (err) {
             console.log(err);
+            res.json(reply(500,null))
         }
     }
 }
