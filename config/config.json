@@ -2,7 +2,6 @@
     "appName": "${JL_APP_NAME}",
     "rootDir": "${JL_APP_DATA_DIR}",
     "debug": false,
-    "ts_node": true,
     "cluster": true,
     "port": 80,
     "tmcCacheTime": 60,

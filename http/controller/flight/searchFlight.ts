@@ -1,11 +1,8 @@
 'use strict';
-import {AbstractController, Restful, Router, reply} from "@jingli/restful";
-import {proxyHttp, transAttributeName} from '../../util'
-import {searchFlight} from "model/flight/search"
+import { AbstractController, Restful, Router, reply } from "@jingli/restful";
+import { searchFlight } from "model/flight/search"
+import { dealLogin } from "model/flight/agent";
 
-let md5 = require("md5");
-let config = require("@jingli/config");
-import cache from "@jingli/cache"
 
 @Restful()
 export class SearchFlightController extends AbstractController {
@@ -18,25 +15,28 @@ export class SearchFlightController extends AbstractController {
     }
 
     async $before(req, res, next) {
-        let {username, password} = req.headers;
-        if (!username || !password) {
+        let { auth } = req.headers;
+        let result = await dealLogin(auth);
+        console.log("search flight: ", result);
+        if (result.code != 0) {
             return res.json(reply(500, null));
         }
-        let key = md5(username + password);
-        let sessionId = await cache.read(key);
+
         if (req.method == "GET") {
-            req.query.sessionId = sessionId["sessionId"]
+            req.query.sessionId = result.data;
         } else {
-            req.body.sessionId = sessionId["sessionId"]
+            req.body.sessionId = result.data;
         }
         next()
     }
 
     async find(req, res, next) {
-        // let query = req.query;
+        let query = req.query;
         let data: any;
+
+        console.log("find1111111", query);
         try {
-            data = await searchFlight(req);
+            data = await searchFlight(query);
             res.json(data)
         } catch (err) {
             console.log(err);
