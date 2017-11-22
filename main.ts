@@ -11,6 +11,7 @@ import path = require("path");
 import cache from "@jingli/cache";
 cache.init({ redis_conf: config.redis.url, prefix: 'tmc:cache:' + config.appName });
 
+/* logger */
 import Logger from "@jingli/logger";
 import * as cluster from 'cluster';
 Logger.init(config.logger);

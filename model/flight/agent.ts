@@ -1,11 +1,10 @@
 let config = require("@jingli/config");
 let md5 = require("md5");
 
-import {proxyHttp} from '../../http/util';
-import {reply, ReplyData} from "@jingli/restful";
+import { proxyHttp } from '../../http/util';
+import { reply, ReplyData } from "@jingli/restful";
 
 import cache from "@jingli/cache"
-
 export async function login(userName, password): Promise<ReplyData> {
 
     let params = {
@@ -30,7 +29,7 @@ export async function login(userName, password): Promise<ReplyData> {
         //redis 存储
         let cacheId = userName + password;
         let param = md5(cacheId);
-        await cache.write(param, sessionId, config.tmcCacheTime * 1000 * 60);
+        await cache.write(param, sessionId, config.tmcCacheTime * 60);
 
         return reply(0, sessionId)
     } else {
@@ -38,3 +37,37 @@ export async function login(userName, password): Promise<ReplyData> {
     }
 }
 
+/* deal login */
+export async function dealLogin(auth): Promise<{ code: number, msg: string, data?: any }> {
+
+    let { username, password } = JSON.parse(decodeURIComponent(auth));
+    if (!username || !password) {
+        return {
+            code: -1,
+            msg: "用户名或密码不存在"
+        }
+    }
+
+    let key = md5(username + password);
+    let sessionId = await cache.read(key);
+    if (!sessionId) {
+        //go login
+        let result = await login(username, password);
+
+        console.log("dealLogin111 : ", result);
+        if (result.code != 0) {
+            return {
+                code: -1,
+                msg: "用户名或密码输入不正确"
+            }
+        }
+
+        sessionId = result.data;
+    }
+
+    return {
+        code: 0,
+        msg: "ok",
+        data: sessionId.sessionId
+    }
+}
