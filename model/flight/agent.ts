@@ -29,7 +29,7 @@ export async function login(userName, password): Promise<ReplyData> {
         //redis 存储
         let cacheId = userName + password;
         let param = md5(cacheId);
-        await cache.write(param, sessionId, config.tmcCacheTime * 1000 * 60);
+        await cache.write(param, sessionId, config.tmcCacheTime * 60);
 
         return reply(0, sessionId)
     } else {
