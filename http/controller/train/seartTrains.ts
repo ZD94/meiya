@@ -1,6 +1,7 @@
 // "use strict";
 // import {AbstractController, Restful, Router, reply} from "@jingli/restful"
 // import {search} from "model/train/search"
+// import {dealLogin} from "model/train/agent"
 //
 // @Restful()
 // export class seartTrainsController extends AbstractController {
@@ -12,6 +13,10 @@
 //         return true
 //     }
 //
+//     async $before(req,res,next){
+//         let {auth} = req.headers;
+//         let result = await
+//     }
 //     async find(req, res, next) {
 //         let data: any;
 //         try {

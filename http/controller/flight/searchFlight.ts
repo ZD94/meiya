@@ -17,11 +17,10 @@ export class SearchFlightController extends AbstractController {
     async $before(req, res, next) {
         let { auth } = req.headers;
         let result = await dealLogin(auth);
-        console.log("search flight: ", result);
+
         if (result.code != 0) {
             return res.json(reply(500, null));
         }
-
         if (req.method == "GET") {
             req.query.sessionId = result.data;
         } else {
@@ -33,8 +32,6 @@ export class SearchFlightController extends AbstractController {
     async find(req, res, next) {
         let query = req.query;
         let data: any;
-
-        console.log("find1111111", query);
         try {
             data = await searchFlight(query);
             res.json(data)

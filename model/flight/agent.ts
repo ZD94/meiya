@@ -53,8 +53,6 @@ export async function dealLogin(auth): Promise<{ code: number, msg: string, data
     if (!sessionId) {
         //go login
         let result = await login(username, password);
-
-        console.log("dealLogin111 : ", result);
         if (result.code != 0) {
             return {
                 code: -1,

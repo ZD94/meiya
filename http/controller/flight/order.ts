@@ -145,6 +145,7 @@ export class OrderController extends AbstractController {
             res.json(data);
         } catch (err) {
             console.log(err)
+
         }
     }
 }
