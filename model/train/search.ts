@@ -23,7 +23,7 @@ export async function search(req): Promise<ReplyData> {
     let params = {
         url: `${config.meiyaTrainUrl}` + '/queryTrains',
         body: {
-            request:querys
+            request: querys
         },
         header: {
             'content-type': 'application/json'
@@ -35,25 +35,25 @@ export async function search(req): Promise<ReplyData> {
     if (datas.d.code == "10000") {
         let changeName = [
             {
-                newname:"ArrDate",
-                oldname:"EndTime"
+                newname: "ArrDate",
+                oldname: "EndTime"
             },
             {
-                newname:"DepDate",
-                oldname:"StartTime"
+                newname: "DepDate",
+                oldname: "StartTime"
             },
             {
-                newname:"DepStation",
-                oldname:"FromStationName"
+                newname: "DepStation",
+                oldname: "FromStationName"
             },
             {
-                newname:"ArrStation",
-                oldname:"ToStationName"
+                newname: "ArrStation",
+                oldname: "ToStationName"
             },
         ];
         transAttributeName(datas.d.TrainInfoList, changeName);
-        for(let item of datas.d.TrainInfoList){
-            if(item.FromPassingType || item.ToPassingType){
+        for (let item of datas.d.TrainInfoList) {
+            if (item.FromPassingType || item.ToPassingType) {
                 delete item.FromPassingType;
                 delete item.ToPassingType
             }

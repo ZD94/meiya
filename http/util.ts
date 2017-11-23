@@ -10,7 +10,7 @@ export async function proxyHttp(params: {
     qs?: object;
     header?: object;
 }): Promise<any> {
-    let { url, body = {}, method = "post", qs = {}, header = {} } = params;
+    let {url, body = {}, method = "post", qs = {}, header = {}} = params;
     let options = {
         url,
         body,
@@ -31,18 +31,17 @@ export async function proxyHttp(params: {
     if (!data) {
         try {
             data = await request(options);
-
         } catch (e) {
             console.log(e);
             return null;
         }
-
     }
     if (config.recordData) {
         if (data.code == "10000") {
             recordedData(url, data);
         }
     }
+    console.log(data,"<===========data")
     return data;
 }
 
