@@ -46,32 +46,96 @@ describe("/美亚火车票订票流程", function () {
 
         })
     });
+    //
+    // it("检查车票是否能预订", (done) => {
+    //     let info = {
+    //         "userName": "JingLiZhiXiang",
+    //         "password": 'sapg8lYZD70C/dOtKLPJmg=='
+    //     }
+    //     let str = JSON.stringify(info);
+    //     str = encodeURIComponent(str);
+    //
+    //     request({
+    //         url: url + "/check",
+    //         method: "GET",
+    //         json: true,
+    //         headers: {
+    //             auth: str,
+    //             supplier: "meiya"
+    //         },
+    //         qs: {
+    //             "TrainNumber": "G101",
+    //             "DepStation": "北京南",
+    //             "ArrStation": "上海虹桥",
+    //             "DepDate": "2017-11-28 06:43",
+    //             "SeatID": "二等座",
+    //             "PassengerNums": 1
+    //         }
+    //     }, (err, res, body) => {
+    //         if (err) {
+    //             console.log(err);
+    //             return
+    //         }
+    //         let result;
+    //         try {
+    //             result = res.body;
+    //         } catch (err) {
+    //             result = body
+    //         }
+    //         console.log(result, "<==========result");
+    //         expect(result.code).to.be.equal(0);
+    //         done()
+    //     })
+    // });
 
-    it("检查车票是否能预订", (done) => {
+    it("创建订单", (done) => {
         let info = {
             "userName": "JingLiZhiXiang",
             "password": 'sapg8lYZD70C/dOtKLPJmg=='
         }
         let str = JSON.stringify(info);
         str = encodeURIComponent(str);
-
         request({
-            url: url + "/check",
-            method: "GET",
+            url: url + "/orderTrain",
+            method: "POST",
             json: true,
             headers: {
                 auth: str,
                 supplier: "meiya"
             },
-            qs: {
-                "TrainNumber": "G101",
-                "DepStation": "北京南",
-                "ArrStation": "上海虹桥",
-                "DepDate": "2017-11-28 06:43",
-                "SeatID": "二等座",
-                "PassengerNums": 1
+            body: {
+                "OutSideOrderNo": '20171025002',
+                "OaSerialnumber": '20171025002',
+                "TrainNumber": 'G1',
+                "DepStation": '北京南',
+                "DepDate": '2017-11-28 09:00',
+                "ArrStation": '上海虹桥',
+                "ArrDate": '2017-11-28 13:28',
+                "PassengerNums": 1,
+                "SeatInfo": {
+                    "SeatName": 209,
+                    "SeatPrice": 553.00,
+                    "IsBookable": true
+                },
+                "PassengerList": [
+                    {
+                        "cnName": "张栋",
+                        "outsidePassengerId": "20171025002",
+                        "certificatesList":
+                            [{
+                                "certType": "身份证",
+                                "certNumber": "411527199408012773",
+                                "expiration": ""
+                            }]
+                    }
+                ],
+                "ContactList": {
+                    "contactName": '张栋',
+                    "mobile": '15978561146'
+                },
+                "type": "order"
             }
-        }, (err, res, body) => {
+        },(err,res,body)=>{
             if (err) {
                 console.log(err);
                 return
@@ -82,11 +146,11 @@ describe("/美亚火车票订票流程", function () {
             } catch (err) {
                 result = body
             }
-            console.log(result, "<==========result");
             expect(result.code).to.be.equal(0);
             done()
         })
     })
+
 
 });
 
