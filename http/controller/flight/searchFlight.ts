@@ -34,7 +34,7 @@ export class SearchFlightController extends AbstractController {
         let data: any;
         try {
             data = await searchFlight(query);
-            res.json(data)
+            res.json(reply(0,data))
         } catch (err) {
             console.log(err);
             res.json(reply(500,null))

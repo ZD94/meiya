@@ -37,19 +37,36 @@ export class orderTrainController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await creatOrder(query);
-                res.json(data);
+                res.json(data.data);
             } catch (err) {
                 console.log(err);
+                res.json(reply(500,null))
             }
         } else if (query.type == "return") {
             try {
                 console.log("waiting......")
             } catch (err) {
                 console.log(err)
+                res.json(reply(500,null))
             }
         }
     }
-    //创建单与退票单的审批
+    //创建单与退票单的取消
+    async delete(req,res,next){
+        let query = req.body;
+        let {id} = req.params;
+        query.OrderNo = id;
+        let data;
+        if(query.type == "order"){
+            try {
+                data = await cancelOrder(query);
+                res.json(reply(0,data))
+            }catch (err){
+                console.log(err);
+                res.json(reply(500,null))
+            }
+        }
+    }
 
 
 }

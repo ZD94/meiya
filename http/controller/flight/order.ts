@@ -1,11 +1,11 @@
 'use strict';
 
-import { AbstractController, Restful, Router, reply } from "@jingli/restful";
-import { proxyHttp, transAttributeName } from '../../util';
-import { creatOrder, createChangeOrder, createReturnOrder, getOrderList, getOrderInfo } from "model/flight/order";
-import { cancelOrder, cancelChangeOrder, cancelReturnOrder } from "model/flight/cancle";
-import { submitOrder, submitReturnOrder } from "model/flight/confirm";
-import { dealLogin } from "model/flight/agent";
+import {AbstractController, Restful, Router, reply} from "@jingli/restful";
+import {proxyHttp, transAttributeName} from '../../util';
+import {creatOrder, createChangeOrder, createReturnOrder, getOrderList, getOrderInfo} from "model/flight/order";
+import {cancelOrder, cancelChangeOrder, cancelReturnOrder} from "model/flight/cancle";
+import {submitOrder, submitReturnOrder} from "model/flight/confirm";
+import {dealLogin} from "model/flight/agent";
 
 @Restful()
 export class OrderController extends AbstractController {
@@ -18,7 +18,7 @@ export class OrderController extends AbstractController {
     }
 
     async $before(req, res, next) {
-        let { auth } = req.headers;
+        let {auth} = req.headers;
         let result = await dealLogin(auth);
         if (result.code != 0) {
             return res.json(reply(500, null));
@@ -42,6 +42,7 @@ export class OrderController extends AbstractController {
                 res.json(data);
             } catch (err) {
                 console.log(err);
+                res.json(reply(500, null))
             }
         } else if (query.type == "change") {
             try {
@@ -49,6 +50,7 @@ export class OrderController extends AbstractController {
                 res.json(data);
             } catch (err) {
                 console.log(err)
+                res.json(reply(500, null))
             }
         } else if (query.type == "return") {
             /*
@@ -59,6 +61,7 @@ export class OrderController extends AbstractController {
                 res.json(data);
             } catch (err) {
                 console.log(err)
+                res.json(reply(500, null))
             }
             /*
             * 改签单创建退票单
@@ -69,7 +72,7 @@ export class OrderController extends AbstractController {
     //订单，改签单，退票单的取消
     async delete(req, res, next) {
         let query = req.body;
-        let { id } = req.params;
+        let {id} = req.params;
         query.orderNo = id;
         let data;
 
@@ -79,6 +82,7 @@ export class OrderController extends AbstractController {
                 res.json(data);
             } catch (err) {
                 console.log(err)
+                res.json(reply(500, null))
             }
 
         } else if (query.type == "change") {
@@ -87,6 +91,7 @@ export class OrderController extends AbstractController {
                 res.json(data)
             } catch (err) {
                 console.log(err)
+                res.json(reply(500, null))
             }
 
         } else if (query.type == "return") {
@@ -95,6 +100,7 @@ export class OrderController extends AbstractController {
                 res.json(data)
             } catch (err) {
                 console.log(err)
+                res.json(reply(500, null))
             }
         }
     }
@@ -102,37 +108,40 @@ export class OrderController extends AbstractController {
     //提交订票单、改签单、退票单审批
     async update(req, res, next) {
         let query = req.body;
-        let { id } = req.params;
+        let {id} = req.params;
         query.orderNo = id;
         let data;
         if (query.type == "order") {
             try {
                 data = await submitOrder(query);
-                res.json(data)
+                res.json(reply(0, data))
             } catch (err) {
-                console.log(err)
+                console.log(err);
+                res.json(reply(500, null))
             }
         } else if (query.type == "return") {
             try {
                 data = await submitReturnOrder(query);
                 res.json(data)
             } catch (err) {
-                console.log(err)
+                console.log(err);
+                res.json(reply(500, null))
             }
         }
     }
 
     //订单详情
-    async get(req, res, next) {
+    async get (req, res, next) {
         let query = req.query;
-        let { id } = req.params;
+        let {id} = req.params;
         query.orderNo = id;
         let data;
         try {
             data = await getOrderInfo(query);
-            res.json(data);
+            res.json(reply(0, data));
         } catch (err) {
             console.log(err)
+            res.json(reply(500, null))
         }
     }
 
@@ -145,7 +154,7 @@ export class OrderController extends AbstractController {
             res.json(data);
         } catch (err) {
             console.log(err)
-
+            res.json(reply(500, null))
         }
     }
 }
