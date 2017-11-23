@@ -1,10 +1,11 @@
 let config = require("@jingli/config");
 let md5 = require("md5");
 
-import { proxyHttp } from '../../http/util';
-import { reply, ReplyData } from "@jingli/restful";
+import {proxyHttp} from '../../http/util';
+import {reply, ReplyData} from "@jingli/restful";
 
 import cache from "@jingli/cache"
+
 export async function login(userName, password): Promise<ReplyData> {
 
     let params = {
@@ -40,7 +41,7 @@ export async function login(userName, password): Promise<ReplyData> {
 /* deal login */
 export async function dealLogin(auth): Promise<{ code: number, msg: string, data?: any }> {
 
-    let { username, password } = JSON.parse(decodeURIComponent(auth));
+    let {username, password} = JSON.parse(decodeURIComponent(auth));
     if (!username || !password) {
         return {
             code: -1,

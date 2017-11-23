@@ -135,7 +135,7 @@ describe("/美亚火车票订票流程", function () {
                 },
                 "type": "order"
             }
-        },(err,res,body)=>{
+        }, (err, res, body) => {
             if (err) {
                 console.log(err);
                 return
@@ -151,9 +151,39 @@ describe("/美亚火车票订票流程", function () {
             done()
         })
     })
-    // it("提交审批",(done)=>{
-    //     console.log(order,"<======")
-    // })
+    it("取消订单", (done) => {
+        let info = {
+            "userName": "JingLiZhiXiang",
+            "password": 'sapg8lYZD70C/dOtKLPJmg=='
+        }
+        let str = JSON.stringify(info);
+        str = encodeURIComponent(str);
+        request({
+            url: url + "/orderTrain/" + order,
+            method: "DELETE",
+            json: true,
+            headers: {
+                auth: str,
+                supplier: "meiya"
+            },
+            body: {
+                "type": "order"
+            }
+        }, (err, res, body) => {
+            if(err){
+                console.log(err);
+                return
+            }
+            let result;
+            try{
+                result = res.body
+            }catch (err){
+                result = body
+            }
+            expect(result.code).to.be.equal(0);
+            done()
+        })
+    })
 });
 
 

@@ -16,14 +16,14 @@ export class seartTrainsController extends AbstractController {
     async $before(req, res, next) {
         let {auth} = req.headers;
         let result = await dealLogin(auth);
-        if(result.code != 0){
-            return res.json(reply(500,null))
+        if (result.code != 0) {
+            return res.json(reply(500, null))
         }
-        if(req.method == "GET"){
+        if (req.method == "GET") {
             req.query.sessionId = result.data.sessionId;
             req.query.companyId = result.data.companyId;
             req.query.userId = result.data.userId
-        }else {
+        } else {
             req.body.sessionId = result.data.sessionId;
             req.body.companyId = result.data.companyId;
             req.body.userId = result.data.userId
@@ -35,10 +35,10 @@ export class seartTrainsController extends AbstractController {
         let data: any;
         try {
             data = await search(req);
-            res.json(reply(0,data.data.TrainInfoList))
+            res.json(reply(0, data.data.TrainInfoList))
         } catch (e) {
             console.log(e);
-            res.json(reply(500,null))
+            res.json(reply(500, null))
         }
     }
 

@@ -1,6 +1,6 @@
 let config = require("@jingli/config");
-import { proxyHttp, transAttributeName, getInfo } from '../../http/util'
-import { reply, ReplyData } from "@jingli/restful";
+import {proxyHttp, transAttributeName, getInfo} from '../../http/util'
+import {reply, ReplyData} from "@jingli/restful";
 import cache from "@jingli/cache"
 
 const url = "http://121.41.36.97:6005/API.svc/GetOrderInfo";
@@ -143,7 +143,7 @@ export async function getOrderList(query): Promise<ReplyData> {
     let datas;
     datas = await proxyHttp(params);
     if (datas.code == '10000') {
-        return reply(0, { result: datas.orderList, total: datas.totalCount });
+        return reply(0, {result: datas.orderList, total: datas.totalCount});
     } else {
         return reply(502, null);
     }
