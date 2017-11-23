@@ -87,7 +87,7 @@ describe("/美亚火车票订票流程", function () {
     //         done()
     //     })
     // });
-
+    let order;
     it("创建订单", (done) => {
         let info = {
             "userName": "JingLiZhiXiang",
@@ -147,11 +147,13 @@ describe("/美亚火车票订票流程", function () {
                 result = body
             }
             expect(result.code).to.be.equal(0);
+            order = result.data.OrderNo;
             done()
         })
     })
-
-
+    // it("提交审批",(done)=>{
+    //     console.log(order,"<======")
+    // })
 });
 
 

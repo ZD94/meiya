@@ -1,8 +1,8 @@
 "use strict";
-import {AbstractController, Restful, Router, reply} from "@jingli/restful"
-import {dealLogin} from "model/train/agent"
-import {creatOrder} from "model/train/order"
+import {AbstractController, Restful, Router, reply} from "@jingli/restful";
+import {dealLogin} from "model/train/agent";
 
+import {creatOrder} from "model/train/order"
 @Restful()
 export class orderTrainController extends AbstractController {
     constructor() {
@@ -49,6 +49,7 @@ export class orderTrainController extends AbstractController {
             }
         }
     }
+    //创建单与退票单的审批
 
 
 }
