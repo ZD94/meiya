@@ -43,7 +43,9 @@ export async function creatOrder(query): Promise<ReplyData> {
         body: query,
         header: {
             'content-type': 'application/json'
-        }
+        },
+        method:"POST"
+
     };
     datas = await proxyHttp(params);
 
@@ -58,7 +60,6 @@ export async function creatOrder(query): Promise<ReplyData> {
 }
 
 //创建改签单
-
 export async function createChangeOrder(query): Promise<ReplyData> {
     for (let i = 0; i < query.flightList.length; i++) {
         query.flightList[i].departureCity = query.flightList[i].departureCode;
@@ -84,7 +85,9 @@ export async function createChangeOrder(query): Promise<ReplyData> {
         body: query,
         header: {
             'content-type': 'application/json'
-        }
+        },
+        method:"POST"
+
     };
     datas = await proxyHttp(params);
     if (datas.code == '10000') {
@@ -122,6 +125,8 @@ export async function createReturnOrder(query): Promise<ReplyData> {
             'content-type': 'application/json'
         },
         body: query,
+        method:"POST"
+
     };
     datas = await proxyHttp(params);
     if (datas.code == '10000') {
@@ -138,7 +143,9 @@ export async function getOrderList(query): Promise<ReplyData> {
         body: query,
         header: {
             'content-type': 'application/json'
-        }
+        },
+        method:"POST"
+
     };
     let datas;
     datas = await proxyHttp(params);
@@ -156,16 +163,56 @@ export async function getOrderInfo(query): Promise<ReplyData> {
         body: query,
         header: {
             'content-type': 'application/json'
-        }
+        },
+        method:"POST"
     };
     let datas;
     datas = await proxyHttp(params);
     if (datas.code == '10000') {
-
         return reply(0, datas.orderInfo);
     } else {
         return reply(502, null);
     }
 }
 
+//退票单详情
+export async function getReturnOrderInfo(query): Promise<ReplyData> {
+    let params = {
+        url: `${config.meiyaUrl}` + "/GetReturnOrderInfo",
+        body: query,
+        header: {
+            'content-type': 'application/json'
+        },
+        method:"POST"
 
+    };
+    let datas;
+    datas = await proxyHttp(params);
+    if (datas.code == '10000') {
+        return reply(0, datas.orderInfo);
+    } else {
+        return reply(502, null);
+    }
+}
+
+//改签单详情
+export async function getChangeOrderInfo(query): Promise<ReplyData> {
+    let params = {
+        url: `${config.meiyaUrl}` + "/GetChangeOrderInfo",
+        body: query,
+        header: {
+            'content-type': 'application/json'
+        },
+        method:"POST"
+    };
+    let datas;
+    datas = await proxyHttp(params);
+    if (datas.code == '10000') {
+        return reply(0, datas.orderInfo);
+    } else {
+        return reply(502, null);
+    }
+
+
+
+}

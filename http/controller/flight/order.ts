@@ -2,7 +2,7 @@
 
 import {AbstractController, Restful, Router, reply} from "@jingli/restful";
 import {proxyHttp, transAttributeName} from '../../util';
-import {creatOrder, createChangeOrder, createReturnOrder, getOrderList, getOrderInfo} from "model/flight/order";
+import {creatOrder, createChangeOrder, createReturnOrder, getOrderList, getOrderInfo,getReturnOrderInfo,getChangeOrderInfo} from "model/flight/order";
 import {cancelOrder, cancelChangeOrder, cancelReturnOrder} from "model/flight/cancle";
 import {submitOrder, submitReturnOrder} from "model/flight/confirm";
 import {dealLogin} from "model/flight/agent";
@@ -136,13 +136,32 @@ export class OrderController extends AbstractController {
         let {id} = req.params;
         query.orderNo = id;
         let data;
-        try {
-            data = await getOrderInfo(query);
-            res.json(reply(0, data));
-        } catch (err) {
-            console.log(err)
-            res.json(reply(500, null))
+        if(query.type == "order"){
+            try {
+                data = await getOrderInfo(query);
+                res.json(reply(0, data));
+            } catch (err) {
+                console.log(err)
+                res.json(reply(500, null))
+            }
+        }else if(query.type == "change"){
+            try{
+                data = await getChangeOrderInfo(query)
+                res.json(data.code,data)
+            }catch (err){
+                console.log(err)
+                res.json(reply(500,null))
+            }
+        }else if(query.type == "return"){
+            try{
+                data = await getReturnOrderInfo(query)
+                res.json(data.code,data)
+            } catch (err){
+                console.log(err)
+                res.json(reply(500,null))
+            }
         }
+
     }
 
     //订单列表
