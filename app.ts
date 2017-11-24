@@ -18,10 +18,10 @@ import router from "./http";
 
 app.use((req, res, next) => {
     logger.info(req.method, req.url, process.title);
-    let { tmckey } = req.headers;
-    if (tmckey != config.tmckey) {
-        return res.sendStatus(403);
-    }
+    // let { tmckey } = req.headers;
+    // if (tmckey != config.tmckey) {
+    //     return res.sendStatus(403);
+    // }
     next();
 });
 app.use(router);

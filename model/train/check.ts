@@ -78,9 +78,11 @@ export async function checkTicket(req): Promise<ReplyData> {
         delete datas.d.TrainNumber;
         delete datas.d.FromStation;
         delete datas.d.SeatName;
-        delete datas.d.ToStation
+        delete datas.d.ToStation;
+        delete datas.d.description;
     }
     if (datas.d.code == "10000") {
+        delete datas.d.code;
         return reply(0, datas.d)
     } else {
         return reply(502, null)

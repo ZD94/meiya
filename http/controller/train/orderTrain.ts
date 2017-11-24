@@ -4,6 +4,8 @@ import {AbstractController, Restful, Router, reply} from "@jingli/restful"
 import {dealLogin} from "model/train/agent"
 import {creatOrder} from "model/train/order"
 import {cancelOrder} from "model/train/cancle"
+import {submitOrder} from "model/train/confirm"
+
 
 @Restful()
 export class orderTrainController extends AbstractController {
@@ -64,7 +66,7 @@ export class orderTrainController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await cancelOrder(query);
-                res.json(reply(0, data))
+                res.json(reply(0, data.code))
             } catch (err) {
                 console.log(err);
                 res.json(reply(500, null))
@@ -79,5 +81,55 @@ export class orderTrainController extends AbstractController {
         }
     }
 
+    //订购单与退票单的审批
+    async update(req, res, next) {
+        let query = req.body;
+        let {id} = req.params;
+        query.orderNo = id;
+        let data;
+        if(query.type == "order"){
+            try {
+                data = await submitOrder(query);
+                res.json(reply(0, data.code))
+            }catch (err){
+                console.log(err);
+                res.json(500,null)
+            }
+        }else if(query.type == "return"){
+            try{
+                console.log("waiting..........")
+            }catch (err){
+                console.log(err);
+                res.json(reply(500,null))
+            }
+        }
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

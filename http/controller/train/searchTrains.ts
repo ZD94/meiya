@@ -15,7 +15,6 @@ export class seartTrainsController extends AbstractController {
 
     async $before(req, res, next) {
         let {auth} = req.headers;
-        console.log("ssssssssssssss")
         let result = await dealLogin(auth);
         if (result.code != 0) {
             return res.json(reply(500, null))
