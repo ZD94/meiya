@@ -2,7 +2,7 @@
 
 import {AbstractController, Restful, Router, reply} from "@jingli/restful"
 import {dealLogin} from "model/train/agent"
-import {creatOrder} from "model/train/order"
+import {creatOrder, orderInfo} from "model/train/order"
 import {cancelOrder} from "model/train/cancle"
 import {submitOrder} from "model/train/confirm"
 
@@ -42,7 +42,7 @@ export class orderTrainController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await creatOrder(query);
-                res.json(reply(0, data.data));
+                res.json(reply(data.code, data.data));
             } catch (err) {
                 console.log(err);
                 res.json(reply(500, null))
@@ -66,7 +66,7 @@ export class orderTrainController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await cancelOrder(query);
-                res.json(reply(0, data.code))
+                res.json(reply(data.code, data))
             } catch (err) {
                 console.log(err);
                 res.json(reply(500, null))
@@ -90,7 +90,7 @@ export class orderTrainController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await submitOrder(query);
-                res.json(reply(0, data.code))
+                res.json(reply(data.code, data.code))
             } catch (err) {
                 console.log(err);
                 res.json(500, null)
@@ -105,10 +105,23 @@ export class orderTrainController extends AbstractController {
         }
     }
 
-    //订购单与退票单详情
-    async get (req, res, next) {
 
+    //订单详情
+    async get (req, res, next) {
+        let query = req.query;
+        let {id} = req.params;
+        query.orderNo = id;
+        let data;
+        if (query.type == "order") {
+            try {
+                data = await orderInfo(query);
+                res.json(reply(data.code, data.data))
+            } catch (err) {
+                console.log(err)
+            }
+        }
     }
+
 
 }
 

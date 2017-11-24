@@ -49,7 +49,6 @@ export async function dealLogin(auth): Promise<{ code: number, msg: string, data
     }
     let key = md5(userName + password);
     let sessionId = await cache.read(key);
-    console.log(sessionId, "<=======Id");
     if (!sessionId) {
         let result = await login(userName, password);
         if (result.code != 0) {

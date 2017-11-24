@@ -3,7 +3,7 @@ import {proxyHttp} from "http/util";
 import {reply, ReplyData} from "@jingli/restful";
 
 //订购单提交审批
-export async function submitOrder(query) {
+export async function submitOrder(query): Promise<ReplyData> {
     let params = ({
         url: `${config.meiyaTrainUrl}` + "/submitTrainOrder",
         method: "POST",

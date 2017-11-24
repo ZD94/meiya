@@ -5,7 +5,7 @@ import {proxyHttp, transAttributeName} from "http/util"
 import {reply, ReplyData} from "@jingli/restful"
 import _quarter = moment.unitOfTime._quarter;
 
-export async function cancelOrder(query) {
+export async function cancelOrder(query): Promise<ReplyData> {
     let params = {
         url: `${config.meiyaTrainUrl}` + '/cancelTrainOrder',
         method: "POST",

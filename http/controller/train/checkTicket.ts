@@ -35,7 +35,7 @@ export class checkController extends AbstractController {
         let data: any;
         try {
             data = await checkTicket(req);
-            res.json(reply(0, data))
+            res.json(reply(data.code, data))
         } catch (e) {
             console.log(e)
             res.json(reply(500, null))

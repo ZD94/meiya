@@ -149,39 +149,39 @@ describe("/美亚火车票订票流程", function () {
         })
     })
 
-    it("提交审批", (done) => {
-        let info = {
-            "userName": "JingLiZhiXiang",
-            "password": 'sapg8lYZD70C/dOtKLPJmg=='
-        }
-        let str = JSON.stringify(info);
-        str = encodeURIComponent(str);
-        request({
-            url: url + "/orderTrain/" + order,
-            method: "PUT",
-            json: true,
-            headers: {
-                auth: str,
-                supplier: "meiya"
-            },
-            body: {
-                type: "order"
-            }
-        }, (err, res, body) => {
-            if (err) {
-                console.log(err);
-                return
-            }
-            let result;
-            try {
-                result = res.body
-            } catch (err) {
-                result = body
-            }
-            expect(result.code).to.be.equal(0);
-            done()
-        })
-    })
+    // it("提交审批", (done) => {
+    //     let info = {
+    //         "userName": "JingLiZhiXiang",
+    //         "password": 'sapg8lYZD70C/dOtKLPJmg=='
+    //     }
+    //     let str = JSON.stringify(info);
+    //     str = encodeURIComponent(str);
+    //     request({
+    //         url: url + "/orderTrain/" + order,
+    //         method: "PUT",
+    //         json: true,
+    //         headers: {
+    //             auth: str,
+    //             supplier: "meiya"
+    //         },
+    //         body: {
+    //             type: "order"
+    //         }
+    //     }, (err, res, body) => {
+    //         if (err) {
+    //             console.log(err);
+    //             return
+    //         }
+    //         let result;
+    //         try {
+    //             result = res.body
+    //         } catch (err) {
+    //             result = body
+    //         }
+    //         expect(result.code).to.be.equal(0);
+    //         done()
+    //     })
+    // })
 
 
     it("取消订单", (done) => {
@@ -213,7 +213,40 @@ describe("/美亚火车票订票流程", function () {
             } catch (err) {
                 result = body
             }
-            console.log(result, "<==========result")
+            expect(result.code).to.be.equal(0);
+            done()
+        })
+    })
+
+    it("订单详情",(done)=>{
+        let info = {
+            "userName": "JingLiZhiXiang",
+            "password": 'sapg8lYZD70C/dOtKLPJmg=='
+        };
+        let str = JSON.stringify(info);
+        str = encodeURIComponent(str);
+        request({
+            url:url + "/orderTrain/" + order,
+            method:"GET",
+            headers:{
+                auth:str,
+                supplier:"meiya"
+            },
+            qs:{
+                "type":"order"
+            }
+        },(err,res,body)=>{
+            if(err){
+                console.log(err);
+                return
+            }
+            let result;
+            try{
+                result = JSON.parse(res.body)
+            }catch (err){
+                console.log(err);
+                result = body
+            }
             expect(result.code).to.be.equal(0);
             done()
         })
