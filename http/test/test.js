@@ -12,7 +12,7 @@ loadTest(__dirname);
 
 function loadTest(dir) {
     let files = fs.readdirSync(dir);
-    for(let f of files) {
+    for (let f of files) {
         let fullPath = path.join(dir, f);
         let stat = fs.statSync(fullPath);
         if (stat.isDirectory()) {

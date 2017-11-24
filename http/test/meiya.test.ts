@@ -73,7 +73,7 @@ describe('/美亚订票流程', function () {
             } catch (err) {
                 result = body
             }
-            console.log(result,"<========result");
+            console.log(result, "<========result");
             // data = result.data[1];
             // flightID = data["flightPriceInfoList"][0].flightID;
             // departureCity = data.orgAirportCode;

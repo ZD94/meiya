@@ -203,17 +203,17 @@ describe("/美亚火车票订票流程", function () {
                 "type": "order"
             }
         }, (err, res, body) => {
-            if(err){
+            if (err) {
                 console.log(err);
                 return
             }
             let result;
-            try{
+            try {
                 result = res.body
-            }catch (err){
+            } catch (err) {
                 result = body
             }
-            console.log(result,"<==========result")
+            console.log(result, "<==========result")
             expect(result.code).to.be.equal(0);
             done()
         })

@@ -8,18 +8,18 @@ import _quarter = moment.unitOfTime._quarter;
 export async function cancelOrder(query) {
     let params = {
         url: `${config.meiyaTrainUrl}` + '/cancelTrainOrder',
-        method:"POST",
-        header:{
+        method: "POST",
+        header: {
             'content-type': 'application/json'
         },
-        body:{
-            request:query
+        body: {
+            request: query
         }
     }
     let datas = await proxyHttp(params);
-    if(datas.d.code == "10000"){
-        return reply(0,datas.d.description)
-    }else {
-        return reply(502,null)
+    if (datas.d.code == "10000") {
+        return reply(0, datas.d.description)
+    } else {
+        return reply(502, null)
     }
 }

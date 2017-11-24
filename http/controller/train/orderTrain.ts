@@ -87,22 +87,27 @@ export class orderTrainController extends AbstractController {
         let {id} = req.params;
         query.orderNo = id;
         let data;
-        if(query.type == "order"){
+        if (query.type == "order") {
             try {
                 data = await submitOrder(query);
                 res.json(reply(0, data.code))
-            }catch (err){
+            } catch (err) {
                 console.log(err);
-                res.json(500,null)
+                res.json(500, null)
             }
-        }else if(query.type == "return"){
-            try{
+        } else if (query.type == "return") {
+            try {
                 console.log("waiting..........")
-            }catch (err){
+            } catch (err) {
                 console.log(err);
-                res.json(reply(500,null))
+                res.json(reply(500, null))
             }
         }
+    }
+
+    //订购单与退票单详情
+    async get (req, res, next) {
+
     }
 
 }

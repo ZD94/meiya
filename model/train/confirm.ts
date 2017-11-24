@@ -15,9 +15,9 @@ export async function submitOrder(query) {
         }
     });
     let datas = await proxyHttp(params);
-    if(datas.d.code == "10000"){
-        return reply(0,datas.d.description)
-    }else {
-        return reply(404,datas.d.description)
+    if (datas.d.code == "10000") {
+        return reply(0, datas.d.description)
+    } else {
+        return reply(404, datas.d.description)
     }
 }

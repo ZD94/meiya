@@ -41,7 +41,7 @@ export async function proxyHttp(params: {
             recordedData(url, data);
         }
     }
-    console.log(data,"<===========data");
+    console.log(data, "<===========data");
     return data;
 }
 

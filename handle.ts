@@ -11,6 +11,7 @@ import app from "./app";
 
 /* logger */
 import Logger from "@jingli/logger";
+
 var logger = new Logger('main');
 
 const server = http.createServer(app);
