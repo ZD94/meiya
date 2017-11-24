@@ -40,7 +40,7 @@ export class orderTrainController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await creatOrder(query);
-                res.json(reply(0,data.data));
+                res.json(reply(0, data.data));
             } catch (err) {
                 console.log(err);
                 res.json(reply(500, null))
@@ -73,7 +73,7 @@ export class orderTrainController extends AbstractController {
             try {
                 console.log("waiting......")
             } catch (err) {
-                console.log(err)
+                console.log(err);
                 res.json(reply(500, null))
             }
         }
