@@ -9,7 +9,7 @@ import {dealLogin} from 'model/hotel/agents';
 import { submitReturnOrder } from 'model/flight/confirm';
 
 @Restful() 
-export class OrderController extends AbstractController {
+export class OrderHotelController extends AbstractController {
     constructor() {
         super();
     }
