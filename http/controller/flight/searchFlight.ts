@@ -32,11 +32,9 @@ export class SearchFlightController extends AbstractController {
     async find(req, res, next) {
         let query = req.query;
         let data: any;
-
-
         try {
             data = await searchFlight(query);
-            res.json(reply(0, data))
+            res.json(reply(data.code, data))
         } catch (err) {
             console.log(err);
             res.json(reply(500, null))
