@@ -33,7 +33,7 @@ export async function login(userName, password): Promise<ReplyData> {
         //redis
         let cacheId = userName + password;
         let params = md5(cacheId);
-        await cache.write(params, ids, config.tmcCacheTime * 2);
+        await cache.write(params, ids, config.tmcCacheTime * 60);
 
         return reply(0, ids);
     } else {
