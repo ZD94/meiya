@@ -42,7 +42,7 @@ export async function login(userName, password): Promise<ReplyData> {
 }
 
 export async function dealLogin(auth): Promise<{ code: number, msg: string, data?: any }> {
-    let authStr = decodeURIComponent(JSON.stringify(auth));
+    let authStr = decodeURIComponent(auth);
     console.log('authStr', authStr);
 
     let {username, password} = JSON.parse(authStr);
