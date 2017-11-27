@@ -162,7 +162,6 @@ export async function getHotelOrderInfo(query): Promise<ReplyData> {
             oldname: 'priceList'
         }
     ];
-    transAttributeName(datas.d.orderInfo, changeName);
     let itemChange = [
         {
             newname: 'priceNow',
@@ -173,13 +172,15 @@ export async function getHotelOrderInfo(query): Promise<ReplyData> {
             oldname: 'sellDate'
         }
     ];
-    for (let item of datas.d.orderInfo.priceList) {
-        transAttributeName(item, itemChange);
-    }
+    
     if (datas.d.code == '10000') {
+        transAttributeName(datas.d.orderInfo, changeName);
+        for (let item of datas.d.orderInfo.priceList) {
+            transAttributeName(item, itemChange);
+        }
         return reply(0, datas.d.orderInfo);
     } else {
-        return reply(502, null);
+        return reply(502, datas.d.description);
     }
 }
 
@@ -198,6 +199,6 @@ export async function getHotelReturnOrderInfo(query): Promise<ReplyData> {
     if (datas.d.code == '10000') {
         return reply(0, datas.d.HrOrderInfo);
     } else {
-        return reply(502, null);
+        return reply(502, datas.d.description);
     }
 }

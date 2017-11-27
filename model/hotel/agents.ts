@@ -36,10 +36,10 @@ export async function login(userName, password): Promise<ReplyData> {
         await cache.write(params, ids, config.tmcCacheTime * 60);
 
         return reply(0, ids);
-    } else {
+    } else {　　　　　　　　
         return reply(502, null);
     }
-}
+}　　
 
 export async function dealLogin(auth): Promise<{ code: number, msg: string, data?: any }> {
     let authStr = decodeURIComponent(auth);
@@ -60,7 +60,6 @@ export async function dealLogin(auth): Promise<{ code: number, msg: string, data
             msg: '请输入密码'
         }
     }
-    console.log('aes start');
     let AESKey = '4f3f29eb05ee4cda81528647e91608d4';
     let cipher = crypto.createCipheriv('aes-256-ecb', new Buffer(AESKey), new Buffer(0));
     let crypted = cipher.update(password, 'utf-8', 'base64');

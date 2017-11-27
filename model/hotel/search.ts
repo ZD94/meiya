@@ -50,6 +50,7 @@ export async function searchHotel(query): Promise<ReplyData> {
         },
         method: "POST" 
     };
+    console.log('query', querys);
     let datas = await proxyHttp(params);
     let itemsChange = [
         {
@@ -118,23 +119,25 @@ export async function searchHotel(query): Promise<ReplyData> {
         }
     ];
 
-    for (let items of datas.d.hotelInfoList) {
-        for (let item of items.hotelRoomList) {
-            for (let ite of item.hotelPriceList) {
-                for (let it of ite.priceList) {
-                    transAttributeName(it, itChange);
-                }
-                transAttributeName(ite, iteChange);
-            }
-            transAttributeName(item, itemChange);
-        }
-    transAttributeName(items, itemsChange);
-    }
+    console.log(datas.d);
+    
     console.log(JSON.stringify(datas.d.hotelInfoList));
 
-    if (datas.d.hotelInfoList.length) {
+    if (datas.d.code == '10000') {
+        for (let items of datas.d.hotelInfoList) {
+            for (let item of items.hotelRoomList) {
+                for (let ite of item.hotelPriceList) {
+                    for (let it of ite.priceList) {
+                        transAttributeName(it, itChange);
+                    }
+                    transAttributeName(ite, iteChange);
+                }
+                transAttributeName(item, itemChange);
+            }
+        transAttributeName(items, itemsChange);
+        }
         return reply(0, datas.d.hotelInfoList);
     } else {
-        return reply(502, null);
+        return reply(502, datas.d.description);
     }
 }
