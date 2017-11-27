@@ -3,8 +3,8 @@ let md5 = require("md5");
 
 import {proxyHttp} from '../../http/util';
 import {reply, ReplyData} from "@jingli/restful";
-
 import cache from "@jingli/cache";
+var crypto = require('crypto');
 
 export async function login(userName, password): Promise<ReplyData> {
     let params = {
@@ -43,7 +43,7 @@ export async function login(userName, password): Promise<ReplyData> {
 
 export async function dealLogin(auth): Promise<{ code: number, msg: string, data?: any }> {
     let authStr = decodeURIComponent(JSON.stringify(auth));
-    console.log(authStr);
+    console.log('authStr', authStr);
 
     let {username, password} = JSON.parse(authStr);
    
@@ -60,10 +60,17 @@ export async function dealLogin(auth): Promise<{ code: number, msg: string, data
             msg: '请输入密码'
         }
     }
-    let key = md5(username + password);
+    console.log('aes start');
+    let AESKey = '4f3f29eb05ee4cda81528647e91608d4';
+    let cipher = crypto.createCipheriv('aes-256-ecb', new Buffer(AESKey), new Buffer(0));
+    let crypted = cipher.update(password, 'utf-8', 'base64');
+    crypted += cipher.final('base64');
+    console.log(crypted);
+
+    let key = md5(username + crypted);
     let ids = await cache.read(key);
     if (!ids) {
-        let result = await login(username, password);
+        let result = await login(username, crypted);
         console.log('code', result.code);
         if (result.code != 0) {
             return {
