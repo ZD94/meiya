@@ -114,7 +114,8 @@ export class OrderController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await submitOrder(query);
-                res.json(reply(0, data))
+                console.log(data,"<===========qqqqqq")
+                res.json(reply(data.code, data))
             } catch (err) {
                 console.log(err);
                 res.json(reply(500, null))
@@ -122,7 +123,7 @@ export class OrderController extends AbstractController {
         } else if (query.type == "return") {
             try {
                 data = await submitReturnOrder(query);
-                res.json(data)
+                res.json(reply(data.code, data))
             } catch (err) {
                 console.log(err);
                 res.json(reply(500, null))
