@@ -139,15 +139,11 @@ export async function getHotelOrderInfo(query): Promise<ReplyData> {
     let changeName = [
         {
             newname: 'JLOrderNo',
-            oldname: 'orderNo'
+            oldname: 'outsideOrderNo'
         },
         {
             newname: 'hotelId',
             oldname: 'hotelcode'
-        },
-        {
-            newname: 'tripApproveId',
-            oldname: 'outsideOrderNo'
         },
         {
             newname: 'roomId',
