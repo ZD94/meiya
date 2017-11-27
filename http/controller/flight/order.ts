@@ -1,11 +1,11 @@
 'use strict';
 
-import {AbstractController, Restful, Router, reply} from "@jingli/restful";
-import {proxyHttp, transAttributeName} from '../../util';
-import {creatOrder, createChangeOrder, createReturnOrder, getOrderList, getOrderInfo,getReturnOrderInfo,getChangeOrderInfo} from "model/flight/order";
-import {cancelOrder, cancelChangeOrder, cancelReturnOrder} from "model/flight/cancle";
-import {submitOrder, submitReturnOrder} from "model/flight/confirm";
-import {dealLogin} from "model/flight/agent";
+import { AbstractController, Restful, Router, reply } from "@jingli/restful";
+import { proxyHttp, transAttributeName } from '../../util';
+import { creatOrder, createChangeOrder, createReturnOrder, getOrderList, getOrderInfo, getReturnOrderInfo, getChangeOrderInfo } from "model/flight/order";
+import { cancelOrder, cancelChangeOrder, cancelReturnOrder } from "model/flight/cancle";
+import { submitOrder, submitReturnOrder } from "model/flight/confirm";
+import { dealLogin } from "model/flight/agent";
 
 @Restful()
 export class OrderController extends AbstractController {
@@ -18,7 +18,7 @@ export class OrderController extends AbstractController {
     }
 
     async $before(req, res, next) {
-        let {auth} = req.headers;
+        let { auth } = req.headers;
         let result = await dealLogin(auth);
         if (result.code != 0) {
             return res.json(reply(500, null));
@@ -72,7 +72,7 @@ export class OrderController extends AbstractController {
     //订单，改签单，退票单的取消
     async delete(req, res, next) {
         let query = req.body;
-        let {id} = req.params;
+        let { id } = req.params;
         query.orderNo = id;
         let data;
 
@@ -108,13 +108,13 @@ export class OrderController extends AbstractController {
     //提交订票单、改签单、退票单审批
     async update(req, res, next) {
         let query = req.body;
-        let {id} = req.params;
+        let { id } = req.params;
         query.orderNo = id;
         let data;
         if (query.type == "order") {
             try {
                 data = await submitOrder(query);
-                console.log(data,"<===========qqqqqq")
+                console.log(data, "<===========qqqqqq")
                 res.json(reply(data.code, data))
             } catch (err) {
                 console.log(err);
@@ -132,12 +132,12 @@ export class OrderController extends AbstractController {
     }
 
     //订单详情
-    async get (req, res, next) {
+    async get(req, res, next) {
         let query = req.query;
-        let {id} = req.params;
+        let { id } = req.params;
         query.orderNo = id;
         let data;
-        if(query.type == "order"){
+        if (query.type == "order") {
             try {
                 data = await getOrderInfo(query);
                 res.json(reply(data.code, data));
@@ -145,21 +145,21 @@ export class OrderController extends AbstractController {
                 console.log(err)
                 res.json(reply(500, null))
             }
-        }else if(query.type == "change"){
-            try{
+        } else if (query.type == "change") {
+            try {
                 data = await getChangeOrderInfo(query)
-                res.json(data.code,data)
-            }catch (err){
+                res.json(data.code, data)
+            } catch (err) {
                 console.log(err)
-                res.json(reply(500,null))
+                res.json(reply(500, null))
             }
-        }else if(query.type == "return"){
-            try{
+        } else if (query.type == "return") {
+            try {
                 data = await getReturnOrderInfo(query)
-                res.json(data.code,data)
-            } catch (err){
+                res.json(data.code, data)
+            } catch (err) {
                 console.log(err)
-                res.json(reply(500,null))
+                res.json(reply(500, null))
             }
         }
 
@@ -171,10 +171,10 @@ export class OrderController extends AbstractController {
         let data;
         try {
             data = await getOrderList(query);
-            res.json(data.code,data);
+            res.json(data);
         } catch (err) {
             console.log(err)
-            res.json(reply(500, null))
+            res.json(data)
         }
     }
 }
