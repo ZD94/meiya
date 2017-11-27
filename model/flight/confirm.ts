@@ -1,8 +1,7 @@
 let config = require("@jingli/config");
-import { proxyHttp } from "../../http/util"
-import { reply, ReplyData } from "@jingli/restful"
+import {proxyHttp} from "http/util"
+import {reply, ReplyData} from "@jingli/restful"
 
-import cache from "@jingli/cache"
 
 //订购单提交审批
 export async function submitOrder(query): Promise<ReplyData> {
@@ -23,6 +22,7 @@ export async function submitOrder(query): Promise<ReplyData> {
     }
 }
 
+//退票单提交审批
 export async function submitReturnOrder(query): Promise<ReplyData> {
     let params = {
         url: `${config.meiyaUrl}` + "/SubmitReturnOrder",

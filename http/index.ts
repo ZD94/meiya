@@ -6,9 +6,10 @@
 
 import http = require("http");
 
-import { scannerDecoration, registerControllerToRouter, reply } from "@jingli/restful";
+import {scannerDecoration, registerControllerToRouter, reply} from "@jingli/restful";
 
 import path = require("path");
+
 let express = require("express");
 
 let router = express.Router();

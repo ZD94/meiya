@@ -10,46 +10,55 @@ describe('/美亚订票流程', function () {
     let sessionId;
     this.timeout(5 * 60 * 10000);
 
-    before("login", (done) => {
-        request({
-            url: url + "Auth",
-            method: 'POST',
-            json: true,
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: {
-                "userName": "JingLiZhiXiang",
-                "password": '123456',
-            }
-        }, function (err, res, body) {
-            let result;
-            if (!err && res.statusCode == 200) {
-                result = res.body;
-            } else {
-                console.log(err);
-            }
-            sessionId = result.data.sessionId;
-
-            expect(result.code).to.be.equal(0);
-            done()
-        });
-    });
+    // before("login", (done) => {
+    //     request({
+    //         url: url + "Auth",
+    //         method: 'POST',
+    //         json: true,
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: {
+    //             "userName": "JingLiZhiXiang",
+    //             "password": '123456',
+    //         }
+    //     }, function (err, res, body) {
+    //         let result;
+    //         if (!err && res.statusCode == 200) {
+    //             result = res.body;
+    //         } else {
+    //             console.log(err);
+    //         }
+    //         sessionId = result.data.sessionId;
+    //
+    //         expect(result.code).to.be.equal(0);
+    //         done()
+    //     });
+    // });
     let data, flightID, departureCity, arrivalCity, departureDate, airline, cabinType, flightNo, price;
     let data2, flightID2, departureCity2, arrivalCity2, departureDate2, airline2, cabinType2, flightNo2, price2;
     it("get /查询航班", (done) => {
+
+        let info = {
+            username: "JingLiZhiXiang",
+            password: "123456"
+        };
+
+        let str = JSON.stringify(info);
+        str = encodeURIComponent(str);
+
         request({
             url: url + "SearchFlight",
             method: 'GET',
             json: true,
             headers: {
-                userName: "JingLiZhiXiang",
-                password: "123456"
+                auth: str,
+                supplier: "meiya"
             },
             qs: {
                 "departureCode": "PEK",
                 "arrivalCode": "SHA",
-                "depDate": "2018-01-20",
+                "depDate": "2018-01-22",
                 supplier: "meiya",
                 tripType: 1
             }
@@ -64,8 +73,9 @@ describe('/美亚订票流程', function () {
             } catch (err) {
                 result = body
             }
-
-            data = result.data[1];
+            console.log(result.data.data[1], "<========result");
+            data = result.data.data[1];
+            // console.log(data, "<========result");
             flightID = data["flightPriceInfoList"][0].flightID;
             departureCity = data.orgAirportCode;
             arrivalCity = data.desAirportCode;
@@ -92,13 +102,20 @@ describe('/美亚订票流程', function () {
 
     let order;
     it("/创建订单", (done) => {
+        let info = {
+            username: "JingLiZhiXiang",
+            password: "123456"
+        };
+
+        let str = JSON.stringify(info);
+        str = encodeURIComponent(str);
         request({
             url: url + "Order",
             method: 'POST',
             json: true,
             headers: {
-                userName: "JingLiZhiXiang",
-                password: "123456"
+                auth: str,
+                supplier: "meiya"
             },
             body: {
                 "flightList":
@@ -149,12 +166,21 @@ describe('/美亚订票流程', function () {
     });
 
     it("提交审批", (done) => {
+
+        let info = {
+            username: "JingLiZhiXiang",
+            password: "123456"
+        };
+
+        let str = JSON.stringify(info);
+        str = encodeURIComponent(str);
+
         request({
             url: url + "Order/" + order,
             method: "PUT",
             headers: {
-                userName: "JingLiZhiXiang",
-                password: "123456"
+                auth: str,
+                supplier: "meiya"
             },
             json: true,
             body: {
@@ -175,144 +201,144 @@ describe('/美亚订票流程', function () {
             done()
         })
     });
-
-    it("订单详情", (done) => {
-        request({
-            url: url + "Order/" + order,
-            method: "GET",
-            json: true,
-            headers: {
-                userName: "JingLiZhiXiang",
-                password: "123456"
-            },
-        }, (err, res, body) => {
-            if (err) {
-                console.log(err);
-                return
-            }
-            let result;
-            try {
-                result = res.body;
-            } catch (err) {
-                result = body
-            }
-            expect(result.code).to.be.equal(0);
-            done()
-        })
-    });
-
-    /*
-        it("取消订单", (done) => {
-            request({
-                url: url + "Order/" + order,
-                method: "DELETE",
-                json: true,
-                headers: {
-                    userName: "JingLiZhiXiang",
-                    password: "123456"
-                },
-                body: {
-                    "type": "order",
-                }
-            }, (err, res, body) => {
-                if (err) {
-                    console.log(err);
-                    return
-                }
-                let result;
-                try {
-                    result = res.body
-                } catch (err) {
-                    result = body
-                }
-                expect(result.code).to.be.equal(0);
-                done()
-            })
-        });
-    */
-
-    it("订单列表", (done) => {
-        request({
-            url: url + "Order",
-            json: true,
-            headers: {
-                userName: "JingLiZhiXiang",
-                password: "123456"
-            },
-            method: "GET"
-        }, (err, res, body) => {
-            if (err) {
-                console.log(err);
-                return
-            }
-            let result;
-            try {
-                result = res.body
-            } catch (err) {
-                result = body
-            }
-            expect(result.code).to.be.equal(0);
-            done()
-        })
-    });
-
-    /************************************************************/
-
-    it("创建改签单", (done) => {
-        request({
-            url: url + "Order",
-            method: "POST",
-            json: true,
-            headers: {
-                userName: "JingLiZhiXiang",
-                password: "123456"
-            },
-            body: {
-                "originalOrderNo": `${order}`,
-                "flightList":
-                    [{
-                        "flightID": `${flightID2}`,
-                        "departureCode": `${departureCity2}`,
-                        "arrivalCode": `${arrivalCity2}`,
-                        "depDate": `${departureDate2}`,
-                        "airline": `${airline2}`,
-                        "cabinType": `${cabinType2}`,
-                        "flightNo": `${flightNo2}`,
-                        "price": price2
-                    }],
-                "passengerList":
-                    [{
-                        "name": "张栋",
-                        "mobile": "15978561146",
-                        "passengerType": "1",
-                        "companyId": "S117325",
-                        "certificatesList": [{
-                            "certType": "身份证",
-                            "certNumber": "411527199408012773"
-                        }]
-                    }],
-                "contactList":
-                    {
-                        "name": "张栋",
-                        "mobile": "15978561146"
-                    },
-                "type": "change",
-            }
-        }, (err, res, body) => {
-            if (err) {
-                console.log(err);
-                return
-            }
-            let result;
-            try {
-                result = res.body
-            } catch (err) {
-                result = body
-            }
-            expect(result.code).to.be.equal(0);
-            done()
-        })
-    })
+    //
+    // it("订单详情", (done) => {
+    //     request({
+    //         url: url + "Order/" + order,
+    //         method: "GET",
+    //         json: true,
+    //         headers: {
+    //             userName: "JingLiZhiXiang",
+    //             password: "123456"
+    //         },
+    //     }, (err, res, body) => {
+    //         if (err) {
+    //             console.log(err);
+    //             return
+    //         }
+    //         let result;
+    //         try {
+    //             result = res.body;
+    //         } catch (err) {
+    //             result = body
+    //         }
+    //         expect(result.code).to.be.equal(0);
+    //         done()
+    //     })
+    // });
+    //
+    // /*
+    //     it("取消订单", (done) => {
+    //         request({
+    //             url: url + "Order/" + order,
+    //             method: "DELETE",
+    //             json: true,
+    //             headers: {
+    //                 userName: "JingLiZhiXiang",
+    //                 password: "123456"
+    //             },
+    //             body: {
+    //                 "type": "order",
+    //             }
+    //         }, (err, res, body) => {
+    //             if (err) {
+    //                 console.log(err);
+    //                 return
+    //             }
+    //             let result;
+    //             try {
+    //                 result = res.body
+    //             } catch (err) {
+    //                 result = body
+    //             }
+    //             expect(result.code).to.be.equal(0);
+    //             done()
+    //         })
+    //     });
+    // */
+    //
+    // it("订单列表", (done) => {
+    //     request({
+    //         url: url + "Order",
+    //         json: true,
+    //         headers: {
+    //             userName: "JingLiZhiXiang",
+    //             password: "123456"
+    //         },
+    //         method: "GET"
+    //     }, (err, res, body) => {
+    //         if (err) {
+    //             console.log(err);
+    //             return
+    //         }
+    //         let result;
+    //         try {
+    //             result = res.body
+    //         } catch (err) {
+    //             result = body
+    //         }
+    //         expect(result.code).to.be.equal(0);
+    //         done()
+    //     })
+    // });
+    //
+    // /************************************************************/
+    //
+    // it("创建改签单", (done) => {
+    //     request({
+    //         url: url + "Order",
+    //         method: "POST",
+    //         json: true,
+    //         headers: {
+    //             userName: "JingLiZhiXiang",
+    //             password: "123456"
+    //         },
+    //         body: {
+    //             "originalOrderNo": `${order}`,
+    //             "flightList":
+    //                 [{
+    //                     "flightID": `${flightID2}`,
+    //                     "departureCode": `${departureCity2}`,
+    //                     "arrivalCode": `${arrivalCity2}`,
+    //                     "depDate": `${departureDate2}`,
+    //                     "airline": `${airline2}`,
+    //                     "cabinType": `${cabinType2}`,
+    //                     "flightNo": `${flightNo2}`,
+    //                     "price": price2
+    //                 }],
+    //             "passengerList":
+    //                 [{
+    //                     "name": "张栋",
+    //                     "mobile": "15978561146",
+    //                     "passengerType": "1",
+    //                     "companyId": "S117325",
+    //                     "certificatesList": [{
+    //                         "certType": "身份证",
+    //                         "certNumber": "411527199408012773"
+    //                     }]
+    //                 }],
+    //             "contactList":
+    //                 {
+    //                     "name": "张栋",
+    //                     "mobile": "15978561146"
+    //                 },
+    //             "type": "change",
+    //         }
+    //     }, (err, res, body) => {
+    //         if (err) {
+    //             console.log(err);
+    //             return
+    //         }
+    //         let result;
+    //         try {
+    //             result = res.body
+    //         } catch (err) {
+    //             result = body
+    //         }
+    //         expect(result.code).to.be.equal(0);
+    //         done()
+    //     })
+    // })
 
     /*
     it("订购单创建退票单", (done) => {

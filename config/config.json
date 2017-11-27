@@ -11,6 +11,7 @@
     "socket_file": "${{rootDir}}/web.sock",
     "pid_file": "${{rootDir}}/tmp/server.pid",
     "meiyaUrl": "http://121.41.36.97:6005/API.svc",
+    "meiyaTrainUrl":"http://121.41.36.97:6005/APIForTrain.asmx",
     "logger": {
         "path": "${{rootDir}}/log",
         "prefix": "${{appName}}_",
