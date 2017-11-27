@@ -7,6 +7,7 @@ import app from "./app";
 import config = require("@jingli/config");
 import {serverInit, serverStart} from "@jingli/server";
 import path = require("path");
+import fs = require("fs");
 
 /* redis */
 import cache from "@jingli/cache";
@@ -26,4 +27,10 @@ serverInit({
     cluster: config.cluster,
 });
 
-serverStart();
+serverStart(function () {
+    try {
+        fs.unlinkSync(config.socket_file)
+    } catch (err) {
+        console.warn(`not found ${config.socket_file}`);
+    }
+});
