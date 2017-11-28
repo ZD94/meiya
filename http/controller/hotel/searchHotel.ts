@@ -1,7 +1,7 @@
 'use strict';
 import {AbstractController, Restful, Router, reply} from '@jingli/restful';
 import {dealLogin} from 'model/hotel/agents';
-import {searchHotel, getCityList} from 'model/hotel/search'
+import {searchHotel, getCityList, getHotelDetail} from 'model/hotel/search'
 
 @Restful()
 export class SearchHotelController extends AbstractController {
@@ -46,6 +46,18 @@ export class SearchHotelController extends AbstractController {
         try {
             data = await searchHotel(query);
             res.json(data);
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    async add(req, res, next) {
+        let query = req.body;
+        let data: any;
+
+        try {
+            data = await getHotelDetail(query);
+            res.json(data); 
         } catch(err) {
             console.log(err);
         }

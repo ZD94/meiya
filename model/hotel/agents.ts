@@ -70,7 +70,6 @@ export async function dealLogin(auth): Promise<{ code: number, msg: string, data
     let ids = await cache.read(key);
     if (!ids) {
         let result = await login(username, crypted);
-        console.log('code', result.code);
         if (result.code != 0) {
             return {
                 code: -1,
