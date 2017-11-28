@@ -79,6 +79,7 @@ export async function dealLogin(auth): Promise<{ code: number, msg: string, data
         }
         ids = result.data;
     }
+    console.log('ids', ids);
     return {
         code: 0,
         msg: 'ok',
