@@ -30,8 +30,8 @@ export async function createHotelOrder(query): Promise<ReplyData> {
             oldname: 'supplierId'
         },
         {
-            newname: 'priceList',
-            oldname: 'datePriceList'
+            newname: 'datePriceList',
+            oldname: 'priceList'
         },
         {
             newname: 'firstArriveTime',
@@ -52,8 +52,21 @@ export async function createHotelOrder(query): Promise<ReplyData> {
             oldname: 'dateNow'
         }
     ];
-    for (let item of query.datePrice) {
+    let iteChange = [
+        {
+            newname: 'outsidePassengerId',
+            oldname: 'passengerId'
+        },
+        {
+            newname: 'cnName',
+            oldname: 'passengerName'
+        }
+    ]
+    for (let item of query.datePriceList) {
        transAttributeName(item, itemChange); 
+    }
+    for (let ite of query.passengerList) {
+        transAttributeName(ite, iteChange);
     }
     transAttributeName(query, changeName);
     
@@ -66,6 +79,7 @@ export async function createHotelOrder(query): Promise<ReplyData> {
             'content-type': 'application/json'
         }
     };
+
     let datas = await proxyHttp(params);
 
     if (datas.d.code == '10000') {
@@ -74,7 +88,7 @@ export async function createHotelOrder(query): Promise<ReplyData> {
         };
         return reply(0, orderNo);
     } else {
-        return reply(502, null);
+        return reply(502, datas.d.description);
     } 
 }
 
@@ -135,6 +149,7 @@ export async function getHotelOrderInfo(query): Promise<ReplyData> {
            request: query 
         } 
     };
+    console.log('querys', query);
     let datas = await proxyHttp(params);
     let changeName = [
         {
@@ -143,7 +158,7 @@ export async function getHotelOrderInfo(query): Promise<ReplyData> {
         },
         {
             newname: 'hotelId',
-            oldname: 'hotelcode'
+            oldname: 'hotelCode'
         },
         {
             newname: 'roomId',
@@ -174,10 +189,12 @@ export async function getHotelOrderInfo(query): Promise<ReplyData> {
     ];
     
     if (datas.d.code == '10000') {
-        transAttributeName(datas.d.orderInfo, changeName);
+        // console.log('datas.d', datas.d);
         for (let item of datas.d.orderInfo.priceList) {
             transAttributeName(item, itemChange);
         }
+        transAttributeName(datas.d.orderInfo, changeName);
+        
         return reply(0, datas.d.orderInfo);
     } else {
         return reply(502, datas.d.description);
