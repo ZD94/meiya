@@ -19,6 +19,8 @@ export async function proxyHttp(params: {
         qs,
         headers: header
     };
+
+    // console.log(options);
     let data;
     if (config.fake_data) {
         let filepath = recordedData(url);

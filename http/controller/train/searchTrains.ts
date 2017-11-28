@@ -4,7 +4,7 @@ import {search} from "model/train/search"
 import {dealLogin} from "model/train/agent"
 
 @Restful()
-export class seartTrainsController extends AbstractController {
+export class searchTrainsController extends AbstractController {
     constructor() {
         super()
     }

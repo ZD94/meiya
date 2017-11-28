@@ -40,17 +40,20 @@ export async function login(userName, password): Promise<ReplyData> {
 
 /* deal login */
 export async function dealLogin(auth): Promise<{ code: number, msg: string, data?: any }> {
-    let {userName, password} = JSON.parse(decodeURIComponent(auth));
-    if (!userName || !password) {
+    // console.log("ok", auth);
+    let {username, password} = JSON.parse(decodeURIComponent(auth));
+
+    // console.log(username, password);
+    if (!username || !password) {
         return {
             code: -1,
             msg: "用户名或密码不存在"
         }
     }
-    let key = md5(userName + password);
+    let key = md5(username + password);
     let sessionId = await cache.read(key);
     if (!sessionId) {
-        let result = await login(userName, password);
+        let result = await login(username, password);
         if (result.code != 0) {
             return {
                 code: -1,
