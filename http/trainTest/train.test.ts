@@ -16,7 +16,7 @@ describe("/美亚火车票订票流程", function () {
         let str = JSON.stringify(info);
         str = encodeURIComponent(str);
         request({
-            url: url + "/seartTrains",
+            url: url + "/searchTrain",
             method: "GET",
             json: true,
             headers: {
@@ -49,7 +49,7 @@ describe("/美亚火车票订票流程", function () {
         let info = {
             "userName": "JingLiZhiXiang",
             "password": 'sapg8lYZD70C/dOtKLPJmg=='
-        }
+        };
         let str = JSON.stringify(info);
         str = encodeURIComponent(str);
 
