@@ -10,31 +10,6 @@ describe('/美亚订票流程', function () {
     let sessionId;
     this.timeout(5 * 60 * 10000);
 
-    // before("login", (done) => {
-    //     request({
-    //         url: url + "Auth",
-    //         method: 'POST',
-    //         json: true,
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: {
-    //             "userName": "JingLiZhiXiang",
-    //             "password": '123456',
-    //         }
-    //     }, function (err, res, body) {
-    //         let result;
-    //         if (!err && res.statusCode == 200) {
-    //             result = res.body;
-    //         } else {
-    //             console.log(err);
-    //         }
-    //         sessionId = result.data.sessionId;
-    //
-    //         expect(result.code).to.be.equal(0);
-    //         done()
-    //     });
-    // });
     let data, flightID, departureCity, arrivalCity, departureDate, airline, cabinType, flightNo, price;
     let data2, flightID2, departureCity2, arrivalCity2, departureDate2, airline2, cabinType2, flightNo2, price2;
     it("get /查询航班", (done) => {
@@ -58,7 +33,7 @@ describe('/美亚订票流程', function () {
             qs: {
                 "departureCode": "PEK",
                 "arrivalCode": "SHA",
-                "depDate": "2018-01-22",
+                "depDate": "2017-12-25",
                 supplier: "meiya",
                 tripType: 1
             }
@@ -73,9 +48,7 @@ describe('/美亚订票流程', function () {
             } catch (err) {
                 result = body
             }
-            console.log(result.data.data[1], "<========result");
-            data = result.data.data[1];
-            // console.log(data, "<========result");
+            data = result.data[1];
             flightID = data["flightPriceInfoList"][0].flightID;
             departureCity = data.orgAirportCode;
             arrivalCity = data.desAirportCode;
@@ -94,7 +67,6 @@ describe('/美亚订票流程', function () {
             cabinType2 = data.flightPriceInfoList[0].cabinType;
             flightNo2 = data.flightNo;
             price2 = Number(data.flightPriceInfoList[0].ticketPrice);
-
             expect(result.code).to.be.equal(0);
             done()
         })
@@ -202,30 +174,37 @@ describe('/美亚订票流程', function () {
         })
     });
     //
-    // it("订单详情", (done) => {
-    //     request({
-    //         url: url + "Order/" + order,
-    //         method: "GET",
-    //         json: true,
-    //         headers: {
-    //             userName: "JingLiZhiXiang",
-    //             password: "123456"
-    //         },
-    //     }, (err, res, body) => {
-    //         if (err) {
-    //             console.log(err);
-    //             return
-    //         }
-    //         let result;
-    //         try {
-    //             result = res.body;
-    //         } catch (err) {
-    //             result = body
-    //         }
-    //         expect(result.code).to.be.equal(0);
-    //         done()
-    //     })
-    // });
+    it("订单详情", (done) => {
+        let info = {
+            username: "JingLiZhiXiang",
+            password: "123456"
+        };
+
+        let str = JSON.stringify(info);
+        str = encodeURIComponent(str);
+        request({
+            url: url + "Order/" + order,
+            method: "GET",
+            json: true,
+            headers: {
+                auth: str,
+                supplier: "meiya"
+            },
+        }, (err, res, body) => {
+            if (err) {
+                console.log(err);
+                return
+            }
+            let result;
+            try {
+                result = res.body;
+            } catch (err) {
+                result = body
+            }
+            expect(result.code).to.be.equal(0);
+            done()
+        })
+    });
     //
     // /*
     //     it("取消订单", (done) => {

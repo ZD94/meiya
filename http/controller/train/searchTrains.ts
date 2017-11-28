@@ -4,7 +4,8 @@ import {search} from "model/train/search"
 import {dealLogin} from "model/train/agent"
 
 @Restful()
-export class searchTrainController extends AbstractController {
+
+export class searchTrainsController extends AbstractController {
     constructor() {
         super()
     }
@@ -35,7 +36,7 @@ export class searchTrainController extends AbstractController {
         let data: any;
         try {
             data = await search(req);
-            res.json(reply(0, data.data.TrainInfoList))
+            res.json(reply(data.code, data.data.TrainInfoList))
         } catch (e) {
             console.log(e);
             res.json(reply(500, null))

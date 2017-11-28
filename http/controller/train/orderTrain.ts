@@ -105,7 +105,6 @@ export class orderTrainController extends AbstractController {
         }
     }
 
-
     //订单详情
     async get (req, res, next) {
         let query = req.query;
@@ -121,8 +120,6 @@ export class orderTrainController extends AbstractController {
             }
         }
     }
-
-
 }
 
 
