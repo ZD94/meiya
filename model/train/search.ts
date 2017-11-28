@@ -4,7 +4,17 @@ import {reply, ReplyData} from "@jingli/restful"
 import cache from "@jingli/cache"
 
 export async function search(req): Promise<ReplyData> {
-    let query = req.query;
+    let query = {};
+    let param = req.params;
+    if (typeof param == 'string') {
+        param = JSON.parse(param);
+    }
+    query["FromStationName"] = param.depCity;
+    query["ToStationName"] = param.arrCity;
+    query["DepartureDate"] = param.depDate;
+    query['sessionId'] = req.query.sessionId;
+    query['userId'] = req.query.userId;
+    query['companyId'] = req.query.companyId;
     let testArr = [
         {
             newname: "FromStationName",

@@ -31,8 +31,8 @@ export class searchTrainsController extends AbstractController {
         }
         next()
     }
-
-    async find(req, res, next) {
+    @Router("/getList/:depCity/:arrCity/:depDate","GET")
+    async getList(req, res, next) {
         let data: any;
         try {
             data = await search(req);
@@ -42,5 +42,4 @@ export class searchTrainsController extends AbstractController {
             res.json(reply(500, null))
         }
     }
-
 }

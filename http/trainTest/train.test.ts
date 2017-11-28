@@ -8,42 +8,38 @@ const url = "http://localhost:3000";
 
 describe("/美亚火车票订票流程", function () {
     this.timeout(5 * 60 * 10000);
-    it("get / 查询车次", (done) => {
-        let info = {
-            "username": "JingLiZhiXiang",
-            "password": '123456'
-        };
-        let str = JSON.stringify(info);
-        str = encodeURIComponent(str);
-        request({
-            url: url + "/searchTrains",
-            method: "GET",
-            json: true,
-            headers: {
-                auth: str,
-                supplier: "meiya"
-            },
-            qs: {
-                "depCity": '北京',
-                "arrCity": '上海',
-                "depDate": '2017-12-01',
-            }
-        }, (err, res, body) => {
-            if (err) {
-                console.log(err);
-                return
-            }
-            let result;
-            try {
-                result = res.body
-            } catch (err) {
-                result = body
-            }
-            expect(result.code).to.be.equal(0);
-            done()
-        })
-    });
+    // it("get / 查询车次", (done) => {
+    //     let info = {
+    //         "username": "JingLiZhiXiang",
+    //         "password": '123456'
+    //     };
+    //     let str = JSON.stringify(info);
+    //     str = encodeURIComponent(str);
+    //     request({
+    //         url: url + "/searchTrains" + "/getList/北京/上海/2017-12-01",
+    //         method: "GET",
+    //         json: true,
+    //         headers: {
+    //             auth: str,
+    //             supplier: "meiya"
+    //         },
     //
+    //     }, (err, res, body) => {
+    //         if (err) {
+    //             console.log(err);
+    //             return
+    //         }
+    //         let result;
+    //         try {
+    //             result = res.body
+    //         } catch (err) {
+    //             result = body
+    //         }
+    //         expect(result.code).to.be.equal(0);
+    //         done()
+    //     })
+    // });
+
     // it("检查车票是否能预订", (done) => {
     //     let info = {
     //         "username": "JingLiZhiXiang",
@@ -83,12 +79,14 @@ describe("/美亚火车票订票流程", function () {
     //         done()
     //     })
     // });
+
+
     let order;
     it("创建订单", (done) => {
         let info = {
             "username": "JingLiZhiXiang",
             "password": '123456'
-        }
+        };
         let str = JSON.stringify(info);
         str = encodeURIComponent(str);
         request({
@@ -143,10 +141,10 @@ describe("/美亚火车票订票流程", function () {
             }
             expect(result.code).to.be.equal(0);
             order = result.data.OrderNo;
-            console.log(order,"<=========order");
+            console.log(order,"<=========order")
             done()
         })
-    });
+    })
     // it("提交审批", (done) => {
     //     let info = {
     //         "username": "JingLiZhiXiang",
@@ -183,6 +181,7 @@ describe("/美亚火车票订票流程", function () {
     //     })
     // })
 
+    //
     // it("取消订单", (done) => {
     //     let info = {
     //         "username": "JingLiZhiXiang",
@@ -217,41 +216,40 @@ describe("/美亚火车票订票流程", function () {
     //     })
     // })
 
-    it("订单详情",(done)=>{
-        let info = {
-            "username": "JingLiZhiXiang",
-            "password": '123456'
-        };
-        let str = JSON.stringify(info);
-        str = encodeURIComponent(str);
-        request({
-            url:url + "/orderTrain/" + order,
-            method:"GET",
-            headers:{
-                auth:str,
-                supplier:"meiya"
-            },
-            qs:{
-                "type":"order"
-            }
-        },(err,res,body)=>{
-
-            if(err){
-                console.log(err);
-                return
-            }
-            let result;
-            try{
-                result = JSON.parse(res.body)
-            }catch (err){
-                console.log(err);
-                result = body
-            }
-            console.log(result,"<=============result")
-            expect(result.code).to.be.equal(0);
-            done()
-        })
-    })
+    // it("订单详情",(done)=>{
+    //     let info = {
+    //         "username": "JingLiZhiXiang",
+    //         "password": '123456'
+    //     };
+    //     let str = JSON.stringify(info);
+    //     str = encodeURIComponent(str);
+    //     request({
+    //         url:url + "/orderTrain/" + order,
+    //         method:"GET",
+    //         headers:{
+    //             auth:str,
+    //             supplier:"meiya"
+    //         },
+    //         qs:{
+    //             "type":"order"
+    //         }
+    //     },(err,res,body)=>{
+    //         if(err){
+    //             console.log(err);
+    //             return
+    //         }
+    //         let result;
+    //         try{
+    //             result = JSON.parse(res.body)
+    //         }catch (err){
+    //             console.log(err);
+    //             result = body
+    //         }
+    //         console.log(result,"<=============result")
+    //         expect(result.code).to.be.equal(0);
+    //         done()
+    //     })
+    // })
 });
 
 

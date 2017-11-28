@@ -20,6 +20,6 @@ export async function cancelOrder(query): Promise<ReplyData> {
     if (datas.d.code == "10000") {
         return reply(0, datas.d.description)
     } else {
-        return reply(502, null)
+        return reply(502, datas.d.description)
     }
 }
