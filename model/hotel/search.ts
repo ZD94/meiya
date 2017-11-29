@@ -16,7 +16,7 @@ export async function getCityList(query): Promise<{ code: number, msg: string, d
     };
     
     let datas = await proxyHttp(params);
-    if (datas.d.cityList.length) {
+    if (datas.d.code == '10000') {
         return {
             code: 0,
             data: datas.d.cityList,
@@ -78,6 +78,42 @@ export async function searchHotel(query): Promise<ReplyData> {
             oldname: 'hotelPhone'
         }
     ];
+    
+
+    console.log(datas.d);
+    
+    console.log(JSON.stringify(datas.d.hotelInfoList));
+
+    if (datas.d.code == '10000') {
+        for (let items of datas.d.hotelInfoList) {
+        transAttributeName(items, itemsChange);
+        }
+        return reply(0, datas.d.hotelInfoList);
+    } else {
+        return reply(502, datas.d.description);
+    }
+}
+
+export async function getHotelDetail(query): Promise<ReplyData> {
+    let testArr = [
+        {
+            newname: 'hotelCode',
+            oldname: 'hotelId'
+        }
+    ];
+    transAttributeName(query, testArr);
+
+    let params = {
+        url: `${config.meiyaHotelUrl}` + "/getHotelDetail",
+        body: {
+            request: query
+        },
+        header: {
+            'content-type': 'application/json'
+        },
+        method: "POST" 
+    };
+
     let itChange = [
         {
             newname: 'priceNow',
@@ -119,24 +155,20 @@ export async function searchHotel(query): Promise<ReplyData> {
         }
     ];
 
-    console.log(datas.d);
-    
-    console.log(JSON.stringify(datas.d.hotelInfoList));
-
+    let datas = await proxyHttp(params);
     if (datas.d.code == '10000') {
-        for (let items of datas.d.hotelInfoList) {
-            for (let item of items.hotelRoomList) {
-                for (let ite of item.hotelPriceList) {
-                    for (let it of ite.priceList) {
-                        transAttributeName(it, itChange);
-                    }
-                    transAttributeName(ite, iteChange);
+        for (let item of datas.d.hotelInfo.hotelRoomList) {
+            if (!item.hotelPriceList) {continue;}
+            for (let ite of item.hotelPriceList) {
+                if (!ite.priceList) {continue;}
+                for (let it of ite.priceList) {
+                    transAttributeName(it, itChange);
                 }
-                transAttributeName(item, itemChange);
+                transAttributeName(ite, iteChange);
             }
-        transAttributeName(items, itemsChange);
+            transAttributeName(item, itemChange);
         }
-        return reply(0, datas.d.hotelInfoList);
+        return reply(0, datas.d.hotelInfo);
     } else {
         return reply(502, datas.d.description);
     }

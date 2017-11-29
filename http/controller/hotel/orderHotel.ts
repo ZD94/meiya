@@ -22,10 +22,8 @@ export class OrderHotelController extends AbstractController {
         let {auth} = req.headers;
         let result = await dealLogin(auth);
         if (result.code != 0) {
-            console.log('ooooooooooh noooooooo');
             return res.json(reply(500, null));
         }
-        console.log('haloooooooooooo');
         if (req.method == 'GET') {
             req.query.sessionId = result.data.sessionId;
             req.query.userId = result.data.userId;
@@ -41,7 +39,6 @@ export class OrderHotelController extends AbstractController {
     //订票单,退票单创建
     async add(req, res, next) {
         let query = req.body;
-        console.log('query.body', query);
         let data;
         if (query.type == 'order') {//预订
             try {
@@ -89,7 +86,6 @@ export class OrderHotelController extends AbstractController {
      //订票单,退票单详情
      async find(req, res, next) {
         let query = req.query;
-        console.log('restful', query);
         let data;
 
         if (query.type == 'order') {
