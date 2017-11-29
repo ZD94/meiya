@@ -6,7 +6,6 @@ import cache from "@jingli/cache"
 
 export async function searchFlight(query): Promise<ReplyData> {
 
-
     let testArr = [
         {
             newname: "departureDate",
@@ -23,8 +22,6 @@ export async function searchFlight(query): Promise<ReplyData> {
     ];
     let querys = transAttributeName(query, testArr);
 
-
-    console.log("searchFlight:==> ",querys)
     let params = {
         url: `${config.meiyaUrl}` + "/QueryFlights",
         body: querys,

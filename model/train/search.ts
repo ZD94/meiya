@@ -3,8 +3,8 @@ import {proxyHttp, transAttributeName} from "http/util"
 import {reply, ReplyData} from "@jingli/restful"
 import cache from "@jingli/cache"
 
-export async function search(req): Promise<ReplyData> {
-    let query = req.query;
+export async function search(query): Promise<ReplyData> {
+
     let testArr = [
         {
             newname: "FromStationName",
@@ -20,6 +20,7 @@ export async function search(req): Promise<ReplyData> {
         }
     ];
     let querys = transAttributeName(query, testArr);
+
     let params = {
         url: `${config.meiyaTrainUrl}` + '/queryTrains',
         body: {

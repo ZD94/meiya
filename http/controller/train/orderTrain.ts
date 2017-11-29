@@ -5,6 +5,9 @@ import {dealLogin} from "model/train/agent"
 import {creatOrder, orderInfo} from "model/train/order"
 import {cancelOrder} from "model/train/cancle"
 import {submitOrder} from "model/train/confirm"
+import * as moment from "moment";
+import _quarter = moment.unitOfTime._quarter;
+import {type} from "os";
 
 
 @Restful()
@@ -51,7 +54,7 @@ export class orderTrainController extends AbstractController {
             try {
                 console.log("waiting......")
             } catch (err) {
-                console.log(err)
+                console.log(err);
                 res.json(reply(500, null))
             }
         }
@@ -66,7 +69,7 @@ export class orderTrainController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await cancelOrder(query);
-                res.json(reply(data.code, data))
+                res.json(reply(data.code, data.data))
             } catch (err) {
                 console.log(err);
                 res.json(reply(500, null))
@@ -105,24 +108,29 @@ export class orderTrainController extends AbstractController {
         }
     }
 
-
     //订单详情
-    async get (req, res, next) {
-        let query = req.query;
-        let {id} = req.params;
-        query.orderNo = id;
+    @Router("/getInfo/:orderNo/:orderType","GET")
+    async getInfo (req, res, next) {
+        let query = {};
+        let param = req.params;
+        if (typeof param == 'string') {
+            param = JSON.parse(param);
+        }
+        query["orderNo"] = param.orderNo;
+        query["type"] = param.orderType;
+        query['sessionId'] = req.query.sessionId;
+        query['userId'] = req.query.userId;
+        query['companyId'] = req.query.companyId;
         let data;
-        if (query.type == "order") {
+        if (query["type"] == "order") {
             try {
                 data = await orderInfo(query);
-                res.json(reply(data.code, data.data))
+                res.json(reply(data.code, data))
             } catch (err) {
                 console.log(err)
             }
         }
     }
-
-
 }
 
 
