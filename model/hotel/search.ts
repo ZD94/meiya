@@ -50,7 +50,7 @@ export async function searchHotel(query): Promise<ReplyData> {
         },
         method: "POST" 
     };
-    console.log('query', querys);
+    // console.log('query', querys);
     let datas = await proxyHttp(params);
     let itemsChange = [
         {
@@ -80,9 +80,9 @@ export async function searchHotel(query): Promise<ReplyData> {
     ];
     
 
-    console.log(datas.d);
+    // console.log(datas.d);
     
-    console.log(JSON.stringify(datas.d.hotelInfoList));
+    // console.log(JSON.stringify(datas.d.hotelInfoList));
 
     if (datas.d.code == '10000') {
         for (let items of datas.d.hotelInfoList) {

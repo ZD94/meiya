@@ -82,7 +82,7 @@ export async function checkTicket(req): Promise<ReplyData> {
         delete datas.d.description;
     }
 
-    console.log(datas.d.code,"<================check");
+    // console.log(datas.d.code,"<================check");
     if (datas.d.code == "10000") {
         delete datas.d.code;
         return reply(0, datas.d)

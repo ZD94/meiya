@@ -22,7 +22,7 @@ export async function login(userName, password): Promise<ReplyData> {
     };
 
     let datas: any = await proxyHttp(params);
-    console.log('datas', datas);
+    // console.log('datas', datas);
 
     if (datas.d.userInfo.sessionId) {
         let ids = {
@@ -43,7 +43,7 @@ export async function login(userName, password): Promise<ReplyData> {
 
 export async function dealLogin(auth): Promise<{ code: number, msg: string, data?: any }> {
     let authStr = decodeURIComponent(auth);
-    console.log('authStr', authStr);
+    // console.log('authStr', authStr);
 
     let {username, password} = JSON.parse(authStr);
    
@@ -78,7 +78,7 @@ export async function dealLogin(auth): Promise<{ code: number, msg: string, data
         }
         ids = result.data;
     }
-    console.log('ids', ids);
+    // console.log('ids', ids);
     return {
         code: 0,
         msg: 'ok',

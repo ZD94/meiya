@@ -137,7 +137,7 @@ export class OrderController extends AbstractController {
         let param = req.params;
         query["orderNo"] = param.orderNo;
         query["type"] = param.type
-        console.log(query,"<=================getInfoQuery")
+        // console.log(query,"<=================getInfoQuery")
         let data;
         if (query.type == "order") {
             try {

@@ -64,7 +64,7 @@ export class SearchHotelController extends AbstractController {
             }
         }
 
-        console.log('queryss', query);
+        // console.log('queryss', query);
 
         let data: any;
         try {
