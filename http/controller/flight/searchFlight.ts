@@ -1,7 +1,7 @@
 'use strict';
-import { AbstractController, Restful, Router, reply } from "@jingli/restful";
-import { searchFlight } from "model/flight/search"
-import { dealLogin } from "model/flight/agent";
+import {AbstractController, Restful, Router, reply} from "@jingli/restful";
+import {searchFlight, searchFlightInfo} from "model/flight/search"
+import {dealLogin} from "model/flight/agent";
 
 
 @Restful()
@@ -15,7 +15,7 @@ export class SearchFlightController extends AbstractController {
     }
 
     async $before(req, res, next) {
-        let { auth } = req.headers;
+        let {auth} = req.headers;
         let result = await dealLogin(auth);
 
         if (result.code != 0) {
@@ -28,7 +28,8 @@ export class SearchFlightController extends AbstractController {
         }
         next()
     }
-    @Router("/getList/:departureCode/:arrivalCode/:depDate","GET")
+
+    @Router("/getList/:departureCode/:arrivalCode/:depDate", "GET")
     async getList(req, res, next) {
         let query = {};
         let param = req.params;
@@ -42,6 +43,19 @@ export class SearchFlightController extends AbstractController {
         let data: any;
         try {
             data = await searchFlight(query);
+            res.json(data);
+        } catch (err) {
+            console.log(err);
+            res.json(data);
+        }
+    }
+
+    @Router("/getFlightInfo", "POST")
+    async getFlightInfo(req, res, next) {
+        let query = req.body;
+        let data: any;
+        try {
+            data = await searchFlightInfo(query);
             res.json(data);
         } catch (err) {
             console.log(err);
