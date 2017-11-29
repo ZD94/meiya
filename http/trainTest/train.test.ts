@@ -16,7 +16,7 @@ describe("/美亚火车票订票流程", function () {
     //     let str = JSON.stringify(info);
     //     str = encodeURIComponent(str);
     //     request({
-    //         url: url + "/searchTrains" + "/getList/北京/上海/2017-12-01",
+    //         url: url + "/searchTrains" + "/getList/北京/上海/2017-12-20",
     //         method: "GET",
     //         json: true,
     //         headers: {
@@ -89,6 +89,7 @@ describe("/美亚火车票订票流程", function () {
         };
         let str = JSON.stringify(info);
         str = encodeURIComponent(str);
+        console.log(str,"<=========str");
         request({
             url: url + "/orderTrain",
             method: "POST",
@@ -99,11 +100,11 @@ describe("/美亚火车票订票流程", function () {
             },
             body: {
                 "OutSideOrderNo": '20171025002',
-                "TrainNumber": 'G1',
+                "TrainNumber": 'G101',
                 "DepStation": '北京南',
-                "DepDate": '2017-11-29 09:00',
+                "DepDate": '2017-12-10 06:43',
                 "ArrStation": '上海虹桥',
-                "ArrDate": '2017-11-29 13:28',
+                "ArrDate": '2017-12-10 12:39',
                 "PassengerNums": 1,
                 "SeatInfo": {
                     "SeatName": 209,

@@ -114,7 +114,6 @@ export class OrderController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await submitOrder(query);
-                console.log(data, "<===========qqqqqq")
                 res.json(reply(data.code, data))
             } catch (err) {
                 console.log(err);
@@ -132,10 +131,13 @@ export class OrderController extends AbstractController {
     }
 
     //订单详情
-    async get(req, res, next) {
+    @Router("/getOrderInfo/:orderNo/:type","GET")
+    async getOrderInfo(req, res, next) {
         let query = req.query;
-        let { id } = req.params;
-        query.orderNo = id;
+        let param = req.params;
+        query["orderNo"] = param.orderNo;
+        query["type"] = param.type
+        console.log(query,"<=================getInfoQuery")
         let data;
         if (query.type == "order") {
             try {
@@ -147,7 +149,7 @@ export class OrderController extends AbstractController {
             }
         } else if (query.type == "change") {
             try {
-                data = await getChangeOrderInfo(query)
+                data = await getChangeOrderInfo(query);
                 res.json(data.code, data)
             } catch (err) {
                 console.log(err)
@@ -166,15 +168,24 @@ export class OrderController extends AbstractController {
     }
 
     //订单列表
-    async find(req, res, next) {
-        let query = req.query;
+    @Router("/getOrderList/:orderType","GET")
+    async getOrderList(req, res, next) {
+        let query = {};
+        let param = req.params;
+        if (typeof param == 'string') {
+            param = JSON.parse(param);
+        }
+        query["type"] = param.type
+        query['sessionId'] = req.query.sessionId;
         let data;
-        try {
-            data = await getOrderList(query);
-            res.json(data);
-        } catch (err) {
-            console.log(err)
-            res.json(data)
+        if( query["type"] == "order"){
+            try {
+                data = await getOrderList(query);
+                res.json(data);
+            } catch (err) {
+                console.log(err);
+                res.json(data)
+            }
         }
     }
 }

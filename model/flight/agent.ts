@@ -60,7 +60,6 @@ export async function dealLogin(auth): Promise<{ code: number, msg: string, data
                 msg: "用户名或密码输入不正确"
             }
         }
-
         sessionId = result.data;
     }
 

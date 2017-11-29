@@ -3,18 +3,8 @@ import {proxyHttp, transAttributeName} from "http/util"
 import {reply, ReplyData} from "@jingli/restful"
 import cache from "@jingli/cache"
 
-export async function search(req): Promise<ReplyData> {
-    let query = {};
-    let param = req.params;
-    if (typeof param == 'string') {
-        param = JSON.parse(param);
-    }
-    query["FromStationName"] = param.depCity;
-    query["ToStationName"] = param.arrCity;
-    query["DepartureDate"] = param.depDate;
-    query['sessionId'] = req.query.sessionId;
-    query['userId'] = req.query.userId;
-    query['companyId'] = req.query.companyId;
+export async function search(query): Promise<ReplyData> {
+
     let testArr = [
         {
             newname: "FromStationName",
@@ -30,6 +20,7 @@ export async function search(req): Promise<ReplyData> {
         }
     ];
     let querys = transAttributeName(query, testArr);
+
     let params = {
         url: `${config.meiyaTrainUrl}` + '/queryTrains',
         body: {

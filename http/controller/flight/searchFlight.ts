@@ -28,9 +28,17 @@ export class SearchFlightController extends AbstractController {
         }
         next()
     }
-
-    async find(req, res, next) {
-        let query = req.query;
+    @Router("/getList/:departureCode/:arrivalCode/:depDate","GET")
+    async getList(req, res, next) {
+        let query = {};
+        let param = req.params;
+        if (typeof param == 'string') {
+            param = JSON.parse(param);
+        }
+        query["departureCity"] = param.departureCode;
+        query["arrivalCity"] = param.arrivalCode;
+        query["departureDate"] = param.depDate;
+        query['sessionId'] = req.query.sessionId;
         let data: any;
         try {
             data = await searchFlight(query);

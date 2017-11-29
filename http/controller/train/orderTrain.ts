@@ -125,7 +125,7 @@ export class orderTrainController extends AbstractController {
         if (query["type"] == "order") {
             try {
                 data = await orderInfo(query);
-                res.json(reply(data.code, data.code))
+                res.json(reply(data.code, data))
             } catch (err) {
                 console.log(err)
             }
