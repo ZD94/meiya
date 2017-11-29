@@ -19,6 +19,10 @@ import router from "./http";
 
 app.get("/test", (req, res, next) => {
     console.log("test has been called.");
+    console.log(req.query);
+    console.log(req.body);
+    logger.info(req.query);
+    logger.info(req.body);
     res.send("test ok");
 });
 
