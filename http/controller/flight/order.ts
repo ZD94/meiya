@@ -175,7 +175,7 @@ export class OrderController extends AbstractController {
         if (typeof param == 'string') {
             param = JSON.parse(param);
         }
-        query["type"] = param.type
+        query["type"] = param.orderType;
         query['sessionId'] = req.query.sessionId;
         let data;
         if( query["type"] == "order"){

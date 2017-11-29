@@ -56,7 +56,6 @@ export class searchTrainsController extends AbstractController {
         }
     }
 
-
     @Router("/getInfo","POST")
     async geiInfo(req, res, next) {
         let query = req.body;
