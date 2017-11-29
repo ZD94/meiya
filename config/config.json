@@ -35,5 +35,5 @@
     },
     "tmckey": "jingli2017",
     "AES": "tmc-meiya",
-    "meiyaHotelUrl": "http://121.41.36.97:6005/APIForTrain.asmx"
+    "meiyaHotelUrl": "http://121.41.36.97:6005/APIForHotel.asmx"
 }
