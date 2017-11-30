@@ -37,6 +37,7 @@ export async function creatOrder(query): Promise<ReplyData> {
         }
     ];
     transAttributeName(query.contactList, contactListNewName);
+    console.log(query,'<==================ppppppppp');
     let datas;
     let params = {
         url: `${config.meiyaUrl}` + "/CreateOrder",
@@ -48,7 +49,7 @@ export async function creatOrder(query): Promise<ReplyData> {
 
     };
     datas = await proxyHttp(params);
-
+    console.log(datas,"<==========datasssssssss");
     if (datas.code == "10000") {
         let orderNos = {
             orderNos: datas.orderNos

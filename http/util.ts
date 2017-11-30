@@ -20,7 +20,7 @@ export async function proxyHttp(params: {
         headers: header
     };
 
-    // console.log(options);
+    console.log(options.body,"<===============options");
     let data;
     if (config.fake_data) {
         let filepath = recordedData(url);
@@ -43,7 +43,7 @@ export async function proxyHttp(params: {
             recordedData(url, data);
         }
     }
-    console.log(data, "<===========data");
+    // console.log(data, "<===========data");
     return data;
 }
 
