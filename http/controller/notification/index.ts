@@ -18,6 +18,15 @@ export class MYNotificationController extends AbstractController {
         next();
     }
 
+    async find(req, res, next){
+
+        res.json({
+            "msg":"ok",
+            code:0,
+            data:req.query || {}
+        })
+    }
+
     async add(req, res, next) {
         let query = req.body;
         let data: any;
