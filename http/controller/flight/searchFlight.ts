@@ -56,6 +56,7 @@ export class SearchFlightController extends AbstractController {
         let data: any;
         try {
             data = await searchFlightInfo(query);
+            console.log(data,"<=================getFlightInfoData")
             res.json(data);
         } catch (err) {
             console.log(err);

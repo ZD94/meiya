@@ -85,6 +85,7 @@ export async function searchFlightInfo(query): Promise<ReplyData> {
         }
     ];
     let querys = transAttributeName(query, testArr);
+    console.log(querys,"<======================获取单个航班信息参数")
     let params = {
         url: `${config.meiyaUrl}` + "/QueryFlights",
         body: querys,
@@ -95,7 +96,6 @@ export async function searchFlightInfo(query): Promise<ReplyData> {
     };
     let datas;
     datas = await proxyHttp(params);
-
     if (datas.code == "10000") {
         let changeName = [
             {
@@ -129,6 +129,7 @@ export async function searchFlightInfo(query): Promise<ReplyData> {
                 items.price = items.ticketPrice;
             }
         }
+        console.log(flightInfo,"<=========================航班信息返回")
         return reply(0, flightInfo || []);
     } else {
         return reply(502, null);

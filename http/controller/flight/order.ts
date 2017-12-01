@@ -47,8 +47,10 @@ export class OrderController extends AbstractController {
         let data;
         if (query.type == "order") {
             try {
+                console.log(query,"<===============kkkk")
                 data = await creatOrder(query);
-                res.json(data);
+                console.log(data,"<===========================lllllllll")
+                res.json(data)
             } catch (err) {
                 console.log(err);
                 res.json(reply(500, null))

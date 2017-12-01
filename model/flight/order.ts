@@ -37,7 +37,7 @@ export async function creatOrder(query): Promise<ReplyData> {
         }
     ];
     transAttributeName(query.contactList, contactListNewName);
-    console.log(query,'<==================ppppppppp');
+    console.log(query,'<==================机票创建订单请求参数');
     let datas;
     let params = {
         url: `${config.meiyaUrl}` + "/CreateOrder",
@@ -49,14 +49,14 @@ export async function creatOrder(query): Promise<ReplyData> {
 
     };
     datas = await proxyHttp(params);
-    console.log(datas,"<==========datasssssssss");
+    console.log(datas,"<===================创建机票订单美亚返回");
     if (datas.code == "10000") {
         let orderNos = {
             orderNos: datas.orderNos
         };
         return reply(0, orderNos)
     } else {
-        return reply(502, null);
+        return reply(502, datas);
     }
 }
 
