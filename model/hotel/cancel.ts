@@ -16,8 +16,12 @@ export async function cancelHotelOrder(query): Promise<ReplyData> {
         method: "POST"
     };
     let datas = await proxyHttp(params);
+    let res = {
+        statusCode: datas.d.code,
+        result: datas.d.description
+    };
     if (datas.d.code == '10000') {
-        return reply(0, datas.d.description);
+        return reply(0, res);
     } else {
         return reply(502, datas.d.description);
     }
@@ -36,8 +40,13 @@ export async function cancelHotelReturnOrder(query): Promise<ReplyData> {
         method: "POST"
     }; 
     let datas = await proxyHttp(params);
+    let res = {
+        statusCode: datas.d.code,
+        result: datas.d.description
+    };
+
     if (datas.d.code == '10000') {
-        return reply(0, datas.d.description);
+        return reply(0, res);
     } else {
         return reply(502, datas.d.description);
     }
