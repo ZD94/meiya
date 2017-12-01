@@ -14,6 +14,7 @@ export async function submitOrder(query): Promise<ReplyData> {
     };
     let datas;
     datas = await proxyHttp(params);
+    console.log(datas,"<=============datas");
     if (datas.code == '10000') {
         return reply(0, datas.description);
     } else {
@@ -32,7 +33,6 @@ export async function submitReturnOrder(query): Promise<ReplyData> {
     };
     let datas;
     datas = await proxyHttp(params);
-
     if (datas.code == "10000") {
         return reply(0, datas)
     } else {

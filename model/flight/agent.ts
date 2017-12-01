@@ -40,7 +40,6 @@ export async function login(userName, password): Promise<ReplyData> {
 
 /* deal login */
 export async function dealLogin(auth): Promise<{ code: number, msg: string, data?: any }> {
-
     let {username, password} = JSON.parse(decodeURIComponent(auth));
     if (!username || !password) {
         return {

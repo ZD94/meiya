@@ -2,7 +2,7 @@
 
 import {AbstractController, Restful, Router, reply} from "@jingli/restful"
 import {dealLogin} from "model/train/agent"
-import {creatOrder, orderInfo} from "model/train/order"
+import {creatOrder, orderInfo,orderList} from "model/train/order"
 import {cancelOrder} from "model/train/cancle"
 import {submitOrder} from "model/train/confirm"
 import * as moment from "moment";
@@ -109,8 +109,8 @@ export class orderTrainController extends AbstractController {
     }
 
     //订单详情
-    @Router("/getInfo/:orderNo/:orderType","GET")
-    async getInfo (req, res, next) {
+    @Router("/getInfo/:orderNo/:orderType", "GET")
+    async getInfo(req, res, next) {
         let query = {};
         let param = req.params;
         if (typeof param == 'string') {
@@ -131,6 +131,21 @@ export class orderTrainController extends AbstractController {
             }
         }
     }
+    //订单列表
+    // @Router("/getOrderList", "POST")
+    // async getOrderList(req, res, next) {
+    //    let query = req.body;
+    //     let data;
+    //     if (query.type == "order") {
+    //         try {
+    //            data = await orderList(query);
+    //             res.json(reply(data.code,data))
+    //         } catch (err) {
+    //             console.log(err)
+    //         }
+    //     }
+    // }
+
 }
 
 

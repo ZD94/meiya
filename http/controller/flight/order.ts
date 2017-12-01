@@ -1,11 +1,19 @@
 'use strict';
 
-import { AbstractController, Restful, Router, reply } from "@jingli/restful";
-import { proxyHttp, transAttributeName } from '../../util';
-import { creatOrder, createChangeOrder, createReturnOrder, getOrderList, getOrderInfo, getReturnOrderInfo, getChangeOrderInfo } from "model/flight/order";
-import { cancelOrder, cancelChangeOrder, cancelReturnOrder } from "model/flight/cancle";
-import { submitOrder, submitReturnOrder } from "model/flight/confirm";
-import { dealLogin } from "model/flight/agent";
+import {AbstractController, Restful, Router, reply} from "@jingli/restful";
+import {proxyHttp, transAttributeName} from '../../util';
+import {
+    creatOrder,
+    createChangeOrder,
+    createReturnOrder,
+    getOrderList,
+    getOrderInfo,
+    getReturnOrderInfo,
+    getChangeOrderInfo
+} from "model/flight/order";
+import {cancelOrder, cancelChangeOrder, cancelReturnOrder} from "model/flight/cancle";
+import {submitOrder, submitReturnOrder} from "model/flight/confirm";
+import {dealLogin} from "model/flight/agent";
 
 @Restful()
 export class OrderController extends AbstractController {
@@ -18,7 +26,8 @@ export class OrderController extends AbstractController {
     }
 
     async $before(req, res, next) {
-        let { auth } = req.headers;
+
+        let {auth} = req.headers;
         let result = await dealLogin(auth);
         if (result.code != 0) {
             return res.json(reply(500, null));
@@ -72,7 +81,7 @@ export class OrderController extends AbstractController {
     //订单，改签单，退票单的取消
     async delete(req, res, next) {
         let query = req.body;
-        let { id } = req.params;
+        let {id} = req.params;
         query.orderNo = id;
         let data;
 
@@ -99,7 +108,7 @@ export class OrderController extends AbstractController {
                 data = await cancelReturnOrder(query);
                 res.json(data)
             } catch (err) {
-                console.log(err)
+                console.log(err);
                 res.json(reply(500, null))
             }
         }
@@ -108,13 +117,13 @@ export class OrderController extends AbstractController {
     //提交订票单、改签单、退票单审批
     async update(req, res, next) {
         let query = req.body;
-        let { id } = req.params;
+        let {id} = req.params;
         query.orderNo = id;
         let data;
         if (query.type == "order") {
             try {
                 data = await submitOrder(query);
-                res.json(reply(data.code, data))
+                res.json(reply(data.code, data.data))
             } catch (err) {
                 console.log(err);
                 res.json(reply(500, null))
@@ -131,13 +140,13 @@ export class OrderController extends AbstractController {
     }
 
     //订单详情
-    @Router("/getOrderInfo/:orderNo/:type","GET")
+    @Router("/getOrderInfo/:orderNo/:type", "GET")
     async getOrderInfo(req, res, next) {
         let query = req.query;
         let param = req.params;
         query["orderNo"] = param.orderNo;
+
         query["type"] = param.type
-        // console.log(query,"<=================getInfoQuery")
         let data;
         if (query.type == "order") {
             try {
@@ -164,11 +173,10 @@ export class OrderController extends AbstractController {
                 res.json(reply(500, null))
             }
         }
-
     }
 
     //订单列表
-    @Router("/getOrderList/:orderType","GET")
+    @Router("/getOrderList/:orderType", "GET")
     async getOrderList(req, res, next) {
         let query = {};
         let param = req.params;
@@ -178,7 +186,7 @@ export class OrderController extends AbstractController {
         query["type"] = param.orderType;
         query['sessionId'] = req.query.sessionId;
         let data;
-        if( query["type"] == "order"){
+        if (query["type"] == "order") {
             try {
                 data = await getOrderList(query);
                 res.json(data);
