@@ -36,10 +36,9 @@ export async function proxyHttp(params: {
             return null;
         }
     }
+
     if (config.recordData) {
-        if (data.code == "10000") {
-            recordedData(url, data);
-        }
+        recordedData(url, data);
     }
     return data;
 }
@@ -126,7 +125,8 @@ export async function getInfo(url, id, orderNo) {
 
 function recordedData(url: string, data?: object) {
     let reg = /\/|\:/ig;
-    let filename = url.replace(reg, "") + ".json";
+    let randomStr = Math.random().toString(36).substr(2, 5);
+    let filename = [url.replace(reg, ""), randomStr, "json"].join(".");
     let filepath = path.join(process.cwd(), "test/data", filename);
     if (!data) {
         return filepath;
