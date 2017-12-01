@@ -149,7 +149,7 @@ export async function getHotelOrderInfo(query): Promise<ReplyData> {
            request: query 
         } 
     };
-    console.log('querys', query);
+    // console.log('querys', query);
     let datas = await proxyHttp(params);
     let changeName = [
         {

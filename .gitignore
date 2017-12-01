@@ -8,3 +8,4 @@ dist/
 package-lock.json
 test/data/*.json
 .DS_Store
+.vscode

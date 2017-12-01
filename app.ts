@@ -19,11 +19,14 @@ import router from "./http";
 
 app.get("/test", (req, res, next) => {
     console.log("test has been called.");
+    console.log(req.query);
+    console.log(req.body);
+    logger.info(req.query);
+    logger.info(req.body);
     res.send("test ok");
 });
 
 app.use((req, res, next) => {
-    logger.info(req.method, req.url, process.title);
     // let { tmckey } = req.headers;
     // if (tmckey != config.tmckey) {
     //     return res.sendStatus(403);
@@ -31,12 +34,22 @@ app.use((req, res, next) => {
     console.log(req.headers);
     console.log(req.query);
     console.log(req.body);
-
-
     next();
 });
+
+app.use(usingTime);
 app.use(router);
 
+function usingTime(req, res, next){
+    req.enterTime = Date.now();
+    res.json = function(data){
+        res.setHeader('Content-Type', 'application/json');
+        res.write(JSON.stringify(data));
+        logger.info(req.method, req.url, process.title, Date.now() - req.enterTime, "ms");
+        res.end();
+    }
 
+    next();
+}
 
 export default app;
