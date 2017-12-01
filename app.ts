@@ -10,7 +10,7 @@ import Logger from "@jingli/logger";
 var logger = new Logger('main');
 
 let app = express();
-app.use(conn_timeout("15s"));
+app.use(conn_timeout("30s"));
 app.use(bodyParser.json({ limit: '8mb' }));
 app.use(bodyParser.urlencoded({ limit: '8mb', extended: true }));
 app.use(express.static(path.join(__dirname, "www")));

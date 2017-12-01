@@ -2,7 +2,7 @@
 
 import {AbstractController, Restful, Router, reply} from "@jingli/restful";
 import {proxyHttp, transAttributeName} from 'http/util';
-import {createHotelOrder, createHotelReturnOrder, getHotelOrderInfo, getHotelReturnOrderInfo} from 'model/hotel/order';
+import {createHotelOrder, createHotelReturnOrder, getHotelOrderInfo, getHotelReturnOrderInfo, createHotelOrderFake} from 'model/hotel/order';
 import {submitHotelOrder, submitHotelReturnOrder} from 'model/hotel/confirm';
 import {cancelHotelOrder, cancelHotelReturnOrder} from 'model/hotel/cancel';
 import {dealLogin} from 'model/hotel/agents';
@@ -42,7 +42,7 @@ export class OrderHotelController extends AbstractController {
         let data;
         if (query.type == 'order') {//预订
             try {
-                data = await createHotelOrder(query);
+                data = await createHotelOrderFake(query);
                 res.json(data);
             } catch(err) {
                 console.log(err);
@@ -62,7 +62,7 @@ export class OrderHotelController extends AbstractController {
     async update(req, res, next) {
         let query = req.body;
         let {id} = req.params;
-        query.OrderNo = id;
+        query['OrderNo'] = id;
         let data;
 
         if (query.type == 'order') {
@@ -84,8 +84,10 @@ export class OrderHotelController extends AbstractController {
     }
 
      //订票单,退票单详情
-     async find(req, res, next) {
+     async get(req, res, next) {
         let query = req.query;
+        let {id} = req.params;
+        query['OrderNo'] = id;
         let data;
 
         if (query.type == 'order') {
@@ -110,7 +112,7 @@ export class OrderHotelController extends AbstractController {
     async delete(req, res, next) {
         let query = req.body;
         let {id} = req.params;
-        query.OrderNo = id;
+        query['OrderNo'] = id;
         let data;
 
         if (query.type == 'order') {
