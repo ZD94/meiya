@@ -15,6 +15,7 @@ export class MYNotificationController extends AbstractController {
 
     async $before(req, res, next) {
         num++;
+        next();
     }
 
     async add(req, res, next) {
