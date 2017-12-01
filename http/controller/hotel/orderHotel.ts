@@ -3,7 +3,7 @@
 import {AbstractController, Restful, Router, reply} from "@jingli/restful";
 import {proxyHttp, transAttributeName} from 'http/util';
 import {createHotelOrder, createHotelReturnOrder, getHotelOrderInfo, getHotelReturnOrderInfo, createHotelOrderFake} from 'model/hotel/order';
-import {submitHotelOrder, submitHotelReturnOrder} from 'model/hotel/confirm';
+import {submitHotelOrder, submitHotelReturnOrder, submitHotelOrderFake} from 'model/hotel/confirm';
 import {cancelHotelOrder, cancelHotelReturnOrder} from 'model/hotel/cancel';
 import {dealLogin} from 'model/hotel/agents';
 import {submitReturnOrder} from 'model/flight/confirm';
@@ -67,7 +67,7 @@ export class OrderHotelController extends AbstractController {
 
         if (query.type == 'order') {
             try {
-                data = await submitHotelOrder(query);
+                data = await submitHotelOrderFake(query);
                 res.json(data);
             } catch(err) {
                 console.log(err);
