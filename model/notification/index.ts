@@ -38,7 +38,7 @@ export async function handleMYNotification(query, num): Promise<{code: string, d
     let crypted = cipher.digest('hex');
     
     if (crypted == password) { //校验成功
-        fs.writeFileSync(`log/MYresult_${num}.json`, JSON.stringify(data), 'utf-8'); 
+        fs.writeFileSync(`test/MYresult_${num}.json`, JSON.stringify(data), 'utf-8'); 
         return {code: '10000', description: '通知成功'};
     } else {
         console.log('crypted======>', crypted);
