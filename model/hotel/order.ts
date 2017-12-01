@@ -2,6 +2,14 @@ let config = require('@jingli/config');
 import {proxyHttp, transAttributeName, getInfo} from 'http/util';
 import {reply, ReplyData} from '@jingli/restful';
 
+// create 
+export async function createHotelOrderFake(query): Promise<ReplyData> {
+    let orderNo = {
+        orderNo: 'HR6666666666'
+    };
+    return reply(0, orderNo);
+}
+
 // 创建酒店订单
 export async function createHotelOrder(query): Promise<ReplyData> {
     let changeName = [
@@ -79,7 +87,8 @@ export async function createHotelOrder(query): Promise<ReplyData> {
             'content-type': 'application/json'
         }
     };
-
+    
+    console.log('params', JSON.stringify(params));
     let datas = await proxyHttp(params);
 
     if (datas.d.code == '10000') {
@@ -88,6 +97,7 @@ export async function createHotelOrder(query): Promise<ReplyData> {
         };
         return reply(0, orderNo);
     } else {
+        console.log('datas.d', datas.d);
         return reply(502, datas.d.description);
     } 
 }
@@ -134,7 +144,7 @@ export async function createHotelReturnOrder(query): Promise<ReplyData> {
         };
         return reply(0, orderNo);
     } else {
-        return reply(502, null);
+        return reply(502, datas.d.description);
     }
 }
 
