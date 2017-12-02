@@ -31,6 +31,8 @@ app.use((req, res, next) => {
     // if (tmckey != config.tmckey) {
     //     return res.sendStatus(403);
     // }
+
+    console.log("****************** ENTER  *****************")
     console.log(req.headers);
     console.log(req.query);
     console.log(req.body);

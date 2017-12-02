@@ -28,9 +28,11 @@ serverInit({
 });
 
 serverStart(function () {
-    try {
-        fs.unlinkSync(config.socket_file)
-    } catch (err) {
-        console.warn(`not found ${config.socket_file}`);
+    if(typeof config.socket_file == "number" || /^\d+$/.test(config.socket_file)){
+        return;
+    }
+
+    if( fs.existsSync(config.socket_file) ){
+        fs.unlinkSync(config.socket_file);
     }
 });
