@@ -40,6 +40,8 @@ export async function proxyHttp(params: {
     if (config.recordData) {
         recordedData(url, data);
     }
+
+    console.log("request result =======>", data);
     return data;
 }
 
