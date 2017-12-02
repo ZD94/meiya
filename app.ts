@@ -3,10 +3,10 @@ let conn_timeout = require("connect-timeout");
 let bodyParser = require("body-parser");
 let path = require("path");
 let config = require("@jingli/config");
+let moment = require("moment");
 
 /* logger */
 import Logger from "@jingli/logger";
-
 var logger = new Logger('main');
 
 let app = express();
@@ -34,6 +34,7 @@ app.use((req, res, next) => {
     console.log(req.headers);
     console.log(req.query);
     console.log(req.body);
+    logger.info(moment().format("YYYY-MM-DD hh:mm:ss"),"  ", req.method, req.url);
     next();
 });
 
@@ -45,7 +46,7 @@ function usingTime(req, res, next){
     res.json = function(data){
         res.setHeader('Content-Type', 'application/json');
         res.write(JSON.stringify(data));
-        logger.info(req.method, req.url, process.title, Date.now() - req.enterTime, "ms");
+        logger.info(req.method, req.url, process.title, (Date.now() - req.enterTime) / 1000, "s");
         res.end();
     }
 
