@@ -122,6 +122,10 @@ export async function getInfo(url, id, orderNo) {
         });
     })
 }
+//处理函数
+export async function handle(req,orderNo){
+
+}
 
 function recordedData(url: string, data?: object) {
     let reg = /\/|\:/ig;

@@ -1,7 +1,7 @@
 'use strict';
 
 import {AbstractController, Restful, Router, reply} from "@jingli/restful";
-import {proxyHttp, transAttributeName} from '../../util';
+import {proxyHttp, transAttributeName,handle} from '../../util';
 import {
     creatOrder,
     createChangeOrder,
@@ -47,9 +47,8 @@ export class OrderController extends AbstractController {
         let data;
         if (query.type == "order") {
             try {
-                console.log(query,"<===============kkkk")
                 data = await creatOrder(query);
-                console.log(data,"<===========================lllllllll")
+                await handle(req,data.orderNo);
                 res.json(data)
             } catch (err) {
                 console.log(err);
@@ -60,7 +59,7 @@ export class OrderController extends AbstractController {
                 data = await createChangeOrder(query);
                 res.json(data);
             } catch (err) {
-                console.log(err)
+                console.log(err);
                 res.json(reply(500, null))
             }
         } else if (query.type == "return") {

@@ -17,7 +17,17 @@ export async function creatOrder(query): Promise<ReplyData> {
         delete query.flightList[i].departureCode
     }
     for (let k = 0; k < query.passengerList.length; k++) {
+        // let str = /[\u4e00-\u9fa5]\n/;
+        // console.log(query.passengerList[k].name,"<=============333333333")
+        // if(str.test(query.passengerList[k].name)){
+        //     console.log(111111111)
+        //     query.passengerList[k].cnName = query.passengerList[k].name;
+        // }else {
+        //     console.log(222222222)
+        //     query.passengerList[k].enName = query.passengerList[k].name;
+        // }
         query.passengerList[k].cnName = query.passengerList[k].name;
+        // console.log(query.passengerList[k],"<====================query.passengerList[k].name")
         delete query.passengerList[k].name;
         if (query.passengerList[k].passengerType == 1) {
             query.passengerList[k].passengerType = "成人"
@@ -37,7 +47,6 @@ export async function creatOrder(query): Promise<ReplyData> {
         }
     ];
     transAttributeName(query.contactList, contactListNewName);
-    console.log(query,'<==================机票创建订单请求参数');
     let datas;
     let params = {
         url: `${config.meiyaUrl}` + "/CreateOrder",
@@ -49,14 +58,15 @@ export async function creatOrder(query): Promise<ReplyData> {
 
     };
     datas = await proxyHttp(params);
-    console.log(datas,"<===================创建机票订单美亚返回");
+
+
     if (datas.code == "10000") {
         let orderNos = {
             orderNos: datas.orderNos
         };
         return reply(0, orderNos)
     } else {
-        return reply(502, datas);
+        return reply(502, datas.description);
     }
 }
 
@@ -172,7 +182,7 @@ export async function getOrderInfo(query): Promise<ReplyData> {
     if (datas.code == '10000') {
         return reply(0, datas.orderInfo);
     } else {
-        return reply(502, null);
+        return reply(502, datas.description);
     }
 }
 
@@ -213,7 +223,6 @@ export async function getChangeOrderInfo(query): Promise<ReplyData> {
     } else {
         return reply(502, null);
     }
-
-
-
 }
+
+

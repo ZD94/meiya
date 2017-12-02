@@ -63,7 +63,7 @@ export async function searchFlight(query): Promise<ReplyData> {
         }
         return reply(0, datas.flightInfoList || []);
     } else {
-        return reply(502, null);
+        return reply(502, datas.description);
     }
 }
 

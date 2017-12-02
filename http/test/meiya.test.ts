@@ -119,7 +119,6 @@ describe('/美亚订票流程', function () {
                         "mobile": "15978561146"
                     },
                 "type": "order",
-                // "sessionId": sessionId
             }
         }, (err, res, body) => {
             if (err) {
