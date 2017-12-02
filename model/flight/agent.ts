@@ -40,8 +40,16 @@ export async function login(userName, password): Promise<ReplyData> {
 
 /* deal login */
 export async function dealLogin(auth): Promise<{ code: number, msg: string, data?: any }> {
-    let {username, password} = JSON.parse(decodeURIComponent(auth));
-    if (!username || !password) {
+    let username, password;
+    let authObj = decodeURIComponent(auth);
+    try{
+        authObj = JSON.parse(authObj);
+        username = authObj["username"];
+        password = authObj["password"];
+        if (!username || !password){
+            throw new Error("auth 解析错误");
+        }
+    }catch(e){
         return {
             code: -1,
             msg: "用户名或密码不存在"
