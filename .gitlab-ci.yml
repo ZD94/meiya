@@ -63,7 +63,7 @@ deploy:master:
     - docker pull $DOCKER_CI_NAME
     - docker tag $DOCKER_CI_NAME $DOCKER_BRANCH_NAME
     - docker push $DOCKER_BRANCH_NAME
-    - echo deploy to ts-project-template.com
+    - echo deploy to http://l.jingli365.com/proj/tmc-meiya/test
     - ssh test@l.jingli365.com /home/test/bin/docker_start.sh $DOCKER_REG $DOCKER_NAME $CI_COMMIT_REF_SLUG
 
 
@@ -80,9 +80,24 @@ deploy:test:
     - docker pull $DOCKER_CI_NAME
     - docker tag $DOCKER_CI_NAME $DOCKER_BRANCH_NAME
     - docker push $DOCKER_BRANCH_NAME
-    - echo deploy to ts-project-template.com
+    - echo deploy to http://t.jingli365.com/proj/tmc-meiya/test
     - ssh test@l.jingli365.com /home/test/bin/docker_start.sh $DOCKER_REG $DOCKER_NAME $CI_COMMIT_REF_SLUG
 
+
+deploy:release:
+  stage: deploy
+  only:
+    - /^release$/
+  environment:
+    name: test
+    url: http://j.jingli365.com/proj/svr-tmc/test
+  script:
+    - docker login -u dockeruser -p $DOCKER_PASSWD $DOCKER_REG
+    - docker pull $DOCKER_CI_NAME
+    - docker tag $DOCKER_CI_NAME $DOCKER_BRANCH_NAME
+    - docker push $DOCKER_BRANCH_NAME
+    - echo deploy to http://j.jingli365.com/proj/svr-tmc/test
+    - ssh test@l.jingli365.com /home/test/bin/docker_start.sh $DOCKER_REG $DOCKER_NAME $CI_COMMIT_REF_SLUG
 
 
 deploy:tester:
