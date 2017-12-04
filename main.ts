@@ -12,7 +12,7 @@ import fs = require("fs");
 /* redis */
 import cache from "@jingli/cache";
 
-cache.init({redis_conf: config.redis.url, prefix: 'tmc:cache:' + config.appName});
+cache.init({redis_conf: config.redis.url, prefix: 'tmc-meiya:cache:' + config.appName});
 
 /* logger */
 import Logger from "@jingli/logger";
