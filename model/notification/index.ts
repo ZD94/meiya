@@ -2,7 +2,11 @@ let config = require('@jingli/config');
 let crypto = require('crypto');
 let fs = require('fs');
 let path = require('path');
+let moment = require("moment");
 import {transAttributeName} from 'http/util';
+import Logger from "@jingli/logger";
+var logger = new Logger('main');
+
 
 let key = '4f3f29eb05ee4cda81528647e91608d4';
 
@@ -39,7 +43,7 @@ export async function handleMYNotification(query, num): Promise<{code: string, d
     let crypted = cipher.digest('hex');
     
     if (crypted == password) { //校验成功
-        fs.writeFileSync(`test/meiya/MYresult_${num}.json`, JSON.stringify(data), 'utf-8'); 
+        logger.info(moment().format("YYYY-MM-DD hh:mm:ss"), " 美亚回调事件  ", data);
         return {code: '10000', description: '通知成功'};
     } else {
         console.log('crypted======>', crypted);
