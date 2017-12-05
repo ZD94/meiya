@@ -58,7 +58,7 @@ export async function search(query): Promise<ReplyData> {
                 delete item.ToPassingType
             }
         }
-        return reply(0, datas.d)
+        return reply(0, datas.d.TrainInfoList)
     } else {
         return reply(502, datas.d.description)
     }
