@@ -59,10 +59,3 @@ export async function cancelReturnOrder(query): Promise<ReplyData> {
         return reply(502, datas.description)
     }
 }
-
-
-
-
-
-
-
