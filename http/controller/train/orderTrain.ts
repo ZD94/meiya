@@ -2,7 +2,7 @@
 
 import {AbstractController, Restful, Router, reply} from "@jingli/restful"
 import {dealLogin} from "model/train/agent"
-import {creatOrder, orderInfo,orderList} from "model/train/order"
+import {creatOrder, orderInfo, orderList} from "model/train/order"
 import {cancelOrder} from "model/train/cancle"
 import {submitOrder} from "model/train/confirm"
 import * as moment from "moment";
@@ -45,7 +45,7 @@ export class orderTrainController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await creatOrder(query);
-                res.json(reply(data.code, data.data));
+                res.json(data);
             } catch (err) {
                 console.log(err);
                 res.json(reply(500, null))
@@ -69,7 +69,7 @@ export class orderTrainController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await cancelOrder(query);
-                res.json(reply(data.code, data.data))
+                res.json(data)
             } catch (err) {
                 console.log(err);
                 res.json(reply(500, null))
@@ -93,7 +93,7 @@ export class orderTrainController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await submitOrder(query);
-                res.json(reply(data.code, data.code))
+                res.json(data)
             } catch (err) {
                 console.log(err);
                 res.json(500, null)
@@ -125,12 +125,14 @@ export class orderTrainController extends AbstractController {
         if (query["type"] == "order") {
             try {
                 data = await orderInfo(query);
-                res.json(reply(data.code, data))
+                res.json(data)
             } catch (err) {
-                console.log(err)
+                console.log(err);
+                res.json(data)
             }
         }
     }
+
     //订单列表
     // @Router("/getOrderList", "POST")
     // async getOrderList(req, res, next) {

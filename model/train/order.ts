@@ -68,7 +68,7 @@ export async function creatOrder(query): Promise<ReplyData> {
         "userId": `${userId}`,
         "sessionId": `${sessionId}`
     };
-    console.log("=============>",checkQuerys,"<=====================检查车票能否预订参数")
+    console.log("=============>", checkQuerys, "<=====================检查车票能否预订参数")
     let params = {
         url: `${config.meiyaTrainUrl}` + "/checkTrainIsBookable",
         body: {
@@ -81,7 +81,7 @@ export async function creatOrder(query): Promise<ReplyData> {
     }
     let datas;
     datas = await proxyHttp(params);
-    console.log(datas,"<====================检查车票返回结果")
+    console.log(datas, "<====================检查车票返回结果")
     if (datas.d.IsBook) {
         let testArr = [
             {
@@ -125,7 +125,6 @@ export async function creatOrder(query): Promise<ReplyData> {
         } else {
             return reply(404, datas.d.description)
         }
-
     }
 }
 
@@ -173,7 +172,7 @@ export async function orderInfo(query): Promise<ReplyData> {
                 },
             ];
             transAttributeName(datas.d.OrderInfo.TicketTrain, changeName);
-            let PassengerListKey = ["SeatNum", "PassengerName","TicketPrice", "CertificateID","PassengerType", "ServicePrice", "ElectronicOrderNo", "IssueStatus", "Reason","Mobile"];
+            let PassengerListKey = ["SeatNum", "PassengerName", "TicketPrice", "CertificateID", "PassengerType", "ServicePrice", "ElectronicOrderNo", "IssueStatus", "Reason", "Mobile"];
             datas.d.OrderInfo.PassengerList.map(function (item) {
                 for (let key in item) {
                     if (PassengerListKey.indexOf(key) == -1) {
