@@ -31,8 +31,9 @@ export class searchTrainsController extends AbstractController {
         }
         next()
     }
+
     //车次查询接口 GET
-    @Router("/getList/:depCity/:arrCity/:depDate","GET")
+    @Router("/getList/:depCity/:arrCity/:depDate", "GET")
     async getList(req, res, next) {
         let query = {};
         let param = req.params;
@@ -49,20 +50,21 @@ export class searchTrainsController extends AbstractController {
         let data: any;
         try {
             data = await search(query);
-            res.json(reply(data.code, data.data.TrainInfoList))
+            res.json(data)
         } catch (e) {
             console.log(e);
             res.json(reply(500, null))
         }
     }
+
     //车次查询接口 POST
-    @Router("/getInfo","POST")
-    async geiInfo(req, res, next) {
+    @Router("/getInfo", "POST")
+    async getInfo(req, res, next) {
         let query = req.body;
         let data: any;
         try {
             data = await search(query);
-            res.json(reply(data.code, data.data.TrainInfoList))
+            res.json(data)
         } catch (e) {
             console.log(e);
             res.json(reply(500, null))

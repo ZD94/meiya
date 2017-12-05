@@ -17,9 +17,9 @@ export async function cancelOrder(query): Promise<ReplyData> {
     let datas;
     datas = await proxyHttp(params);
     if (datas.code == '10000') {
-        return reply(0, datas.destination);
+        return reply(0, datas.description);
     } else {
-        return reply(502, null);
+        return reply(502, datas.description);
     }
 }
 
@@ -38,7 +38,7 @@ export async function cancelChangeOrder(query): Promise<ReplyData> {
     if (datas.code == "10000") {
         return reply(0, datas.description)
     } else {
-        return reply(502, null)
+        return reply(502, datas.description)
     }
 }
 
@@ -56,7 +56,7 @@ export async function cancelReturnOrder(query): Promise<ReplyData> {
     if (datas.code == "10000") {
         return reply(0, datas)
     } else {
-        return reply(502, null)
+        return reply(502, datas.description)
     }
 }
 

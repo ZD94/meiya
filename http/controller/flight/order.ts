@@ -26,7 +26,6 @@ export class OrderController extends AbstractController {
     }
 
     async $before(req, res, next) {
-
         let {auth} = req.headers;
         let result = await dealLogin(auth);
         if (result.code != 0) {
@@ -52,7 +51,7 @@ export class OrderController extends AbstractController {
                 res.json(data)
             } catch (err) {
                 console.log(err);
-                res.json(reply(500, null))
+                res.json(reply(500, data))
             }
         } else if (query.type == "change") {
             try {
@@ -60,7 +59,7 @@ export class OrderController extends AbstractController {
                 res.json(data);
             } catch (err) {
                 console.log(err);
-                res.json(reply(500, null))
+                res.json(data)
             }
         } else if (query.type == "return") {
             /*
@@ -71,7 +70,7 @@ export class OrderController extends AbstractController {
                 res.json(data);
             } catch (err) {
                 console.log(err)
-                res.json(reply(500, null))
+                res.json(data)
             }
             /*
             * 改签单创建退票单
@@ -85,14 +84,13 @@ export class OrderController extends AbstractController {
         let {id} = req.params;
         query.orderNo = id;
         let data;
-
         if (query.type == "order") {
             try {
                 data = await cancelOrder(query);
                 res.json(data);
             } catch (err) {
                 console.log(err)
-                res.json(reply(500, null))
+                res.json(data)
             }
 
         } else if (query.type == "change") {
@@ -101,7 +99,7 @@ export class OrderController extends AbstractController {
                 res.json(data)
             } catch (err) {
                 console.log(err)
-                res.json(reply(500, null))
+                res.json(reply(500, data))
             }
 
         } else if (query.type == "return") {
@@ -110,7 +108,7 @@ export class OrderController extends AbstractController {
                 res.json(data)
             } catch (err) {
                 console.log(err);
-                res.json(reply(500, null))
+                res.json(reply(500, data))
             }
         }
     }
@@ -124,18 +122,18 @@ export class OrderController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await submitOrder(query);
-                res.json(reply(data.code, data.data))
+                res.json(data)
             } catch (err) {
                 console.log(err);
-                res.json(reply(500, null))
+                res.json(data)
             }
         } else if (query.type == "return") {
             try {
                 data = await submitReturnOrder(query);
-                res.json(reply(data.code, data))
+                res.json( data)
             } catch (err) {
                 console.log(err);
-                res.json(reply(500, null))
+                res.json(reply(500, data))
             }
         }
     }
@@ -152,26 +150,26 @@ export class OrderController extends AbstractController {
         if (query.type == "order") {
             try {
                 data = await getOrderInfo(query);
-                res.json(reply(data.code, data));
+                res.json(data);
             } catch (err) {
                 console.log(err)
-                res.json(reply(500, null))
+                res.json(data)
             }
         } else if (query.type == "change") {
             try {
                 data = await getChangeOrderInfo(query);
-                res.json(data.code, data)
+                res.json(data)
             } catch (err) {
                 console.log(err)
-                res.json(reply(500, null))
+                res.json(reply(500, data))
             }
         } else if (query.type == "return") {
             try {
-                data = await getReturnOrderInfo(query)
-                res.json(data.code, data)
+                data = await getReturnOrderInfo(query);
+                res.json(data)
             } catch (err) {
                 console.log(err)
-                res.json(reply(500, null))
+                res.json(reply(500, data))
             }
         }
     }

@@ -57,8 +57,9 @@ export async function creatOrder(query): Promise<ReplyData> {
         method:"POST"
 
     };
+    console.log(params.body,"<===========params.body")
     datas = await proxyHttp(params);
-
+    console.log(datas,"<==================datassss")
 
     if (datas.code == "10000") {
         let orderNos = {
@@ -182,7 +183,7 @@ export async function getOrderInfo(query): Promise<ReplyData> {
     if (datas.code == '10000') {
         return reply(0, datas.orderInfo);
     } else {
-        return reply(502, datas.description);
+        return reply(502,datas.description);
     }
 }
 

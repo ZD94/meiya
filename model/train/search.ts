@@ -20,7 +20,6 @@ export async function search(query): Promise<ReplyData> {
         }
     ];
     let querys = transAttributeName(query, testArr);
-
     let params = {
         url: `${config.meiyaTrainUrl}` + '/queryTrains',
         body: {
@@ -61,6 +60,6 @@ export async function search(query): Promise<ReplyData> {
         }
         return reply(0, datas.d)
     } else {
-        return reply(502, null)
+        return reply(502, datas.d.description)
     }
 }
