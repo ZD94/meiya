@@ -42,7 +42,7 @@ export class OrderHotelController extends AbstractController {
         let data;
         if (query.type == 'order') {//预订
             try {
-                data = await createHotelOrder(query);
+                data = await createHotelOrderFake(query);
                 res.json(data);
             } catch(err) {
                 console.log(err);
@@ -67,7 +67,7 @@ export class OrderHotelController extends AbstractController {
 
         if (query.type == 'order') {
             try {
-                data = await submitHotelOrder(query);
+                data = await submitHotelOrderFake(query);
                 res.json(data);
             } catch(err) {
                 console.log(err);
