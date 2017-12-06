@@ -1,0 +1,87 @@
+{
+    "code": "10000",
+    "description": "请求成功",
+    "orderInfo": {
+        "baseInfo": {
+            "TotalPay": 0,
+            "issueDate": "0001-01-01 00:00",
+            "oaSerialnumber": null,
+            "opDate": "2017-12-06 17:25",
+            "opName": "王鹏",
+            "opRemark": null,
+            "orderNo": "TB1700205592",
+            "orderType": 1,
+            "originalOrderNo": "",
+            "outsideOrderNo": "",
+            "productType": 1,
+            "status": 5,
+            "statusText": "待提交",
+            "pnr": "JXHF5H"
+        },
+        "contactInfo": {
+            "contactName": "董娜",
+            "email": "",
+            "mobile": "13811595192",
+            "orderNo": "TB1700205592",
+            "phone": ""
+        },
+        "costList": [],
+        "passengerList": [
+            {
+                "OutsidePsngrId": "13811595192",
+                "birthday": "1995-01-18",
+                "certificateID": "370303199501182819",
+                "certificateType": "身份证",
+                "gender": "男",
+                "nationality": "CN",
+                "orderNo": "TB1700205592",
+                "passengerCode": "P351838",
+                "passengerName": "董娜",
+                "passengerNo": 1,
+                "passengerType": "成人",
+                "reasonID": 0,
+                "reasonRemark": null,
+                "ticketNo": null
+            }
+        ],
+        "priceList": [
+            {
+                "discount": 43,
+                "orderNo": "TB1700205592",
+                "passengerType": "成人",
+                "price": 580,
+                "returnprice": 0,
+                "serviceAmount": 0,
+                "tax": 50
+            }
+        ],
+        "segmentList": [
+            {
+                "airlineCode": "FM",
+                "airlineName": "上海航空",
+                "arrTerminal": "--",
+                "arrivalDate": "2017-12-26",
+                "arrivalTime": "20:05",
+                "cabin": "1",
+                "carrier": "",
+                "clazz": "V",
+                "depTerminal": "T2",
+                "departureDate": "2017-12-26",
+                "departureTime": "17:30",
+                "destinationCityCode": "CAN",
+                "destinationCityName": "广州",
+                "destinationName": "白云国际机场",
+                "flightNo": "FM9311",
+                "flyTime": "155",
+                "orderNo": "TB1700205592",
+                "originCityCode": "SHA",
+                "originName": "虹桥国际机场",
+                "origincityName": "上海(虹桥)",
+                "planeType": "333",
+                "remark": "",
+                "segmentNo": 1,
+                "stopItem": ""
+            }
+        ]
+    }
+}

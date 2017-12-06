@@ -6,6 +6,5 @@ config/config.local.json
 dist/
 *.tar.gz
 package-lock.json
-test/data/*.json
 .DS_Store
 .vscode
