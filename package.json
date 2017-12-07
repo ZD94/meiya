@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dist": "tsc && cp -R package.json dist/ && cp -R config dist/"
+    "dist": "tsc && cp -R package.json dist/ && cp -R config dist/ && cp -R test/data dist/test"
   },
   "repository": {
     "type": "git",
