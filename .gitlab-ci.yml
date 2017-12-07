@@ -36,7 +36,6 @@ build:dist:
   script:
     - mkdir -p $NPM_CACHE_DIR/`npmhash`/node_modules && ln -s $NPM_CACHE_DIR/`npmhash`/node_modules .
     - echo `npmhash`
-    - npm --registry https://npm.l.jingli365.com install
     - npm run dist
 
 
