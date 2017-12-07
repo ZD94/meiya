@@ -128,6 +128,9 @@ export async function searchFlightInfo(query): Promise<ReplyData> {
                 items.price = items.ticketPrice;
             }
         }
+        if (!flightInfo){
+            flightInfo = datas.flightInfoList[0];
+        }
         return reply(0, flightInfo || []);
     } else {
         return reply(502, null);
