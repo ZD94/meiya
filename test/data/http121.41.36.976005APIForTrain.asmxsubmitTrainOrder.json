@@ -1,0 +1,7 @@
+{
+    "d": {
+        "__type": "Meiya.Trip.Model.API.BaseResponse",
+        "code": "10000",
+        "description": "请求成功"
+    }
+}

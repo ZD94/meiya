@@ -1,0 +1,8 @@
+{
+    "d": {
+        "__type": "Meiya.Trip.Model.API.CreateTrainOrderResponse",
+        "OrderNo": "RB1700200756",
+        "code": "10000",
+        "description": "请求成功"
+    }
+}
