@@ -115,12 +115,7 @@ export async function creatOrder(query): Promise<ReplyData> {
         console.log(params, "<==========创建订单请求参数")
         let datas = await proxyHttp(params);
         console.log(datas, "<===============创建车票美亚返回的结果")
-        if (datas.d.code == "10000") {
-            if (datas.d.__type || datas.d.code || datas.d.description) {
-                delete datas.d.__type;
-                delete datas.d.code;
-                delete datas.d.description
-            }
+        if (datas.d.OrderNo) {
             return reply(0, datas.d)
         } else {
             return reply(404, datas.d.description)
