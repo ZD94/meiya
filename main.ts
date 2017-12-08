@@ -9,6 +9,8 @@ import {serverInit, serverStart} from "@jingli/server";
 import path = require("path");
 import fs = require("fs");
 
+require('model/notification/autoNotiFake');
+
 /* redis */
 import cache from "@jingli/cache";
 

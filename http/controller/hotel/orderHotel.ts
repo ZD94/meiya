@@ -1,6 +1,5 @@
 'use strict';
-
-import {AbstractController, Restful, Router, reply} from "@jingli/restful";
+import {AbstractController, Restful, Router, reply} from '@jingli/restful';
 import {proxyHttp, transAttributeName} from 'http/util';
 import {createHotelOrder, createHotelReturnOrder, getHotelOrderInfo, getHotelReturnOrderInfo, createHotelOrderFake} from 'model/hotel/order';
 import {submitHotelOrder, submitHotelReturnOrder, submitHotelOrderFake} from 'model/hotel/confirm';
@@ -40,6 +39,8 @@ export class OrderHotelController extends AbstractController {
     async add(req, res, next) {
         let query = req.body;
         let data;
+        console.log(typeof query);
+        console.log(query);
         if (query.type == 'order') {//预订
             try {
                 data = await createHotelOrderFake(query);

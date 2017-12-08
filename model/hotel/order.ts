@@ -5,8 +5,24 @@ import {reply, ReplyData} from '@jingli/restful';
 // create 
 export async function createHotelOrderFake(query): Promise<ReplyData> {
     let orderNo = {
-        orderNo: 'HR6666666666'
+        orderNo: 'HB6666666666'
     };
+
+    //请求tmc redis存储qmtripUrl,tripDetailId, 和返回的orderNo
+    let params = {
+        url: `${config.tmcUrl}` + '/addToTmc',
+        body: {
+            orderNo: orderNo.orderNo,
+            qmUrl: query.qmUrl
+        },
+        method: 'POST',
+        header: {
+            'content-type': 'application/json'
+        }
+    };
+    let res = await proxyHttp(params);
+    console.log('add to tmc return ------->', res);
+
     return reply(0, orderNo);
 }
 
@@ -95,6 +111,21 @@ export async function createHotelOrder(query): Promise<ReplyData> {
         let orderNo = {
             orderNo: datas.d.orderNo
         };
+        //请求tmc redis存储qmtripUrl,tripDetailId, 和返回的orderNo
+        let params = {
+            url: `${config.tmcUrl}` + '/addToTmc',
+            body: {
+                orderNo: orderNo.orderNo,
+                qmUrl: query.qmUrl
+            },
+            method: 'POST',
+            header: {
+                'content-type': 'application/json'
+            }
+        };
+        let res = await proxyHttp(params);
+        console.log('add to tmc return ------->', res);
+
         return reply(0, orderNo);
     } else {
         console.log('datas.d', datas.d);
@@ -142,6 +173,22 @@ export async function createHotelReturnOrder(query): Promise<ReplyData> {
         let orderNo = {
             orderNo: datas.d.orderNo
         };
+
+        //请求tmc redis存储qmtripUrl,tripDetailId, 和返回的orderNo
+        let params = {
+            url: `${config.tmcUrl}` + '/addToTmc',
+            body: {
+                orderNo: orderNo.orderNo,
+                qmUrl: query.qmUrl
+            },
+            method: 'POST',
+            header: {
+                'content-type': 'application/json'
+            }
+        };
+        let res = await proxyHttp(params);
+        console.log('add to tmc return ------->', res);
+
         return reply(0, orderNo);
     } else {
         return reply(502, datas.d.description);

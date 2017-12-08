@@ -65,6 +65,22 @@ export async function creatOrder(query): Promise<ReplyData> {
         let orderNos = {
             orderNos: datas.orderNos
         };
+
+        //请求tmc redis存储qmtripUrl,tripDetailId, 和返回的orderNo
+        let params = {
+            url: `${config.tmcUrl}` + '/addToTmc',
+            body: {
+                orderNo: orderNos.orderNos[0],
+                qmUrl: query.qmUrl
+            },
+            method: 'POST',
+            header: {
+                'content-type': 'application/json'
+            }
+        };
+        let res = await proxyHttp(params);
+        console.log('add to tmc return ------->', res);
+
         return reply(0, orderNos)
     } else {
         return reply(502, datas.description);
@@ -106,6 +122,22 @@ export async function createChangeOrder(query): Promise<ReplyData> {
         let orderNos = {
             orderNos: datas.orderNo
         };
+
+        //请求tmc redis存储qmtripUrl,tripDetailId, 和返回的orderNo
+        let params = {
+            url: `${config.tmcUrl}` + '/addToTmc',
+            body: {
+                orderNo: orderNos.orderNos[0],
+                qmUrl: query.qmUrl
+            },
+            method: 'POST',
+            header: {
+                'content-type': 'application/json'
+            }
+        };
+        let res = await proxyHttp(params);
+        console.log('add to tmc return ------->', res);
+
         return reply(0, orderNos);
     } else {
         return reply(502, null);
@@ -142,6 +174,26 @@ export async function createReturnOrder(query): Promise<ReplyData> {
     };
     datas = await proxyHttp(params);
     if (datas.code == '10000') {
+
+        let orderNos = {
+            orderNos: datas.orderNo
+        };
+
+        //请求tmc redis存储qmtripUrl,tripDetailId, 和返回的orderNo
+        let params = {
+            url: `${config.tmcUrl}` + '/addToTmc',
+            body: {
+                orderNo: orderNos.orderNos,
+                qmUrl: query.qmUrl
+            },
+            method: 'POST',
+            header: {
+                'content-type': 'application/json'
+            }
+        };
+        let res = await proxyHttp(params);
+        console.log('add to tmc return ------->', res);
+
         return reply(0, datas);
     } else {
         return reply(502, null);

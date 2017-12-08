@@ -115,7 +115,32 @@ export async function creatOrder(query): Promise<ReplyData> {
         console.log(params, "<==========创建订单请求参数")
         let datas = await proxyHttp(params);
         console.log(datas, "<===============创建车票美亚返回的结果")
-        if (datas.d.OrderNo) {
+
+        if (datas.d.code == "10000") {
+            if (datas.d.__type || datas.d.code || datas.d.description) {
+                delete datas.d.__type;
+                delete datas.d.code;
+                delete datas.d.description
+            }
+
+        let orderNos = {
+            orderNos: datas.d.OrderNo
+        };
+        //请求tmc redis存储qmtripUrl,tripDetailId, 和返回的orderNo
+        let params = {
+            url: `${config.tmcUrl}` + '/addToTmc',
+            body: {
+                orderNo: orderNos.orderNos,
+                qmUrl: query.qmUrl
+            },
+            method: 'POST',
+            header: {
+                'content-type': 'application/json'
+            }
+        };
+        let res = await proxyHttp(params);
+        console.log('add to tmc return ------->', res);
+
             return reply(0, datas.d)
         } else {
             return reply(404, datas.d.description)
