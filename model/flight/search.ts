@@ -129,9 +129,11 @@ export async function searchFlightInfo(query): Promise<ReplyData> {
             }
         }
         if (!flightInfo){
+            console.log("没有找到匹配的项")
             flightInfo = datas.flightInfoList[0];
+            console.log(flightInfo)
         }
-        return reply(0, flightInfo || []);
+        return reply(0, flightInfo);
     } else {
         return reply(502, null);
     }
