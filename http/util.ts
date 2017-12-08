@@ -6,7 +6,7 @@ import * as path from "path";
 export async function proxyHttp(params: {
     url: string;
     method?: string;
-    body: object;
+    body?: object;
     qs?: object;
     header?: object;
 }): Promise<any> {

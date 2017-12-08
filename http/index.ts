@@ -15,6 +15,8 @@ let express = require("express");
 let router = express.Router();
 
 scannerDecoration(path.join(__dirname, 'controller'), [".d"]);
-registerControllerToRouter(router);
+registerControllerToRouter(router, {
+    isShowUrls: true
+});
 
 export default router
