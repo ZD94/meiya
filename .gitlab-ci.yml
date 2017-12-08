@@ -1,5 +1,5 @@
 variables:
-  DOCKER_REG: docker.l.jingli365.com
+  DOCKER_REG: dk.jingli365.com
   DOCKER_NAME: $CI_PROJECT_NAMESPACE-$CI_PROJECT_NAME
   DOCKER_CI_NAME: $DOCKER_REG/$CI_PROJECT_NAMESPACE-$CI_PROJECT_NAME:$CI_COMMIT_SHA
   DOCKER_BRANCH_NAME: $DOCKER_REG/$CI_PROJECT_NAMESPACE-$CI_PROJECT_NAME:$CI_COMMIT_REF_SLUG
@@ -26,7 +26,7 @@ build:dist:
   stage: build
   only:
     - branches
-  image: $DOCKER_REG/jl-build:v2
+  image: $DOCKER_REG/jl-build:v3
   tags:
     - serial
   cache:
@@ -36,7 +36,7 @@ build:dist:
   script:
     - mkdir -p $NPM_CACHE_DIR/`npmhash`/node_modules && ln -s $NPM_CACHE_DIR/`npmhash`/node_modules .
     - echo `npmhash`
-    - npm --registry https://npm.l.jingli365.com install
+    - npm install
     - npm run dist
 
 
@@ -63,7 +63,7 @@ deploy:master:
     - docker pull $DOCKER_CI_NAME
     - docker tag $DOCKER_CI_NAME $DOCKER_BRANCH_NAME
     - docker push $DOCKER_BRANCH_NAME
-    - echo deploy to ts-project-template.com
+    - echo deploy to http://l.jingli365.com/proj/tmc-meiya/test
     - ssh test@l.jingli365.com /home/test/bin/docker_start.sh $DOCKER_REG $DOCKER_NAME $CI_COMMIT_REF_SLUG
 
 
@@ -80,9 +80,24 @@ deploy:test:
     - docker pull $DOCKER_CI_NAME
     - docker tag $DOCKER_CI_NAME $DOCKER_BRANCH_NAME
     - docker push $DOCKER_BRANCH_NAME
-    - echo deploy to ts-project-template.com
+    - echo deploy to http://t.jingli365.com/proj/tmc-meiya/test
     - ssh test@l.jingli365.com /home/test/bin/docker_start.sh $DOCKER_REG $DOCKER_NAME $CI_COMMIT_REF_SLUG
 
+
+deploy:release:
+  stage: deploy
+  only:
+    - /^release$/
+  environment:
+    name: test
+    url: http://j.jingli365.com/proj/svr-tmc/test
+  script:
+    - docker login -u dockeruser -p $DOCKER_PASSWD $DOCKER_REG
+    - docker pull $DOCKER_CI_NAME
+    - docker tag $DOCKER_CI_NAME $DOCKER_BRANCH_NAME
+    - docker push $DOCKER_BRANCH_NAME
+    - echo deploy to http://j.jingli365.com/proj/svr-tmc/test
+    - ssh test@l.jingli365.com /home/test/bin/docker_start.sh $DOCKER_REG $DOCKER_NAME $CI_COMMIT_REF_SLUG
 
 
 deploy:tester:

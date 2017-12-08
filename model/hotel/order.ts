@@ -199,7 +199,7 @@ export async function getHotelOrderInfo(query): Promise<ReplyData> {
     ];
     
     if (datas.d.code == '10000') {
-        // console.log('datas.d', datas.d);
+        console.log('datas.d=========>', datas.d);
         for (let item of datas.d.orderInfo.priceList) {
             transAttributeName(item, itemChange);
         }

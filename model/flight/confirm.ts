@@ -12,13 +12,13 @@ export async function submitOrder(query): Promise<ReplyData> {
             'content-type': 'application/json'
         }
     };
+    console.log(params,"<===========params")
     let datas;
     datas = await proxyHttp(params);
-    console.log(datas,"<=============datas");
     if (datas.code == '10000') {
         return reply(0, datas.description);
     } else {
-        return reply(502, null);
+        return reply(502, datas.description);
     }
 }
 

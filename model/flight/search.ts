@@ -63,7 +63,7 @@ export async function searchFlight(query): Promise<ReplyData> {
         }
         return reply(0, datas.flightInfoList || []);
     } else {
-        return reply(502, null);
+        return reply(502, datas.description);
     }
 }
 
@@ -95,7 +95,6 @@ export async function searchFlightInfo(query): Promise<ReplyData> {
     };
     let datas;
     datas = await proxyHttp(params);
-
     if (datas.code == "10000") {
         let changeName = [
             {
@@ -129,7 +128,12 @@ export async function searchFlightInfo(query): Promise<ReplyData> {
                 items.price = items.ticketPrice;
             }
         }
-        return reply(0, flightInfo || []);
+        if (!flightInfo){
+            console.log("没有找到匹配的项")
+            flightInfo = datas.flightInfoList[0];
+            console.log(flightInfo)
+        }
+        return reply(0, flightInfo);
     } else {
         return reply(502, null);
     }

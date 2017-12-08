@@ -1,0 +1,13 @@
+{
+    "d": {
+        "__type": "Meiya.Trip.Model.API.CheckTrainIsBookableResponse",
+        "TrainNumber": "G101",
+        "FromStation": "北京南",
+        "SeatName": "二等座",
+        "ToStation": "上海虹桥",
+        "TicketNum": "200",
+        "IsBook": true,
+        "code": "10000",
+        "description": "请求成功"
+    }
+}

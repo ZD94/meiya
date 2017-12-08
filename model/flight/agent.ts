@@ -55,7 +55,6 @@ export async function dealLogin(auth): Promise<{ code: number, msg: string, data
             msg: "用户名或密码不存在"
         }
     }
-
     let key = md5(username + password);
     let sessionId = await cache.read(key);
     if (!sessionId) {

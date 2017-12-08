@@ -1,0 +1,113 @@
+{
+    "d": {
+        "__type": "Meiya.Trip.Model.API.HBOrderInfoResponse",
+        "orderInfo": {
+            "orderNo": "HB1700200792",
+            "outsideOrderNo": "20171025002",
+            "hotelCode": "201356727",
+            "hotelName": "莉莉酒店B",
+            "roomCode": "HR301223457",
+            "roomName": "B标准",
+            "city": "北京",
+            "checkInDate": "2017-11-21",
+            "checkOutDate": "2017-11-22",
+            "orderStatus": 3,
+            "checkInStatus": 0,
+            "passengerCount": 1,
+            "passengerList": [
+                {
+                    "orderNo": "HB1700200792",
+                    "num": 1,
+                    "passengerCode": "P350828",
+                    "passengerName": "张栋",
+                    "sex": "男",
+                    "nationality": "CN",
+                    "idType": null,
+                    "idNo": "",
+                    "birthday": "1994/8/1",
+                    "passengerType": "成人",
+                    "mobile": "",
+                    "reasonID": 0,
+                    "reasonRemark": null
+                }
+            ],
+            "payType": 2,
+            "nightCount": 1,
+            "roomCount": 1,
+            "rooms": 1,
+            "firstArriveTime": "2017-11-21 00:00",
+            "lastArriveTime": "2017-11-22 00:00",
+            "currency": "CNY",
+            "amount": 110,
+            "stRemark": "test",
+            "submitName": "JingLiZhiXiang",
+            "submitTime": "2017-11-21 14:25:11",
+            "canCancel": false,
+            "contactInfo": [
+                {
+                    "orderNo": "HB1700200792",
+                    "contactName": "test man",
+                    "mobile": "13700000001",
+                    "phone": "",
+                    "email": ""
+                }
+            ],
+            "CreditCardNo": null,
+            "holderName": null,
+            "priceList": [
+                {
+                    "sellDate": "2017-11-21",
+                    "price": 110,
+                    "priceRebate": 0,
+                    "priceServiceAmount": 0
+                }
+            ],
+            "garanteeRule": null,
+            "payRule": null,
+            "costList": [],
+            "serviceFee": 0,
+            "rebateFee": 0,
+            "priceService": 0,
+            "priceRebate": 0,
+            "auditInfoList": [
+                {
+                    "actName": "生成订单",
+                    "opName": "JingLiZhiXiang",
+                    "opResult": "通过",
+                    "opTime": "2017-11-21 14:25:13",
+                    "remark": ""
+                },
+                {
+                    "actName": "是否手工单",
+                    "opName": "自动运行",
+                    "opResult": "通过",
+                    "opTime": "2017-11-21 14:25:13",
+                    "remark": ""
+                },
+                {
+                    "actName": "待提交订单",
+                    "opName": "张栋",
+                    "opResult": "通过",
+                    "opTime": "2017-11-21 14:26:04",
+                    "remark": ""
+                },
+                {
+                    "actName": "审批完成",
+                    "opName": "自动运行",
+                    "opResult": "通过",
+                    "opTime": "2017-11-21 14:26:04",
+                    "remark": ""
+                },
+                {
+                    "actName": "处理中",
+                    "opName": null,
+                    "opResult": "待审核",
+                    "opTime": "0001-01-01 00:00:00",
+                    "remark": null
+                }
+            ]
+        },
+        "code": "10000",
+        "description": "订单号无效"
+    }
+}

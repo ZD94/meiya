@@ -1,0 +1,1148 @@
+{
+    "d": {
+        "__type": "Meiya.Trip.Model.API.QueryTrainsResponse",
+        "TrainInfoList": [
+            {
+                "TrainNumber": "G101",
+                "StartTime": "06:43",
+                "EndTime": "12:39",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": false
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G5",
+                "StartTime": "07:00",
+                "EndTime": "11:34",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": false
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": false
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G105",
+                "StartTime": "07:35",
+                "EndTime": "13:11",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": false
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G11",
+                "StartTime": "08:00",
+                "EndTime": "13:06",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G107",
+                "StartTime": "08:05",
+                "EndTime": "13:49",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": false
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G111",
+                "StartTime": "08:35",
+                "EndTime": "14:22",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": false
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": false
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G113",
+                "StartTime": "08:53",
+                "EndTime": "14:33",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G1",
+                "StartTime": "09:00",
+                "EndTime": "13:28",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G41",
+                "StartTime": "09:15",
+                "EndTime": "14:49",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iPass",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": false
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": false
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G115",
+                "StartTime": "09:20",
+                "EndTime": "15:10",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G117",
+                "StartTime": "09:25",
+                "EndTime": "15:37",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": false
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G13",
+                "StartTime": "10:00",
+                "EndTime": "14:28",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G119",
+                "StartTime": "10:05",
+                "EndTime": "15:43",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G121",
+                "StartTime": "10:28",
+                "EndTime": "16:32",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G15",
+                "StartTime": "11:00",
+                "EndTime": "15:56",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G125",
+                "StartTime": "11:10",
+                "EndTime": "16:56",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G411",
+                "StartTime": "11:20",
+                "EndTime": "17:08",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": false
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "1461",
+                "StartTime": "11:54",
+                "EndTime": "07:19",
+                "FromStationName": "北京",
+                "ToStationName": "上海",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "无座",
+                        "SeatPrice": 156.5,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "硬座",
+                        "SeatPrice": 156.5,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "硬卧",
+                        "SeatPrice": 304.5,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "软卧",
+                        "SeatPrice": 476.5,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G129",
+                "StartTime": "12:10",
+                "EndTime": "17:56",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G131",
+                "StartTime": "12:20",
+                "EndTime": "18:06",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G133",
+                "StartTime": "12:40",
+                "EndTime": "18:33",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G135",
+                "StartTime": "12:55",
+                "EndTime": "18:54",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G137",
+                "StartTime": "13:07",
+                "EndTime": "19:04",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G139",
+                "StartTime": "13:45",
+                "EndTime": "19:48",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G3",
+                "StartTime": "14:00",
+                "EndTime": "18:28",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G43",
+                "StartTime": "14:05",
+                "EndTime": "19:44",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iPass",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G141",
+                "StartTime": "14:10",
+                "EndTime": "20:04",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G143",
+                "StartTime": "14:30",
+                "EndTime": "20:30",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G145",
+                "StartTime": "14:35",
+                "EndTime": "20:47",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G17",
+                "StartTime": "15:00",
+                "EndTime": "19:28",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G147",
+                "StartTime": "15:46",
+                "EndTime": "21:50",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G21",
+                "StartTime": "16:00",
+                "EndTime": "21:13",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G149",
+                "StartTime": "16:25",
+                "EndTime": "22:22",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G23",
+                "StartTime": "17:00",
+                "EndTime": "22:39",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G153",
+                "StartTime": "17:15",
+                "EndTime": "22:49",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G157",
+                "StartTime": "17:43",
+                "EndTime": "23:30",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G7",
+                "StartTime": "19:00",
+                "EndTime": "23:24",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "G9",
+                "StartTime": "19:05",
+                "EndTime": "23:39",
+                "FromStationName": "北京南",
+                "ToStationName": "上海虹桥",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 553,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "一等座",
+                        "SeatPrice": 933,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "商务座",
+                        "SeatPrice": 1748,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "T109",
+                "StartTime": "19:30",
+                "EndTime": "10:43",
+                "FromStationName": "北京",
+                "ToStationName": "上海",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "无座",
+                        "SeatPrice": 177.5,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "硬座",
+                        "SeatPrice": 177.5,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "硬卧",
+                        "SeatPrice": 325.5,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "软卧",
+                        "SeatPrice": 497.5,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "高级软卧",
+                        "SeatPrice": 919.5,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "D313",
+                "StartTime": "19:34",
+                "EndTime": "07:41",
+                "FromStationName": "北京南",
+                "ToStationName": "上海",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "无座",
+                        "SeatPrice": 336,
+                        "IsBookable": false
+                    },
+                    {
+                        "SeatName": "软卧",
+                        "SeatPrice": 780,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 336,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "D311",
+                "StartTime": "21:16",
+                "EndTime": "09:08",
+                "FromStationName": "北京南",
+                "ToStationName": "上海",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "软卧",
+                        "SeatPrice": 695,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            },
+            {
+                "TrainNumber": "D321",
+                "StartTime": "21:23",
+                "EndTime": "09:13",
+                "FromStationName": "北京南",
+                "ToStationName": "上海",
+                "FromPassingType": "iStart",
+                "ToPassingType": "iEnd",
+                "SeatList": [
+                    {
+                        "SeatName": "无座",
+                        "SeatPrice": 336,
+                        "IsBookable": false
+                    },
+                    {
+                        "SeatName": "软卧",
+                        "SeatPrice": 780,
+                        "IsBookable": true
+                    },
+                    {
+                        "SeatName": "二等座",
+                        "SeatPrice": 336,
+                        "IsBookable": true
+                    }
+                ],
+                "ServicePrice": 6
+            }
+        ],
+        "code": "10000",
+        "description": "请求成功"
+    }
+}

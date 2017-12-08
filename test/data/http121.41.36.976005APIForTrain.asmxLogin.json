@@ -1,0 +1,17 @@
+{
+    "d": {
+        "__type": "Meiya.Trip.Model.API.LoginResponse",
+        "userInfo": {
+            "sessionId": "636482398662114866",
+            "companyId": "S117325",
+            "userId": "P350828",
+            "userName": "JingLiZhiXiang",
+            "password": "",
+            "DId": 0,
+            "DepName": null,
+            "OutsidePassengerId": null
+        },
+        "code": "10000",
+        "description": "请求成功"
+    }
+}

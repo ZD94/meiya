@@ -1,0 +1,77 @@
+{
+    "d": {
+        "__type": "Meiya.Trip.Model.API.QueryTrainOrderInfoResponse",
+        "OrderInfo": {
+            "BaseInfo": {
+                "outsideOrderNo": "20171025002",
+                "orderNo": "RB1700200753",
+                "originalOrderNo": "",
+                "opDate": "2017/12/7 11:16:39",
+                "opName": "JingLiZhiXiang",
+                "opId": null,
+                "statusText": "暂缓订单",
+                "status": 10,
+                "orderType": 70,
+                "productType": 3,
+                "issueDate": "",
+                "oaSerialnumber": null,
+                "TotalPay": 0,
+                "opRemark": null
+            },
+            "TicketTrain": {
+                "OrderNo": "RB1700200753",
+                "TrainNumber": "G101",
+                "FromStation": "北京南",
+                "ToStation": "上海虹桥",
+                "DepartureTime": "2017-12-10 06:43",
+                "ArriveTime": "2017-12-10 12:39",
+                "TrainType": null,
+                "SeatLevel": "二等座"
+            },
+            "PassengerList": [
+                {
+                    "PassengerNo": 1,
+                    "PassengerName": "张栋",
+                    "DepartmentID": "59265",
+                    "DepartmentName": "部门",
+                    "Sex": "男",
+                    "Nationality": "CN",
+                    "CertificateType": "身份证",
+                    "CertificateID": "411527199408012773",
+                    "Mobile": "",
+                    "SeatNum": null,
+                    "TicketPrice": 0,
+                    "PassengerType": "成人",
+                    "ServicePrice": 6,
+                    "ElectronicOrderNo": null,
+                    "IssueStatus": "",
+                    "Reason": null
+                }
+            ],
+            "ContactInfo": {
+                "orderNo": null,
+                "contactName": null,
+                "mobile": "",
+                "phone": "",
+                "email": ""
+            },
+            "CostList": [],
+            "InvoiceInfo": {
+                "InvoiceAddress": "",
+                "InvoiceRecipients": "",
+                "InvoicePostCode": ""
+            },
+            "ApproveInfo": [
+                {
+                    "ActName": "提交审批",
+                    "Operator": null,
+                    "Result": "待审核",
+                    "OperateTime": "",
+                    "Remark": null
+                }
+            ]
+        },
+        "code": "10000",
+        "description": "请求成功"
+    }
+}

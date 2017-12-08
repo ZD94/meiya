@@ -47,7 +47,11 @@ function usingTime(req, res, next){
     req.enterTime = Date.now();
     res.json = function(data){
         res.setHeader('Content-Type', 'application/json');
-        res.write(JSON.stringify(data));
+        
+        try{
+            data = JSON.stringify(data);
+        }catch(e){}
+        res.write(data);
         logger.info(req.method, req.url, process.title, (Date.now() - req.enterTime) / 1000, "s");
         res.end();
     }

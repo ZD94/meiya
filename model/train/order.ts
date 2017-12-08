@@ -68,7 +68,7 @@ export async function creatOrder(query): Promise<ReplyData> {
         "userId": `${userId}`,
         "sessionId": `${sessionId}`
     };
-    console.log("=============>",checkQuerys,"<=====================检查车票能否预订参数")
+    console.log("=============>", checkQuerys, "<=====================检查车票能否预订参数")
     let params = {
         url: `${config.meiyaTrainUrl}` + "/checkTrainIsBookable",
         body: {
@@ -81,7 +81,7 @@ export async function creatOrder(query): Promise<ReplyData> {
     }
     let datas;
     datas = await proxyHttp(params);
-    console.log(datas,"<====================检查车票返回结果")
+    console.log(datas, "<====================检查车票返回结果")
     if (datas.d.IsBook) {
         let testArr = [
             {
@@ -115,17 +115,11 @@ export async function creatOrder(query): Promise<ReplyData> {
         console.log(params, "<==========创建订单请求参数")
         let datas = await proxyHttp(params);
         console.log(datas, "<===============创建车票美亚返回的结果")
-        if (datas.d.code == "10000") {
-            if (datas.d.__type || datas.d.code || datas.d.description) {
-                delete datas.d.__type;
-                delete datas.d.code;
-                delete datas.d.description
-            }
+        if (datas.d.OrderNo) {
             return reply(0, datas.d)
         } else {
             return reply(404, datas.d.description)
         }
-
     }
 }
 
@@ -173,7 +167,7 @@ export async function orderInfo(query): Promise<ReplyData> {
                 },
             ];
             transAttributeName(datas.d.OrderInfo.TicketTrain, changeName);
-            let PassengerListKey = ["SeatNum", "PassengerName","TicketPrice", "CertificateID","PassengerType", "ServicePrice", "ElectronicOrderNo", "IssueStatus", "Reason","Mobile"];
+            let PassengerListKey = ["SeatNum", "PassengerName", "TicketPrice", "CertificateID", "PassengerType", "ServicePrice", "ElectronicOrderNo", "IssueStatus", "Reason", "Mobile"];
             datas.d.OrderInfo.PassengerList.map(function (item) {
                 for (let key in item) {
                     if (PassengerListKey.indexOf(key) == -1) {

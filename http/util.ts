@@ -19,11 +19,14 @@ export async function proxyHttp(params: {
         qs,
         headers: header
     };
+    console.log("url=====>",url);
     let data;
     if (config.fake_data) {
         let filepath = recordedData(url);
         try {
             data = require(filepath);
+            console.log("使用了 记录数据")
+            return data;
         } catch (e) {
 
         }
@@ -39,9 +42,17 @@ export async function proxyHttp(params: {
 
     if (config.recordData) {
         recordedData(url, data);
+        // if(data.code && data.code == "10000"){
+        //     recordedData(url, data);
+        // }else if(data.d && data.d.code == "10000"){
+        //     recordedData(url, data);
+        // }else{
+        //     console.log("request data =====>", data);
+        // }
+        
     }
 
-    console.log("request result =======>", data);
+    // console.log("request result =======>", data );
     return data;
 }
 
@@ -124,11 +135,15 @@ export async function getInfo(url, id, orderNo) {
         });
     })
 }
+//处理函数
+export async function handle(req,orderNo){
+
+}
 
 function recordedData(url: string, data?: object) {
     let reg = /\/|\:/ig;
-    let randomStr = Math.random().toString(36).substr(2, 5);
-    let filename = [url.replace(reg, ""), randomStr, "json"].join(".");
+    // let randomStr = Math.random().toString(36).substr(2, 5);
+    let filename = [url.replace(reg, ""), "json"].join(".");
     let filepath = path.join(process.cwd(), "test/data", filename);
     if (!data) {
         return filepath;
