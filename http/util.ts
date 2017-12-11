@@ -3,6 +3,8 @@ import config = require("@jingli/config");
 import * as fs from "fs";
 import * as path from "path";
 
+console.log("config===>", config);
+
 export async function proxyHttp(params: {
     url: string;
     method?: string;
