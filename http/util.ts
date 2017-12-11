@@ -23,7 +23,7 @@ export async function proxyHttp(params: {
     };
     console.log("url=====>",url);
     let data;
-    if (config.fake_data) {
+    if (config.fake_data == 1) {
         let filepath = recordedData(url);
         try {
             data = require(filepath);
