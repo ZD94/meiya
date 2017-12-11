@@ -246,10 +246,12 @@ let queryTrain = {
     } 
 };
 
-setInterval(function() {
-  if (fake_data) {
+if (fake_data == 1) {
+  setInterval(function() {
+    
     handleMYNotification(queryHotel, 666); 
     handleMYNotification(queryFlight, 888);
     handleMYNotification(queryTrain, 999);
-  }
-}, 1000 * 60 * 1);
+   
+  }, 1000 * 60 * 1);
+}
