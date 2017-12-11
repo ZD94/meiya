@@ -58,6 +58,9 @@ deploy:master:
   environment:
     name: dev
     url: http://l.jingli365.com/proj/tmc-meiya/test
+  variables:
+    JL_APP_FAKE: false
+    
   script:
     - docker login -u dockeruser -p $DOCKER_PASSWD $DOCKER_REG
     - docker pull $DOCKER_CI_NAME
@@ -75,6 +78,9 @@ deploy:test:
   environment:
     name: dev
     url: http://t.jingli365.com/proj/tmc-meiya/test
+  variables:
+    JL_APP_FAKE: true
+
   script:
     - docker login -u dockeruser -p $DOCKER_PASSWD $DOCKER_REG
     - docker pull $DOCKER_CI_NAME
