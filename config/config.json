@@ -35,6 +35,7 @@
         }
     },
     "fake_data": "${JL_APP_FAKE}",
+    "tmcUrl": "${JL_APP_TMC}",
     "tmckey": "jingli2017",
     "AES": "tmc-meiya",
     "meiyaHotelUrl": "http://121.41.36.97:6005/APIForHotel.asmx"

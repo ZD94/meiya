@@ -60,6 +60,7 @@ deploy:master:
     url: http://l.jingli365.com/proj/tmc-meiya/test
   variables:
     JL_APP_FAKE: 0
+    JL_APP_TMC: http://l.jingli365.com/proj/svr-tmc
 
   script:
     - docker login -u dockeruser -p $DOCKER_PASSWD $DOCKER_REG
@@ -80,6 +81,7 @@ deploy:test:
     url: http://t.jingli365.com/proj/tmc-meiya/test
   variables:
     JL_APP_FAKE: 1
+    JL_APP_TMC: http://t.jingli365.com/proj/svr-tmc
 
   script:
     - docker login -u dockeruser -p $DOCKER_PASSWD $DOCKER_REG
@@ -99,6 +101,7 @@ deploy:release:
     url: http://j.jingli365.com/proj/svr-tmc/test
   variables:
     JL_APP_FAKE: 0
+    JL_APP_TMC: http://l.jingli365.com/proj/svr-tmc
   script:
     - docker login -u dockeruser -p $DOCKER_PASSWD $DOCKER_REG
     - docker pull $DOCKER_CI_NAME
@@ -118,6 +121,7 @@ deploy:tester:
     url: https://review.l.jingli365.com/vm/$GITLAB_USER_ID/$CI_PROJECT_NAMESPACE-$CI_PROJECT_NAME
   variables:
     JL_APP_FAKE: 0
+    JL_APP_TMC: http://l.jingli365.com/proj/svr-tmc
   script:
     - docker login -u dockeruser -p $DOCKER_PASSWD $DOCKER_REG
     - docker pull $DOCKER_CI_NAME
